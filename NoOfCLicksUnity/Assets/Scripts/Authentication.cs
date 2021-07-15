@@ -68,7 +68,7 @@ public class Authentication : MonoBehaviour
             Debug.Log("username missing");
         }
 
-        var SignTask = auth.SignInWithEmailAndPasswordAsync(email, password);
+        var SignTask = auth.CreateUserWithEmailAndPasswordAsync(email, password);
         yield return new WaitUntil(predicate: () => SignTask.IsCompleted);
         Debug.Log("profile is created");
 
@@ -80,6 +80,8 @@ public class Authentication : MonoBehaviour
             var createProfile = User.UpdateUserProfileAsync(profile);
 
             yield return new WaitUntil(predicate: () => createProfile.IsCompleted);
+
+
             Debug.Log("Details Updated");
         }
     }

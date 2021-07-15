@@ -25,10 +25,4 @@ public class SaveDetails : MonoBehaviour
         Debug.Log("Data Saved");
     }
 
-    public void loginButton()
-    {
-        if (PlayerPrefs.GetString("username")==loginEmail.text  && PlayerPrefs.GetString("password")==passwordEmail.text) {
-            
-        }
-    }
 }
