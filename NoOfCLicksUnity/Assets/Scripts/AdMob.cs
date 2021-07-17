@@ -8,7 +8,9 @@ using GoogleMobileAds.Api;
 public class AdMob : MonoBehaviour
 {
     public Text status;
-
+    public Text coinsText;
+    private int coin = 0;
+    private int rewardCoins = 0; 
     string App_Id = "ca-app-pub-9144048783690789~4437741489";
     string Banner_Id = "ca-app-pub-3940256099942544/6300978111";
     string Interstitial_Id = "ca-app-pub-3940256099942544/1033173712";
@@ -22,6 +24,16 @@ public class AdMob : MonoBehaviour
     void Start()
     {
         MobileAds.Initialize(initStatus => { });
+    }
+
+    private void Update()
+    {
+        if(rewardCoins > 0)
+        {
+            coin += rewardCoins;
+            coinsText.text = coin.ToString();
+            rewardCoins = 0;
+        }
     }
 
     public void RequestBanner()
@@ -103,8 +115,6 @@ public class AdMob : MonoBehaviour
         }
     }
 
-
-
     public void HandleOnAdLoaded(object sender, EventArgs args)
     {
         status.text = "Ad load";
@@ -144,7 +154,7 @@ public class AdMob : MonoBehaviour
 
     public void HandleRewardedAdOpening(object sender, EventArgs args)
     {
-        
+       
     }
 
     public void HandleRewardedAdFailedToShow(object sender, AdErrorEventArgs args)
@@ -159,7 +169,8 @@ public class AdMob : MonoBehaviour
 
     public void HandleUserEarnedReward(object sender, Reward args)
     {
-        
+        double amount = args.Amount;
+        rewardCoins = (int)amount;
     }
 }
 
