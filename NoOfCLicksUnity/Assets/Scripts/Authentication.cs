@@ -22,6 +22,11 @@ public class Authentication : MonoBehaviour
     public InputField emailRegistration;
     public InputField passwordRegistration;
 
+    [Header("Phone")]
+    public InputField phoneNumber;
+    public InputField verificationCode;
+    private uint phoneAuthTimeoutMs = 60 * 1000;
+    private string verificationId;
 
     private void Awake()
     {
@@ -40,6 +45,7 @@ public class Authentication : MonoBehaviour
         });
     }
 
+    //Email and login (FireBase)
 
     public void loginButton()
     {
@@ -61,9 +67,9 @@ public class Authentication : MonoBehaviour
         Debug.Log("Loge in");
     }
 
-    public IEnumerator signup(string username , string email,string password)
+    public IEnumerator signup(string username, string email, string password)
     {
-        if(username == "")
+        if (username == "")
         {
             Debug.Log("username missing");
         }
@@ -81,8 +87,40 @@ public class Authentication : MonoBehaviour
 
             yield return new WaitUntil(predicate: () => createProfile.IsCompleted);
 
-
             Debug.Log("Details Updated");
         }
     }
+
+    //Phone Number Authentication (FireBase)
+
+    public void loginPhoneNo()
+    {
+        PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(auth);
+        provider.VerifyPhoneNumber(phoneNumber.text, phoneAuthTimeoutMs, null, verificationCompleted: (Credential) => { },
+        verificationFailed: (error) => { }, codeSent: (id, token) => { verificationId = id; Debug.Log("Code sent"); }, 
+        codeAutoRetrievalTimeOut: (id) =>{ });
+    }
+    public void  verifyOtp()
+    {
+        PhoneAuthProvider provider = PhoneAuthProvider.GetInstance(auth);
+        Credential credential = provider.GetCredential(verificationId, verificationCode.text);
+
+        auth.SignInWithCredentialAsync(credential).ContinueWith(task => {
+            if (task.IsFaulted)
+            {
+                Debug.LogError("SignInWithCredentialAsync encountered an error: " +
+                               task.Exception);
+                return;
+            }
+
+            FirebaseUser newUser = task.Result;
+            Debug.Log("User signed in successfully");
+            // This should display the phone number.
+            Debug.Log("Phone number: " + newUser.PhoneNumber);
+            // The phone number providerID is 'phone'.
+            Debug.Log("Phone provider ID: " + newUser.ProviderId);
+        });
+    }
+
+
 }
