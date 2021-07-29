@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - kill
+  - Background
+  - Booster
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Player
+  - Ground
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 182440605
+    locked: 0
+  - name: Player
+    uniqueID: 2109796527
+    locked: 0
+  - name: Ground
+    uniqueID: 1162538641
+    locked: 0
+  - name: New Layer
+    uniqueID: 1306187245
+    locked: 0
+  - name: infinitePath
+    uniqueID: 3713375815
+    locked: 0
