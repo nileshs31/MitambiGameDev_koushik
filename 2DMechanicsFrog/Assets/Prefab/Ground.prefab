@@ -157,6 +157,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 0.05
   killPositionX: -10
+  infinitepath: {fileID: 8948523492365655283, guid: a0c7eef6a8d214d45802ed11a788688d,
+    type: 3}
 --- !u!212 &8520281170760121193
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -7,6 +7,8 @@ public class Ground : MonoBehaviour
     public float moveSpeed = 0.8f;
     public float killPositionX = -5f;
     Transform selfTransform;
+
+  
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +46,9 @@ public class Ground : MonoBehaviour
     private void FixedUpdate()
     {
         if (move)
-            transform.position += (velocity * Time.deltaTime);
+            transform.position += (velocity *2f * Time.deltaTime);
     }
+
+
+   
 }

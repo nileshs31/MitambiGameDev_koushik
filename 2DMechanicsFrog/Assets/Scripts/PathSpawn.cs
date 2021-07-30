@@ -23,19 +23,16 @@ public class PathSpawn : MonoBehaviour
     }
     void Ground()
     {
-        if (!GameManager.Instance.gameOver  && isMoving == true)
+        if (!GameManager.Instance.gameOver)
             Instantiate(obstacles, new Vector3(obstacles.transform.position.x, obstacles.transform.position.y, obstacles.transform.position.z), Quaternion.identity);
             
     }
 
     IEnumerator spawnInfinitePower()
-    {
+    {   //start
+        yield return new WaitForSeconds(5f);
+        Instantiate(powerInfinitePath, new Vector3( 3.5f,0,0), Quaternion.identity);
         yield return new WaitForSeconds(10f);
-        while(stopSpawning == false)
-        {
-            Instantiate(powerInfinitePath, new Vector3( 3.5f,0), Quaternion.identity);
-            yield return new WaitForSeconds(5f);
-        }
     }
 
 

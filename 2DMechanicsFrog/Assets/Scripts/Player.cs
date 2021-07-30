@@ -5,13 +5,12 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public float movementSpeed;
     private Vector2 positionX;
     private bool movement;
 
     private Rigidbody2D rb;
 
-    private float increment = 1;
+    private float increment = 2;
 
     private Animator animPlayer;
     private bool isIfinitePathActive = false;
@@ -23,14 +22,11 @@ public class Player : MonoBehaviour
     {
         animPlayer = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        ps = GameObject.Find("SpawnManager").GetComponent<PathSpawn>();
     }
 
 
     private void Update()
     {
-        //move();
-        //InfinitePathActive();
         if (Input.GetMouseButtonDown(0))
         {
             Singlemovement();
@@ -68,10 +64,8 @@ public class Player : MonoBehaviour
 
     //booster
     //Infinite Path
-
     public void InfinitePathActive()
     {
-        //isIfinitePathActive = true;
         StartCoroutine(InfinitePath());
     }
 
@@ -79,6 +73,7 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -0.98f, 0), Quaternion.identity);
-        //isIfinitePathActive = false;
+        yield return new WaitForSeconds(15f);
     }
+
 }
