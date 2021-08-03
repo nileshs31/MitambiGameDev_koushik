@@ -32,4 +32,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void MainMenu()
+    {
+        if(gameOver == true)
+        {
+            SceneManager.LoadScene("Menu");
+        }
+    }
+
 }

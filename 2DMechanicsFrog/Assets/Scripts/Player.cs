@@ -29,13 +29,18 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            animPlayer.SetBool("isJumping",true);
             Singlemovement();
         }
+        else
+        {
+            animPlayer.SetBool("isJumping", false);
+        }
 
-        else if (Input.GetMouseButtonDown(1))
+        /*if (Input.GetMouseButtonDown(1))
         {
             Doublelemovement();
-        }
+        }*/
     }
 
     public void move()
@@ -44,6 +49,7 @@ public class Player : MonoBehaviour
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         transform.Translate(direction * increment * Time.deltaTime);
     }
+
 
     public void Singlemovement()
     {
