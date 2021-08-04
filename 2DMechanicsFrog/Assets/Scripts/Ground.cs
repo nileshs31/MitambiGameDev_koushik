@@ -46,7 +46,7 @@ public class Ground : MonoBehaviour
     private void FixedUpdate()
     {
         if (move)
-            transform.position += (velocity *2f * Time.deltaTime);
+            transform.position += (velocity * 2f * Time.deltaTime);
     }
 
 
