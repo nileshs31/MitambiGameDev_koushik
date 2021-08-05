@@ -27,28 +27,33 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+       /* if (Input.GetMouseButtonDown(0))
         {
-            animPlayer.SetBool("isJumping",true);
+             animPlayer.SetBool("isJumping",true);
             Singlemovement();
         }
         else
         {
             animPlayer.SetBool("isJumping", false);
-        }
-
-        /*if (Input.GetMouseButtonDown(1))
-        {
-            Doublelemovement();
         }*/
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            animPlayer.SetBool("isJumping", true);
+            Doublelemovement();
+        }
+        else
+        {
+            animPlayer.SetBool("isJumping", false);
+        }
     }
 
-    public void move()
+  /*  public void move()
     {
         float horizontalInput = Input.GetAxis("Horizontal");
         Vector3 direction = new Vector3(horizontalInput, 0, 0);
         transform.Translate(direction * increment * Time.deltaTime);
-    }
+    }*/
 
 
     public void Singlemovement()
