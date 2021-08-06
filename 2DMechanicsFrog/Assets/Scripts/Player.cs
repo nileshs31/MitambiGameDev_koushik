@@ -2,14 +2,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.InputSystem;
 public class Player : MonoBehaviour
 {
     private Vector2 positionX;
     private bool movement;
 
     private Rigidbody2D rb;
-
+    [SerializeField]
     private float increment = 2;
 
     private Animator animPlayer;
@@ -27,6 +27,28 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Vector2 mousePosition = Mouse.current.position.ReadValue();
+        Debug.Log(mousePosition);
+
+
+        if(mousePosition.x < 0)
+        {
+            Singlemovement();
+        }
+        else
+        {
+            Doublelemovement();
+        }
+
+    /*    if (Mouse.current.leftButton.wasPressedThisFrame)
+        {
+            Singlemovement();
+        }
+        else if(Mouse.current.rightButton.wasPressedThisFrame)
+        {
+            Doublelemovement();
+        }*/
+
        /* if (Input.GetMouseButtonDown(0))
         {
              animPlayer.SetBool("isJumping",true);
@@ -37,7 +59,7 @@ public class Player : MonoBehaviour
             animPlayer.SetBool("isJumping", false);
         }*/
 
-        if (Input.GetMouseButtonDown(0))
+       /* if (Input.GetMouseButtonDown(0))
         {
             animPlayer.SetBool("isJumping", true);
             Doublelemovement();
@@ -45,16 +67,8 @@ public class Player : MonoBehaviour
         else
         {
             animPlayer.SetBool("isJumping", false);
-        }
+        }*/
     }
-
-  /*  public void move()
-    {
-        float horizontalInput = Input.GetAxis("Horizontal");
-        Vector3 direction = new Vector3(horizontalInput, 0, 0);
-        transform.Translate(direction * increment * Time.deltaTime);
-    }*/
-
 
     public void Singlemovement()
     {
