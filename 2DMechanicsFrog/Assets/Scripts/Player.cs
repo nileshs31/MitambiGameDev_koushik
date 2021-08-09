@@ -17,6 +17,8 @@ public class Player : MonoBehaviour
 
     private PathSpawn ps;
     public GameObject infinitepath;
+    [Range(1, 10)]
+    public float jumpVelocity;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,36 +32,7 @@ public class Player : MonoBehaviour
         Vector2 mousePosition = Mouse.current.position.ReadValue();
         Debug.Log(mousePosition);
 
-
-        if(mousePosition.x < 0)
-        {
-            Singlemovement();
-        }
-        else
-        {
-            Doublelemovement();
-        }
-
-    /*    if (Mouse.current.leftButton.wasPressedThisFrame)
-        {
-            Singlemovement();
-        }
-        else if(Mouse.current.rightButton.wasPressedThisFrame)
-        {
-            Doublelemovement();
-        }*/
-
-       /* if (Input.GetMouseButtonDown(0))
-        {
-             animPlayer.SetBool("isJumping",true);
-            Singlemovement();
-        }
-        else
-        {
-            animPlayer.SetBool("isJumping", false);
-        }*/
-
-       /* if (Input.GetMouseButtonDown(0))
+        if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             animPlayer.SetBool("isJumping", true);
             Doublelemovement();
@@ -67,18 +40,45 @@ public class Player : MonoBehaviour
         else
         {
             animPlayer.SetBool("isJumping", false);
-        }*/
+        }
+
+        /*
+                if (Input.GetButtonDown("SingleBtn"))
+                {
+                    animPlayer.SetBool("isJumping", true);
+                    Doublelemovement();
+                }
+                else
+                {
+                    animPlayer.SetBool("isJumping", false);
+                }
+                //double
+                if (Input.GetButtonDown("DoubleBtn"))
+                {
+                    animPlayer.SetBool("isJumping", true);
+                    Doublelemovement();
+                }
+                else
+                {
+                    animPlayer.SetBool("isJumping", false);
+                }*/
     }
 
-    public void Singlemovement()
+    /*public void Singlemovement()
     {
         positionX = new Vector2(transform.position.x + increment, transform.position.y);
         transform.position = positionX;
-    }
+    }*/
     public void Doublelemovement()
     {
-        positionX = new Vector2(transform.position.x + increment * 2, transform.position.y);
+        positionX = new Vector2(transform.position.x + increment * 6, transform.position.y);
         transform.position = positionX;
+       // rb.velocity = Vector2.up * jumpVelocity;
+    }
+
+    public void jump()
+    {
+         
     }
 
     public void onClickAnimation()

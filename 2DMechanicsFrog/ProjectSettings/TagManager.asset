@@ -8,6 +8,8 @@ TagManager:
   - kill
   - Background
   - Booster
+  - SingleBtn
+  - DoubleBtn
   layers:
   - Default
   - TransparentFX
