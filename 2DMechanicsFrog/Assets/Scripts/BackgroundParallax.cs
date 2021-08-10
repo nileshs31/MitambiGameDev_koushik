@@ -5,13 +5,9 @@ using UnityEngine;
 public class BackgroundParallax : MonoBehaviour
 {
     
-    public Vector2 speed = new Vector2(1, 0);
+    public Vector2 speed = new Vector2(1, 0), direction = new Vector2(-1, 0), whereToSpawn;
 
-    public Vector2 direction = new Vector2(-1, 0);
-
-    public bool isLooping = false;
-
-    public List<SpriteRenderer> background;
+    public float pos;
 
     private void Start()
     {
@@ -24,5 +20,10 @@ public class BackgroundParallax : MonoBehaviour
 
         movement *= Time.deltaTime;
         transform.Translate(movement);
+
+        if(transform.position.x <= pos)
+        {
+            transform.position = new Vector3(whereToSpawn.x, whereToSpawn.y, 0);
+        }
     }
 }

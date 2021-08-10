@@ -728,6 +728,10 @@ PlayerSettings:
   projectName: 
   organizationId: 
   cloudEnabled: 0
+<<<<<<< Updated upstream
   enableNativePlatformBackendsForNewInputSystem: 1
+=======
+  enableNativePlatformBackendsForNewInputSystem: 0
+>>>>>>> Stashed changes
   disableOldInputManagerSupport: 0
   legacyClampBlendShapeWeights: 0
