@@ -14,7 +14,7 @@ public class PathSpawn : MonoBehaviour
     {
         InvokeRepeating("Ground", 1f, 1.2f);
         // StartCoroutine(spawnInfinitePower());
-        InvokeRepeating("PowerSpawn", 50f, 10f);
+        InvokeRepeating("PowerSpawn", 50f, 60f);
     }
     private void FixedUpdate()
     {

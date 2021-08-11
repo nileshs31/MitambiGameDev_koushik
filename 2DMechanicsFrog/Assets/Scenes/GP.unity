@@ -758,7 +758,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &724037852
 RectTransform:
   m_ObjectHideFlags: 0
@@ -810,7 +810,7 @@ Transform:
   - {fileID: 128605962}
   - {fileID: 1031746587}
   m_Father: {fileID: 1995080912}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &928074511
 GameObject:
@@ -1381,7 +1381,7 @@ Transform:
   - {fileID: 1856618860}
   - {fileID: 1023423685}
   m_Father: {fileID: 1995080912}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1330189132
 GameObject:
@@ -1618,7 +1618,7 @@ Transform:
   m_LocalScale: {x: 5.3932104, y: 3.5137267, z: 1}
   m_Children: []
   m_Father: {fileID: 1995080912}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1471190952
 SpriteRenderer:
@@ -1658,7 +1658,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -4
+  m_SortingOrder: -3
   m_Sprite: {fileID: 21300000, guid: bd7549d466a5b7644a717333c6bb0475, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1982,7 +1982,6 @@ GameObject:
   - component: {fileID: 1799533606}
   - component: {fileID: 1799533604}
   - component: {fileID: 1799533603}
-  - component: {fileID: 1799533607}
   m_Layer: 8
   m_Name: player
   m_TagString: Player
@@ -2028,7 +2027,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_Sprite: {fileID: 21300000, guid: 5ab24848e4bba5d4ba5aacc210d6fc6f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2148,23 +2147,12 @@ MonoBehaviour:
   force: 4
   infinitepath: {fileID: 8948523492365655283, guid: a0c7eef6a8d214d45802ed11a788688d,
     type: 3}
+  mainCamera: {fileID: 1590404920}
   groundCheck: {fileID: 29960956}
   checkRadius: 1
   whatIsGround:
     serializedVersion: 2
     m_Bits: 512
---- !u!114 &1799533607
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1799533599}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5f04f87bcdf5554a8847672b909ff3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1816754507
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,7 +2236,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1799533606}
-        m_MethodName: Doublelemovement
+        m_MethodName: DoubleMovement
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2498,9 +2486,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 1471190951}
   - {fileID: 1223673230}
   - {fileID: 927576503}
-  - {fileID: 1471190951}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2585,7 +2573,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2015811301}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1799533606}
+        m_MethodName: SingleMovement
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2015811301
 MonoBehaviour:
   m_ObjectHideFlags: 0

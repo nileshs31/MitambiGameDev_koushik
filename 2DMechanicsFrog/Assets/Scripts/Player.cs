@@ -11,12 +11,14 @@ public class Player : MonoBehaviour
     private Animator animPlayer;
 
     public GameObject infinitepath;
-    private Camera mainCamera;
+    [SerializeField] private Camera mainCamera;
     private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
     public LayerMask whatIsGround;
-
+    Vector2 pos;
+    bool moving;
+    private float currePos;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,23 +34,50 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Debug.Log( mainCamera.ScreenToWorldPoint(Input.mousePosition));
-
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-        if (Input.GetMouseButtonDown(0))
+
+        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        if (Input.GetButton("SingleBtn"))
         {
-                jump = new Vector3(1, 1, 0);
-                rb.AddForce(jump * force, ForceMode2D.Impulse);
+            SingleMovement();
+            animPlayer.SetBool("isJumping", true);
         }
-        if (Input.GetKeyDown("down"))
+        else
         {
-            if (isGrounded)
-            {
-                jump = new Vector3(2, 2, 0);
-                rb.AddForce(jump * force, ForceMode2D.Impulse);
-            }
+            animPlayer.SetBool("isJumping", false);
         }
+
+
+        if (Input.GetButton("DoubleBtn"))
+        {
+            DoubleMovement();
+            animPlayer.SetBool("isJumping", true);
+        }
+        else
+        {
+            animPlayer.SetBool("isJumping", false);
+        }
+       
     }
 
+
+    public void SingleMovement()
+    {
+       // if (Input.GetKeyDown("down"))
+            jump = new Vector3(1, 1, 0);
+            rb.AddForce(jump * force, ForceMode2D.Impulse);
+    }
+
+    public void DoubleMovement()
+    {
+        //  if (Input.GetKeyDown("up"))
+        if (isGrounded)
+        {
+            jump = new Vector3(2, 2, 0);
+            rb.AddForce(jump * force, ForceMode2D.Impulse);
+        }
+    }
     public void onClickAnimation()
     {
         animPlayer.SetTrigger("IsRunning");
