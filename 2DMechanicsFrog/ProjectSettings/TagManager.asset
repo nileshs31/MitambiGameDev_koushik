@@ -9,6 +9,7 @@ TagManager:
   - Booster
   - SingleBtn
   - DoubleBtn
+  - coins
   layers:
   - Default
   - TransparentFX

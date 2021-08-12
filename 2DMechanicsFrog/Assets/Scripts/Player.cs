@@ -12,13 +12,13 @@ public class Player : MonoBehaviour
 
     public GameObject infinitepath;
     [SerializeField] private Camera mainCamera;
-    private bool isGrounded;
     public Transform groundCheck;
     public float checkRadius;
+    private float currePos;
     public LayerMask whatIsGround;
     Vector2 pos;
     bool moving;
-    private float currePos;
+    private bool isGrounded;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,19 +26,15 @@ public class Player : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody2D>();
     }
 
-    private void FixedUpdate()
-    {
-        
-    }
 
     private void Update()
     {
-        Debug.Log( mainCamera.ScreenToWorldPoint(Input.mousePosition));
+        /*Debug.Log( mainCamera.ScreenToWorldPoint(Input.mousePosition));
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
 
-        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        if (Input.GetButton("SingleBtn"))
+        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);*/
+       // if (Input.GetButton("SingleBtn"))
+        if(Input.GetKeyDown("up"))
         {
             SingleMovement();
             animPlayer.SetBool("isJumping", true);
@@ -48,8 +44,8 @@ public class Player : MonoBehaviour
             animPlayer.SetBool("isJumping", false);
         }
 
-
-        if (Input.GetButton("DoubleBtn"))
+           //if (Input.GetButton("DoubleBtn"))
+        if (Input.GetKeyDown("down"))
         {
             DoubleMovement();
             animPlayer.SetBool("isJumping", true);
@@ -64,7 +60,6 @@ public class Player : MonoBehaviour
 
     public void SingleMovement()
     {
-       // if (Input.GetKeyDown("down"))
             jump = new Vector3(1, 1, 0);
             rb.AddForce(jump * force, ForceMode2D.Impulse);
     }
@@ -97,5 +92,5 @@ public class Player : MonoBehaviour
         Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -0.98f, 0), Quaternion.identity);
         yield return new WaitForSeconds(15f);
     }
-
+ 
 }
