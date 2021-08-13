@@ -67,11 +67,11 @@ public class Player : MonoBehaviour
     public void DoubleMovement()
     {
         //  if (Input.GetKeyDown("up"))
-        if (isGrounded)
-        {
+        //if (isGrounded)
+        //{
             jump = new Vector3(2, 2, 0);
             rb.AddForce(jump * force, ForceMode2D.Impulse);
-        }
+        //}
     }
     public void onClickAnimation()
     {

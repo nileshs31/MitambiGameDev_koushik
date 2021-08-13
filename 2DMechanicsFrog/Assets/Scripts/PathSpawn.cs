@@ -6,6 +6,7 @@ public class PathSpawn : MonoBehaviour
 {
     public GameObject obstacles;
     public GameObject powerInfinitePath;
+    public GameObject coin;
    /* private bool stopSpawning = false;
     private bool isMoving = true;*/
 
@@ -16,11 +17,9 @@ public class PathSpawn : MonoBehaviour
         
         InvokeRepeating("PowerSpawn", 50f, 60f);
 
-
+        InvokeRepeating("Coin",4f,2f);
     }
-    private void FixedUpdate()
-    {
-    }
+    
     void Ground()
     {
         if (!GameManager.Instance.gameOver)
@@ -35,7 +34,8 @@ public class PathSpawn : MonoBehaviour
 
     void Coin()
     {
-
+        if (!GameManager.Instance.gameOver)
+            Instantiate(coin, new Vector3(3.5f, 0, 0), Quaternion.identity);
     }
 
 

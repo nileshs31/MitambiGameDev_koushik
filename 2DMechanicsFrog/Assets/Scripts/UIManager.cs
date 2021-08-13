@@ -7,6 +7,8 @@ public class UIManager : MonoBehaviour
     public static UIManager _instance;
     public GameObject gamebuttons;
     public GameObject gameover;
+    public GameObject Points;
+    public GameObject Mainmenu;
     public static UIManager instance
     {
         get
@@ -25,5 +27,7 @@ public class UIManager : MonoBehaviour
         gameover.SetActive(true);
     }
 
-
+    public void MainMenu() {
+        Mainmenu.SetActive(false);
+    }
 }
