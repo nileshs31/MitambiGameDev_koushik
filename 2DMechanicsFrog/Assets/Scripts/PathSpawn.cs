@@ -15,7 +15,9 @@ public class PathSpawn : MonoBehaviour
     {
         InvokeRepeating("Ground", 1f, 1.2f);
         
-        InvokeRepeating("PowerSpawn", 50f, 60f);
+        //InvokeRepeating("PowerSpawn", 50f, 60f);
+        InvokeRepeating("PowerSpawn", 10f, 20f);
+
 
         InvokeRepeating("Coin",4f,2f);
     }

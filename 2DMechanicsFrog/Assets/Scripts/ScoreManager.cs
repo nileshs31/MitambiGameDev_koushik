@@ -30,7 +30,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        coinText.text = "Coins: " + coins;
+        coinText.text = "" + coins;
         coinsTotalText.text = "CoinsTotal: " + coinsTotal;
 
         score += scorePerSecond * Time.deltaTime;
