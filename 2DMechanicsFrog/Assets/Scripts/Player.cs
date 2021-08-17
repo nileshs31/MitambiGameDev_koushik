@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+
 public class Player : MonoBehaviour
 {
     Vector3 jump;
@@ -29,11 +31,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        /*Debug.Log( mainCamera.ScreenToWorldPoint(Input.mousePosition));
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, checkRadius, whatIsGround);
-
-        pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);*/
-       // if (Input.GetButton("SingleBtn"))
         if(Input.GetKeyDown("up"))
         {
             SingleMovement();
@@ -54,7 +51,18 @@ public class Player : MonoBehaviour
         {
             animPlayer.SetBool("isJumping", false);
         }
-       
+      
+        #if UNITY_ANDROID
+        if (Input.GetMouseButtonDown(0) && Input.mousePosition.x <= Screen.width / 2)
+        {
+            SingleMovement();
+        }
+        else if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width / 2)
+        {
+            DoubleMovement();
+        }
+        #endif
+
     }
 
 
