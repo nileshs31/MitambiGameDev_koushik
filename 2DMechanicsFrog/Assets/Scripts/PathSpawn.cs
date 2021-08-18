@@ -25,7 +25,12 @@ public class PathSpawn : MonoBehaviour
     void Ground()
     {
         if (!GameManager.Instance.gameOver)
+        {
             Instantiate(obstacles, new Vector3(obstacles.transform.position.x, -1.5f, 0), Quaternion.identity);   
+            /*transform.position = new Vector3(transform.position.x, -1.5f, 0);
+            GameObject newGameObject = obstacles[Random.Range(0, obstacles.Length)];
+            Instantiate(newGameObject, transform.position, Quaternion.identity);*/
+        }
     }
 
     void PowerSpawn()
