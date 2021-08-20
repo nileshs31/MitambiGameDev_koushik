@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    public float moveSpeed = 0.8f;
+    public float moveSpeed = 0.05f;
     public float killPositionX = -5f;
     Transform selfTransform;
 
@@ -18,7 +18,7 @@ public class Ground : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        selfTransform.position -= new Vector3(moveSpeed/2, 0);
+        selfTransform.position -= new Vector3(moveSpeed/4, 0);
         if (selfTransform.position.x < killPositionX)
         {
             Destroy(gameObject, 2f);
@@ -26,7 +26,7 @@ public class Ground : MonoBehaviour
     }
 
     private bool move;
-    private Vector3 velocity;
+    public Vector3 velocity;
 
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -46,7 +46,7 @@ public class Ground : MonoBehaviour
     private void FixedUpdate()
     {
         if (move)
-            transform.position += (velocity * 2f * Time.deltaTime);
+            transform.position += velocity * 2f * Time.deltaTime;
     }
 
 
