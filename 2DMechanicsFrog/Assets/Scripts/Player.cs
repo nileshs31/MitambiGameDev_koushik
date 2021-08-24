@@ -13,15 +13,8 @@ public class Player : MonoBehaviour
     private Animator animPlayer;
 
     public GameObject infinitepath;
-    [SerializeField] private Camera mainCamera;
-    public Transform groundCheck;
-    public float checkRadius;
-    private float currePos;
-    public LayerMask whatIsGround;
-    Vector2 pos;
-    bool moving;
     private bool isGrounded;
-    // Start is called before the first frame update
+    
     void Start()
     {
         animPlayer = GetComponent<Animator>();
@@ -74,12 +67,8 @@ public class Player : MonoBehaviour
 
     public void DoubleMovement()
     {
-        //  if (Input.GetKeyDown("up"))
-        //if (isGrounded)
-        //{
             jump = new Vector3(2, 2, 0);
             rb.AddForce(jump * force, ForceMode2D.Impulse);
-        //}
     }
     public void onClickAnimation()
     {
@@ -97,7 +86,7 @@ public class Player : MonoBehaviour
     IEnumerator InfinitePath()
     {
         yield return new WaitForSeconds(1f);
-        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -0.98f, 0), Quaternion.identity);
+        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
         yield return new WaitForSeconds(15f);
     }
  

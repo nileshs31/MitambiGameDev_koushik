@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class Ground : MonoBehaviour
 {
-    public float moveSpeed = 0.05f;
+    public float moveSpeed = 2f;
     public float killPositionX = -5f;
-    Transform selfTransform;
+    private bool move;
 
   
     // Start is called before the first frame update
     void Start()
     {
-        selfTransform = transform;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        selfTransform.position -= new Vector3(moveSpeed/4, 0);
-        if (selfTransform.position.x < killPositionX)
+        transform.position += Vector3.left * moveSpeed * Time.deltaTime;
+        if (transform.position.x < killPositionX)
         {
             Destroy(gameObject, 2f);
         }
     }
-
-    private bool move;
-    public Vector3 velocity;
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -45,8 +41,7 @@ public class Ground : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (move)
-            transform.position += velocity * 2f * Time.deltaTime;
+       
     }
 
 

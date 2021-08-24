@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager _instance;
-    public GameObject gamebuttons;
     public GameObject gameover;
     public GameObject Points;
     public GameObject Mainmenu;
@@ -23,7 +22,6 @@ public class UIManager : MonoBehaviour
      
     public void GameOver()
     {
-        gamebuttons.SetActive(false);
         gameover.SetActive(true);
     }
 
