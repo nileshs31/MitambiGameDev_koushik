@@ -122,3 +122,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
+  spawnManager: {fileID: 8473934961237531497, guid: d270cbdf728ad534580b0c86a7b5a006,
+    type: 3}

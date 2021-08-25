@@ -5,6 +5,7 @@ using UnityEngine;
 public class POwerUp : MonoBehaviour
 {
     public float speed = 2f;
+    public GameObject spawnManager;
 
     private void Update()
     {
@@ -23,9 +24,11 @@ public class POwerUp : MonoBehaviour
             Player player = collision.transform.GetComponent<Player>();
             if (player != null)
             {
+                //spawnManager.SetActive(true);
                 player.InfinitePathActive();
             }
             Destroy(this.gameObject);
+            //spawnManager.SetActive(false);
         }
     }
 }

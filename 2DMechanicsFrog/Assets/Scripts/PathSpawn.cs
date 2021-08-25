@@ -8,17 +8,14 @@ public class PathSpawn : MonoBehaviour
     public float waitTime;
     public GameObject[]    obstacles;
     public GameObject powerInfinitePath;
+    //public GameObject infinitepath;
+
     public GameObject coin;
     int i;
-    //public Transform spawngenerationPoint;
-
-    /* private bool stopSpawning = false;
-private bool isMoving = true;*/ 
 
     //powerups
     private void Start()
     {
-        //InvokeRepeating("Ground", 2f, 2f); 
         InvokeRepeating("PowerSpawn", 10f, 60f);
         InvokeRepeating("Coin",4f,2f);
         StartCoroutine(ground());
@@ -27,19 +24,7 @@ private bool isMoving = true;*/
     {
         if (waitTime > 0.4f)
             waitTime -= 0.000007f;
-
     }
-    /*    void Ground()
-        {
-            if (!GameManager.Instance.gameOver)
-            {
-
-                GameObject newGameObject = obstacles[Random.Range(0, obstacles.Length)];
-                Instantiate(newGameObject, new Vector3(transform.position.x, -1.5f, 0), Quaternion.identity);   
-                *//*transform.position = new Vector3(transform.position.x,transform.position.y, 0);
-                Instantiate(newGameObject, transform.position, Quaternion.identity);*//*
-            }
-        }*/
 
     public IEnumerator ground()
     {
@@ -49,12 +34,26 @@ private bool isMoving = true;*/
             yield return new WaitForSeconds(waitTime+0.3f);
         }
     }
-
+    
     public void spawnground()
     {
         i = Random.Range(0,obstacles.Length);
         Instantiate(obstacles[i],new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
     }
+
+/*    public void InfinitePathActive()
+    {
+        StartCoroutine(InfinitePath());
+    }
+
+    IEnumerator InfinitePath()
+    {
+        yield return new WaitForSeconds(1f);
+        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
+        yield return new WaitForSeconds(15f);
+    }
+*/
+
     void PowerSpawn()
     {
         if(!GameManager.Instance.gameOver)

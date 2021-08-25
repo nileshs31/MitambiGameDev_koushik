@@ -11,9 +11,10 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     private Animator animPlayer;
-
     public GameObject infinitepath;
-    private bool isGrounded;
+    public GameObject spawnManager;
+
+    public bool powerUp = true;
     
     void Start()
     {
@@ -79,15 +80,19 @@ public class Player : MonoBehaviour
     //booster
     //Infinite Path
     public void InfinitePathActive()
-    {
-        StartCoroutine(InfinitePath());
+    { 
+            StartCoroutine(InfinitePath());
     }
 
     IEnumerator InfinitePath()
     {
         yield return new WaitForSeconds(1f);
-        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
-        yield return new WaitForSeconds(15f);
+        if (powerUp)
+        {
+            Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
+            spawnManager.SetActive(false);
+            yield return new WaitForSeconds(15f);
+        }
     }
- 
+
 }

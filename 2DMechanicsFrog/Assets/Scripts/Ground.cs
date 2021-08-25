@@ -38,12 +38,4 @@ public class Ground : MonoBehaviour
     {
         collision.collider.transform.SetParent(null);
     }
-
-    private void FixedUpdate()
-    {
-       
-    }
-
-
-   
 }
