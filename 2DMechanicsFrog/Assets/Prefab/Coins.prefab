@@ -111,4 +111,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e66ae3f5d200c4a845881fe140d14b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
+  CoinSpeed: 2

@@ -5,7 +5,12 @@ using UnityEngine;
 public class POwerUp : MonoBehaviour
 {
     public float speed = 2f;
-    public GameObject spawnManager;
+    public PathSpawn spawnManager;
+
+    private void Start()
+    {
+        spawnManager = FindObjectOfType<PathSpawn>();
+    }
 
     private void Update()
     {
@@ -20,15 +25,13 @@ public class POwerUp : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            Debug.Log("Booster Activated");
-            Player player = collision.transform.GetComponent<Player>();
+            /*Player player = collision.transform.GetComponent<Player>();
             if (player != null)
             {
-                //spawnManager.SetActive(true);
-                player.InfinitePathActive();
-            }
-            Destroy(this.gameObject);
-            //spawnManager.SetActive(false);
+            }*/
+            Debug.Log("Booster Activated");
+            spawnManager.InfinitePath();
         }
+        Destroy(this.gameObject);
     }
 }

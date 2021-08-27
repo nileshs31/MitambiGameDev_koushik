@@ -25,7 +25,7 @@ public class ScoreManager : MonoBehaviour
     private void Start()
     {
         highscore = PlayerPrefs.GetFloat("HighScore");
-       // coins = PlayerPrefs.GetInt("CoinPoint");
+        coins = PlayerPrefs.GetInt("CoinPoint");
     }
 
     private void Update()

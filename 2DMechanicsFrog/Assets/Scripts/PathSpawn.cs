@@ -6,58 +6,60 @@ public class PathSpawn : MonoBehaviour
 {
 
     public float waitTime;
-    public GameObject[]    obstacles;
-    public GameObject powerInfinitePath;
-    //public GameObject infinitepath;
-
+    public GameObject[] obstacles;
+    public GameObject InfinitePathsPowerup;
     public GameObject coin;
+    public GameObject infinitepath;
     int i;
 
-    //powerups
+    public bool powerUpActive = false;
+
     private void Start()
     {
-        InvokeRepeating("PowerSpawn", 10f, 60f);
-        InvokeRepeating("Coin",4f,2f);
+        InvokeRepeating("PowerSpawn", 10f, 20f); 
+        InvokeRepeating("Coin", 4f, 2f);
         StartCoroutine(ground());
-    }
+    } 
     void FixedUpdate()
     {
         if (waitTime > 0.4f)
             waitTime -= 0.000007f;
     }
 
+
     public IEnumerator ground()
     {
-        while (true)
+        while (!powerUpActive)
         {
             spawnground();
-            yield return new WaitForSeconds(waitTime+0.3f);
+            yield return new WaitForSeconds(waitTime+0.2f);
         }
     }
-    
+
+    public void InfinitePath()
+    {
+        powerUpActive = true;
+        StartCoroutine(InfinitepathOff());
+        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
+    }
+
+    public IEnumerator InfinitepathOff()
+    {
+        Debug.Log("path");
+        yield return new WaitForSeconds(2f);
+        powerUpActive = false;
+    }
+
     public void spawnground()
     {
         i = Random.Range(0,obstacles.Length);
         Instantiate(obstacles[i],new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
     }
 
-/*    public void InfinitePathActive()
-    {
-        StartCoroutine(InfinitePath());
-    }
-
-    IEnumerator InfinitePath()
-    {
-        yield return new WaitForSeconds(1f);
-        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
-        yield return new WaitForSeconds(15f);
-    }
-*/
-
     void PowerSpawn()
     {
         if(!GameManager.Instance.gameOver)
-            Instantiate(powerInfinitePath, new Vector3( 3.5f,0,0), Quaternion.identity);
+            Instantiate(InfinitePathsPowerup, new Vector3( 3.5f,0,0), Quaternion.identity);
     }
 
     void Coin()
@@ -66,5 +68,5 @@ public class PathSpawn : MonoBehaviour
             Instantiate(coin, new Vector3(3.5f, -1f, 0), Quaternion.identity);
     }
 
-
+   
 }
