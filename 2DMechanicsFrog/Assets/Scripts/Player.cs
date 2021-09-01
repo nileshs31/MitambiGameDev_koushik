@@ -11,8 +11,6 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     private Animator animPlayer;
-    //public GameObject infinitepath;
-    //public GameObject spawnManager;
 
     
     void Start()
@@ -34,7 +32,6 @@ public class Player : MonoBehaviour
             animPlayer.SetBool("isJumping", false);
         }
 
-           //if (Input.GetButton("DoubleBtn"))
         if (Input.GetKeyDown("down"))
         {
             DoubleMovement();
@@ -48,13 +45,15 @@ public class Player : MonoBehaviour
         #if UNITY_ANDROID
         if (Input.GetMouseButtonDown(0) && Input.mousePosition.x <= Screen.width / 2)
         {
+            animPlayer.SetBool("isJumping", true);
             SingleMovement();
         }
         else if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width / 2)
         {
+            animPlayer.SetBool("isJumping", true);
             DoubleMovement();
         }
-        #endif
+#endif
 
     }
 
@@ -74,17 +73,4 @@ public class Player : MonoBehaviour
     {
         animPlayer.SetTrigger("IsRunning");
     }
-
-/*    public void InfinitePathActive()
-    {
-        StartCoroutine(InfinitePath());
-    }
-
-    IEnumerator InfinitePath()
-    {
-        yield return new WaitForSeconds(1f);
-        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
-        yield return new WaitForSeconds(15f);
-    }
-*/
 }

@@ -46,7 +46,7 @@ public class PathSpawn : MonoBehaviour
     public IEnumerator InfinitepathOff()
     {
         Debug.Log("path");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.6f);
         powerUpActive = false;
     }
 

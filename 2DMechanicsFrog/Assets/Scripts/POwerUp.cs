@@ -25,10 +25,6 @@ public class POwerUp : MonoBehaviour
     {
         if (collision.tag == "Player")
         {
-            /*Player player = collision.transform.GetComponent<Player>();
-            if (player != null)
-            {
-            }*/
             Debug.Log("Booster Activated");
             spawnManager.InfinitePath();
         }

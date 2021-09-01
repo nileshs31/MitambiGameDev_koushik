@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+
+
 public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
@@ -23,7 +25,6 @@ public class GameManager : MonoBehaviour
         gameOver = true;
         UIManager.instance.GameOver();
     }
-
     public void Retry()
     {
         if(gameOver == true)
@@ -31,8 +32,6 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene("GP");
         }
     }
-
-
     public void MainMenu()
     {
         if(gameOver == true)
