@@ -61,7 +61,7 @@ public class Player : MonoBehaviour
     public void SingleMovement()
     {
             jump = new Vector3(1, 1, 0);
-            rb.AddForce(jump * force, ForceMode2D.Impulse);
+            rb.AddForce(jump * force * 1.2f, ForceMode2D.Impulse);
     }
 
     public void DoubleMovement()

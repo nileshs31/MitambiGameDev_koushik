@@ -40,7 +40,7 @@ public class PathSpawn : MonoBehaviour
     {
         powerUpActive = true;
         StartCoroutine(InfinitepathOff());
-        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.85f, 0), Quaternion.identity);
+        Instantiate(infinitepath, new Vector3(infinitepath.transform.position.x, -1.2f, 0), Quaternion.identity);
     }
 
     public IEnumerator InfinitepathOff()
@@ -52,8 +52,11 @@ public class PathSpawn : MonoBehaviour
 
     public void spawnground()
     {
-        i = Random.Range(0,obstacles.Length);
-        Instantiate(obstacles[i],new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
+        if (!GameManager.Instance.gameOver)
+        {
+            i = Random.Range(0,obstacles.Length);
+            Instantiate(obstacles[i],new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
+        }
     }
 
     void PowerSpawn()
@@ -65,7 +68,7 @@ public class PathSpawn : MonoBehaviour
     void Coin()
     {
         if (!GameManager.Instance.gameOver)
-            Instantiate(coin, new Vector3(3.5f, -1f, 0), Quaternion.identity);
+            Instantiate(coin, new Vector3(3.5f, -0.4f, 0), Quaternion.identity);
     }
 
    
