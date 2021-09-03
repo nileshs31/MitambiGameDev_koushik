@@ -6,11 +6,12 @@ public class PathSpawn : MonoBehaviour
 {
 
     public float waitTime;
+    private int i;
+    public float ObjectWidth;
     public GameObject[] obstacles;
     public GameObject InfinitePathsPowerup;
     public GameObject coin;
     public GameObject infinitepath;
-    int i;
 
     public bool powerUpActive = false;
 
@@ -22,8 +23,8 @@ public class PathSpawn : MonoBehaviour
     } 
     void FixedUpdate()
     {
-        if (waitTime > 0.4f)
-            waitTime -= 0.000007f;
+       /* if (waitTime > 0.4f)
+            waitTime -= 0.000007f;*/
     }
 
 
@@ -32,7 +33,7 @@ public class PathSpawn : MonoBehaviour
         while (!powerUpActive)
         {
             spawnground();
-            yield return new WaitForSeconds(waitTime+0.2f);
+            yield return new WaitForSeconds(1.5f);
         }
     }
 
@@ -55,8 +56,12 @@ public class PathSpawn : MonoBehaviour
         if (!GameManager.Instance.gameOver)
         {
             i = Random.Range(0,obstacles.Length);
-            Instantiate(obstacles[i],new Vector3(transform.position.x,transform.position.y,transform.position.z),Quaternion.identity);
+            Instantiate(obstacles[i],new Vector3(transform.position.x + ObjectWidth,transform.position.y,transform.position.z),Quaternion.identity);
         }
+/*
+        transform.position = new Vector3(transform.position.x + ObjectWidth, transform.position.y, transform.position.z);
+        GameObject newGameObject = obstacles[Random.Range(0, obstacles.Length)];
+        Instantiate(newGameObject, transform.position, transform.rotation);*/
     }
 
     void PowerSpawn()

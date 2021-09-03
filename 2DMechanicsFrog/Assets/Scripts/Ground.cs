@@ -21,7 +21,7 @@ public class Ground : MonoBehaviour
         transform.position += Vector3.left * moveSpeed * Time.deltaTime;
         if (transform.position.x < killPositionX)
         {
-            Destroy(gameObject, 2f);
+            Destroy(gameObject, 10f);
         }
     }
 
