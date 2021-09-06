@@ -53,7 +53,7 @@ public class PathSpawn : MonoBehaviour
 
     public void spawnground()
     {
-        if (!GameManager.Instance.gameOver)
+        //if (!GameManager.Instance.gameOver)
         {
             i = Random.Range(0,obstacles.Length);
             Instantiate(obstacles[i],new Vector3(transform.position.x + ObjectWidth,transform.position.y,transform.position.z),Quaternion.identity);
@@ -66,13 +66,13 @@ public class PathSpawn : MonoBehaviour
 
     void PowerSpawn()
     {
-        if(!GameManager.Instance.gameOver)
+        //if(!GameManager.Instance.gameOver)
             Instantiate(InfinitePathsPowerup, new Vector3( 3.5f,0,0), Quaternion.identity);
     }
 
     void Coin()
     {
-        if (!GameManager.Instance.gameOver)
+        //if (!GameManager.Instance.gameOver)
             Instantiate(coin, new Vector3(3.5f, -0.4f, 0), Quaternion.identity);
     }
 

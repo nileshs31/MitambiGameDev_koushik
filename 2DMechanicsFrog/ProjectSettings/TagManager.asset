@@ -4,10 +4,10 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - kill
   - Booster
   - coins
+  - Background
+  - Destroy
   layers:
   - Default
   - TransparentFX

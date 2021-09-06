@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GP.unity
     guid: e8950f1b75bae23489ce4ec5e76274e1
+  - enabled: 1
+    path: Assets/Scenes/NewGP.unity
+    guid: cc59a5f0f814dc747841e14bcd723a74
   m_configObjects: {}
