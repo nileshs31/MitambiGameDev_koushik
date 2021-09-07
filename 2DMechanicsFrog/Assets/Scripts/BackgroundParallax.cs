@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BackgroundParallax : MonoBehaviour
 {
-public Vector2 speed = new Vector2(1, 0), direction = new Vector2(-1, 0), whereToSpawn;
+     public Vector2 speed = new Vector2(1, 0), direction = new Vector2(-1, 0), whereToSpawn;
 
      public float pos;
 
@@ -25,6 +25,5 @@ public Vector2 speed = new Vector2(1, 0), direction = new Vector2(-1, 0), whereT
              transform.position = new Vector3(whereToSpawn.x, whereToSpawn.y, 0);
          }
      }
-
 
 }

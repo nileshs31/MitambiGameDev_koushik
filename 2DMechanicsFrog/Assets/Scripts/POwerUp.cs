@@ -5,16 +5,16 @@ using UnityEngine;
 public class POwerUp : MonoBehaviour
 {
     public float speed = 2f;
-    public PathSpawn spawnManager;
+    public ObjectGen spawnManager;
 
     private void Start()
     {
-        spawnManager = FindObjectOfType<PathSpawn>();
+        spawnManager = FindObjectOfType<ObjectGen>();
     }
 
     private void Update()
     {
-        transform.Translate(Vector3.left * speed * Time.deltaTime);
+        //transform.Translate(Vector3.left * speed * Time.deltaTime);
         if(transform.position.x < -2.5)
         {
             Destroy(this.gameObject);
@@ -26,7 +26,7 @@ public class POwerUp : MonoBehaviour
         if (collision.tag == "Player")
         {
             Debug.Log("Booster Activated");
-            spawnManager.InfinitePath();
+            spawnManager.InfiniteGround();
         }
         Destroy(this.gameObject);
     }

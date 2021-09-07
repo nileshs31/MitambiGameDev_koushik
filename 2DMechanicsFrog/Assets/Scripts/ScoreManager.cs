@@ -34,7 +34,7 @@ public class ScoreManager : MonoBehaviour
         coinsTotalText.text = "CoinsTotal: " + coinsTotal;
 
         score += scorePerSecond * Time.deltaTime;
-        scoreText.text = "Score: " +Mathf.Round( score);
+        scoreText.text = "Score: " +  Mathf.Round( score);
         highscoreText.text = "HighScore: " + Mathf.Round(highscore);
         
         if (score > highscore)
