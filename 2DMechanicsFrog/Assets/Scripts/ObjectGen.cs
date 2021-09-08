@@ -17,13 +17,14 @@ public class ObjectGen : MonoBehaviour
 	{
 		InvokeRepeating("InfiniteGroundPower",10f,60f);
 		InvokeRepeating("CoinSpawn", 1f, 3f);
+		//StartCoroutine(Ground());
 	}
 
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		GroundSpawn();
-		//CoinSpawn();
+		//GroundSpawn();
+		StartCoroutine(Ground());
 	}
 
 	public IEnumerator Ground()
@@ -31,7 +32,7 @@ public class ObjectGen : MonoBehaviour
         while (!powerup)
         {
 			GroundSpawn();
-			yield return new WaitForSeconds(0.5f);
+			yield return new WaitForSeconds(0.6f);
         }
     }
 
@@ -45,7 +46,7 @@ public class ObjectGen : MonoBehaviour
 	public IEnumerator InfiniteGroundOff()
     {
 		Debug.Log("Start");
-		yield return new WaitForSeconds(0.6f);
+		yield return new WaitForSeconds(1f);
 		powerup = false;
     }
 
