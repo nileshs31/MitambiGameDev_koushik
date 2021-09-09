@@ -6,13 +6,17 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
 
     private Animator animPlayer;
+    private Gamecontroller gc;
     public bool gameon;
+    public bool animationPlayer = false;
+
 
     void Start()
     {
         animPlayer = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        Input.simulateMouseWithTouches = true;
+        //gc = GameObject.FindGameObjectsWithTag("GameController").GetComponent<Gamecontroller>();
+        //Input.simulateMouseWithTouches = true;
         gameon = false;
     }
 
@@ -24,14 +28,16 @@ public class Player : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0) && Input.mousePosition.x <= Screen.width / 2)
             {
-                //animPlayer.SetBool("isJumping", true);
                 SingleMovement();
+                animPlayer.SetTrigger("jumping");
+
             }
-            else if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width / 2)
+            if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width / 2)
             {
-                //animPlayer.SetBool("isJumping", true);
                 DoubleMovement();
+                animPlayer.SetTrigger("jumping");
             }
+            
 #endif
         }
         Vector2 screenposition = Camera.main.WorldToScreenPoint(transform.position);
@@ -45,11 +51,10 @@ public class Player : MonoBehaviour
 
 
     public void SingleMovement()
-    {
+    { 
         transform.DOMoveX(transform.position.x + 1.1f, 0.1f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);
+        transform.DOMoveY(transform.position.y + 0.2f, 0.05f); 
     }
-
     public void DoubleMovement()
     {
         transform.DOMoveX(transform.position.x + 2.2f, 0.1f);
@@ -59,4 +64,16 @@ public class Player : MonoBehaviour
     {
         animPlayer.SetTrigger("IsRunning");
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Kill")
+        {
+            Debug.Log("Touch");
+            //gc.GameOver();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
+            Destroy(this.gameObject);
+        }
+    }
+
 }

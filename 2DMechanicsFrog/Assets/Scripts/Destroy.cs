@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-	GameObject Destructor;
-	// Use this for initialization
-	void Start()
-	{
-		Destructor = GameObject.FindGameObjectWithTag("Kill");
-	}
+    GameObject Destructor;
+    // Use this for initialization
+    void Start()
+    {
+        Destructor = GameObject.FindGameObjectWithTag("Kill");
+    }
 
-	// Update is called once per frame
-	void Update()
-	{
-		if (transform.position.x < Destructor.transform.position.x)
-		{
-			Destroy(this.gameObject);
-		}
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        if (transform.position.x < Destructor.transform.position.x)
+        {
+            Destroy(this.gameObject);
+        }
+    }
 }
