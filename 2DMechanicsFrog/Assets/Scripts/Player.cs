@@ -1,25 +1,20 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Player : MonoBehaviour
 {
-    Rigidbody2D rb;
-
+    private Rigidbody2D rb;
     private Animator animPlayer;
     private Gamecontroller gc;
     public bool gameon;
     public bool animationPlayer = false;
-
-
+ 
     void Start()
     {
         animPlayer = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        //gc = GameObject.FindGameObjectsWithTag("GameController").GetComponent<Gamecontroller>();
-        //Input.simulateMouseWithTouches = true;
         gameon = false;
     }
-
 
     private void Update()
     {
@@ -37,7 +32,7 @@ public class Player : MonoBehaviour
                 DoubleMovement();
                 animPlayer.SetTrigger("jumping");
             }
-            
+
 #endif
         }
         Vector2 screenposition = Camera.main.WorldToScreenPoint(transform.position);
@@ -51,9 +46,9 @@ public class Player : MonoBehaviour
 
 
     public void SingleMovement()
-    { 
+    {
         transform.DOMoveX(transform.position.x + 1.1f, 0.1f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.05f); 
+        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);
     }
     public void DoubleMovement()
     {
@@ -67,13 +62,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Kill")
+        if (collision.tag == "Kill")
         {
             Debug.Log("Touch");
-            //gc.GameOver();
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
             Destroy(this.gameObject);
         }
     }
-
 }

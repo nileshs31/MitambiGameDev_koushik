@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
+   public static ScoreManager instance;
 
     public Text scoreText;
     public Text highscoreText;
@@ -17,10 +17,12 @@ public class ScoreManager : MonoBehaviour
     public int scorePerSecond=1;
     public float highscore;
 
+    public bool gameon;
+
     private void Awake()
-    {
-        instance = this;
-    }
+  {
+      instance = this;
+  }
 
     private void Start()
     {
@@ -30,34 +32,36 @@ public class ScoreManager : MonoBehaviour
 
     private void Update()
     {
-        coinText.text = "" + coins;
-        coinsTotalText.text = "CoinsTotal: " + coinsTotal;
+        if (!gameon)
+        {
+            coinText.text = "" + coins;
+            coinsTotalText.text = "CoinsTotal: " + coinsTotal;
 
-        score += scorePerSecond * Time.deltaTime;
-        scoreText.text = "Score: " +  Mathf.Round( score);
-        highscoreText.text = "HighScore: " + Mathf.Round(highscore);
-        
-        if (score > highscore)
-        {
-            highscore = score;
-            PlayerPrefs.SetFloat("HighScore", highscore);
-        }
-        if (coins > coinsTotal)
-        {
-            coinsTotal = coins;
-             PlayerPrefs.SetInt("CoinPoint", coinsTotal);
+             score += scorePerSecond * Time.deltaTime;
+             scoreText.text = "Score: " +  Mathf.Round( score);
+             highscoreText.text = "HighScore: " + Mathf.Round(highscore);
+
+             if (score > highscore)
+             {
+                  highscore = score;
+                  PlayerPrefs.SetFloat("HighScore", highscore);
+             }
+             if (coins > coinsTotal)
+             {   
+                coinsTotal = coins;
+                PlayerPrefs.SetInt("CoinPoint", coinsTotal);
+             }
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D Coin)
+    private void OnTriggerEnter2D(Collider2D Coin)  
     {
         if (Coin.tag == "coins")
         {
             coins++;
             Destroy(Coin.gameObject);
             scoreText.text = "Coins: " + coins;
-        }
-            
+        }    
     }
 
 }

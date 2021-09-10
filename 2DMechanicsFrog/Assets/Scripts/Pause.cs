@@ -42,7 +42,7 @@ public class Pause : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        //FindObjectOfType<>().Retry();
+        //  FindObjectOfType<>().Retry();
     }
 
     public void MainMenu()
