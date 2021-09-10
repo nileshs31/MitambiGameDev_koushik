@@ -6,23 +6,44 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Gamecontroller : MonoBehaviour{
-    public GameObject playbutton;
-    public GameObject gamover;
+    public GameObject menuPanel, gameOverPanel;
+    public Player playerCon;
+    public move camMover;
+    public Animator[] animators;
+
+    private void Start()
+    {
+        foreach(Animator bgAnim in animators)
+        {
+            bgAnim.enabled = false;
+        }
+    }
     public void StartGame()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<move>().speed = 2;
-        GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().gameon = true;
-        playbutton.SetActive(false);
+        camMover.speed = 2;
+        playerCon.gameon = true;
+        menuPanel.SetActive(false);
+        foreach (Animator bgAnim in animators)
+        {
+            bgAnim.enabled = true;
+        }
     }
 
     public void GameOver()
     {
-        GameObject.FindGameObjectWithTag("MainCamera").GetComponent<move>().speed = 0;
-        gamover.SetActive(true);
+        camMover.speed = 0;
+        gameOverPanel.SetActive(true);
+        foreach (Animator bgAnim in animators)
+        {
+            bgAnim.enabled = false;
+        }
+        playerCon.gameon = false;
+
     }
     public void Retry()
     {
-        playbutton.SetActive(true);
+        //menuPanel.SetActive(true);
+        //gameOverPanel.SetActive(false);
         SceneManager.LoadScene("GP");
     }
 }

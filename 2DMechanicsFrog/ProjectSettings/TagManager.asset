@@ -10,6 +10,7 @@ TagManager:
   - Destroy
   - Kill
   - Ground
+  - DestroyPlatforms
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,6 @@
-﻿using DG.Tweening;
+﻿using System.Collections;
+using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 public class Player : MonoBehaviour
@@ -18,42 +20,51 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-#if UNITY_ANDROID
         if (gameon)
         {
             if (Input.GetMouseButtonDown(0) && Input.mousePosition.x <= Screen.width / 2)
             {
+                gameon = false;
                 SingleMovement();
                 animPlayer.SetTrigger("jumping");
-
+                StartCoroutine(canbeTappedAgain());
             }
             if (Input.GetMouseButtonDown(0) && Input.mousePosition.x > Screen.width / 2)
             {
+                gameon = false;
                 DoubleMovement();
                 animPlayer.SetTrigger("jumping");
+                StartCoroutine(canbeTappedAgain());
             }
 
-#endif
         }
-        Vector2 screenposition = Camera.main.WorldToScreenPoint(transform.position);
-        if (screenposition.x > Screen.width || screenposition.x < 0)
+       
+        if (this.gameObject.transform.localPosition.y < -4.5f)
         {
-            gameon = false;
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
-            Destroy(this.gameObject);  //player
+            this.gameObject.SetActive(false);
         }
     }
 
 
     public void SingleMovement()
     {
-        transform.DOMoveX(transform.position.x + 1.1f, 0.1f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);
+       /* transform.DOMoveX(transform.position.x + 1.1f, 0.1f);
+        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);*/
+
+        transform.DOMoveX(transform.position.x + 1.1f, 0.4f);
+        transform.DOMoveY(transform.position.y + 0.2f, 0.2f);
     }
     public void DoubleMovement()
     {
-        transform.DOMoveX(transform.position.x + 2.2f, 0.1f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);
+        transform.DOMoveX(transform.position.x + 2.2f, 0.4f);
+        transform.DOMoveY(transform.position.y + 0.3f, 0.2f);
+    }
+
+    IEnumerator canbeTappedAgain()
+    {
+        yield return new WaitForSeconds(0.42f);
+        gameon = true;
+
     }
     public void onClickAnimation()
     {
@@ -64,9 +75,10 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Kill")
         {
-            Debug.Log("Touch");
+            StopAllCoroutines();
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
-            Destroy(this.gameObject);
+         //   Destroy(this.gameObject);
         }
     }
+    
 }

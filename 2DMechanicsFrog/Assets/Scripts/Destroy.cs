@@ -4,17 +4,9 @@ using UnityEngine;
 
 public class Destroy : MonoBehaviour
 {
-    GameObject Destructor;
-    // Use this for initialization
-    void Start()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        Destructor = GameObject.FindGameObjectWithTag("Kill");
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (transform.position.x < Destructor.transform.position.x)
+        if (collision.tag == "DestroyPlatforms")
         {
             Destroy(this.gameObject);
         }
