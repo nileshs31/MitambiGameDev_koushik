@@ -6,7 +6,8 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Gamecontroller : MonoBehaviour{
-    public GameObject menuPanel, gameOverPanel;
+    [SerializeField] 
+    GameObject menuPanel, inGamePanel, gameOverPanel;
     public Player playerCon;
     public move camMover;
     public Animator[] animators;
@@ -22,6 +23,7 @@ public class Gamecontroller : MonoBehaviour{
     {
         camMover.speed = 2;
         playerCon.gameon = true;
+        inGamePanel.SetActive(true);
         menuPanel.SetActive(false);
         foreach (Animator bgAnim in animators)
         {
