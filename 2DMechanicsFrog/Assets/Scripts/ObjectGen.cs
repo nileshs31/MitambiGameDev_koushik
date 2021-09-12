@@ -8,7 +8,7 @@ public class ObjectGen : MonoBehaviour
 	public GameObject coinsPrefab;
 	public GameObject powerPrefab;
 	public GameObject InfinitePath;
-	public Transform GenerationPoint;
+	public Transform GenerationPoint, GenerationPoint2;
 	public float ObjectWidth;
 
 	public bool powerup;
@@ -63,12 +63,12 @@ public class ObjectGen : MonoBehaviour
 
 	private void CoinSpawn()
     {
-		Instantiate(coinsPrefab, new Vector3(transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.identity);
+		Instantiate(coinsPrefab, new Vector3(GenerationPoint2.transform.position.x, transform.position.y + 0.2f, transform.position.z), Quaternion.identity);
 	}
 
 	public void InfiniteGroundPower()
     {
-		Instantiate(powerPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity);
+		Instantiate(powerPrefab, new Vector3(GenerationPoint2.transform.position.x + 2.5f, transform.position.y + 0.2f, transform.position.z), Quaternion.identity);
     }
 
 }

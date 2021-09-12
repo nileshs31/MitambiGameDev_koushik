@@ -6,9 +6,10 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Gamecontroller : MonoBehaviour{
-    [SerializeField] 
-    GameObject menuPanel, inGamePanel, gameOverPanel;
+    public ScoreManager scoreMan;
     public Player playerCon;
+    [SerializeField] 
+    GameObject menuPanel, inGamePanel, pausePanel, gameOverPanel;
     public move camMover;
     public Animator[] animators;
 
@@ -21,8 +22,9 @@ public class Gamecontroller : MonoBehaviour{
     }
     public void StartGame()
     {
-        camMover.speed = 2;
+        camMover.speed = 1.25f;
         playerCon.gameon = true;
+        scoreMan.gameon = true;
         inGamePanel.SetActive(true);
         menuPanel.SetActive(false);
         foreach (Animator bgAnim in animators)
@@ -40,12 +42,30 @@ public class Gamecontroller : MonoBehaviour{
             bgAnim.enabled = false;
         }
         playerCon.gameon = false;
+        scoreMan.gameon = false;
 
     }
+
+    public void CoinIncrement(int coinCount)
+    {
+        scoreMan.CoinIncrement(coinCount);
+    }
+
     public void Retry()
     {
-        //menuPanel.SetActive(true);
-        //gameOverPanel.SetActive(false);
         SceneManager.LoadScene("GP");
     }
+
+    public void Pause()
+    {
+        Time.timeScale = 0;
+        pausePanel.SetActive(true);
+    }
+
+    public void Resume()
+    {
+        Time.timeScale = 1;
+        pausePanel.SetActive(false);
+    }
+
 }

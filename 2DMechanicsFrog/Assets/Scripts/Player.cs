@@ -7,10 +7,12 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animPlayer;
-    private Gamecontroller gc;
+    public Gamecontroller gameCon;
+    [HideInInspector]
     public bool gameon;
-    public bool animationPlayer = false;
- 
+    public float canBeTappedAgainAfter;
+
+
     void Start()
     {
         animPlayer = GetComponent<Animator>();
@@ -48,21 +50,19 @@ public class Player : MonoBehaviour
 
     public void SingleMovement()
     {
-       /* transform.DOMoveX(transform.position.x + 1.1f, 0.1f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.05f);*/
 
         transform.DOMoveX(transform.position.x + 1.1f, 0.4f);
-        transform.DOMoveY(transform.position.y + 0.2f, 0.2f);
+        transform.DOMoveY(transform.position.y + 0.5f, 0.2f);
     }
     public void DoubleMovement()
     {
         transform.DOMoveX(transform.position.x + 2.2f, 0.4f);
-        transform.DOMoveY(transform.position.y + 0.3f, 0.2f);
+        transform.DOMoveY(transform.position.y + 0.75f, 0.2f);
     }
 
     IEnumerator canbeTappedAgain()
     {
-        yield return new WaitForSeconds(0.42f);
+        yield return new WaitForSeconds(canBeTappedAgainAfter);
         gameon = true;
 
     }
@@ -77,8 +77,12 @@ public class Player : MonoBehaviour
         {
             StopAllCoroutines();
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
-         //   Destroy(this.gameObject);
+        }
+        else if (collision.tag == "coins")
+        {
+            Destroy(collision.gameObject);
+            gameCon.CoinIncrement(1);
         }
     }
-    
+
 }

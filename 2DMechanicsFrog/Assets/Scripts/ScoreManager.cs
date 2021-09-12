@@ -2,21 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class ScoreManager : MonoBehaviour
 {
    public static ScoreManager instance;
 
-    public Text scoreText;
+    public TextMeshProUGUI scoreText;
     public Text highscoreText;
-    public Text coinText;
-    public Text coinsTotalText;
+    public TextMeshProUGUI coinText;
 
     public int coins = 0;
-    public int coinsTotal;
     public float score = 0;
-    public int scorePerSecond=1;
+    public float scorePerSecond=0.5f;
     public float highscore;
 
+    [HideInInspector]
     public bool gameon;
 
     private void Awake()
@@ -26,42 +26,34 @@ public class ScoreManager : MonoBehaviour
 
     private void Start()
     {
-        highscore = PlayerPrefs.GetFloat("HighScore");
-        coins = PlayerPrefs.GetInt("CoinPoint");
+        coins = PlayerPrefs.GetInt("CoinPoint",0);
+        coinText.text = "" + coins;
+        scoreText.text = ""+ score;
     }
 
     private void Update()
     {
-        if (!gameon)
+        if (gameon)
         {
             coinText.text = "" + coins;
-            coinsTotalText.text = "CoinsTotal: " + coinsTotal;
 
-             score += scorePerSecond * Time.deltaTime;
-             scoreText.text = "Score: " +  Mathf.Round( score);
-             highscoreText.text = "HighScore: " + Mathf.Round(highscore);
+            score += scorePerSecond * Time.deltaTime;
+            scoreText.text = "" + Mathf.Round(score);
+            highscoreText.text = "HighScore: " + Mathf.Round(highscore);
 
-             if (score > highscore)
-             {
-                  highscore = score;
-                  PlayerPrefs.SetFloat("HighScore", highscore);
-             }
-             if (coins > coinsTotal)
-             {   
-                coinsTotal = coins;
-                PlayerPrefs.SetInt("CoinPoint", coinsTotal);
-             }
+            if (score > highscore)
+            {
+                highscore = score;
+                PlayerPrefs.SetFloat("HighScore", highscore);
+            }
+            PlayerPrefs.SetInt("CoinPoint", coins);
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D Coin)  
+    public void CoinIncrement(int i)
     {
-        if (Coin.tag == "coins")
-        {
-            coins++;
-            Destroy(Coin.gameObject);
-            scoreText.text = "Coins: " + coins;
-        }    
+        coins+=i;
+        coinText.text = "" + coins;
     }
 
 }
