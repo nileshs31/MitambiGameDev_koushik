@@ -24,7 +24,7 @@ public class ScoreManager : MonoBehaviour
       instance = this;
   }
 
-    private void Start()
+    private void Start() 
     {
         coins = PlayerPrefs.GetInt("CoinPoint",0);
         coinText.text = "" + coins;

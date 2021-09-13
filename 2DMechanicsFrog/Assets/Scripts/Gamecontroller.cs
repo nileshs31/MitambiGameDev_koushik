@@ -5,13 +5,22 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
 
-public class Gamecontroller : MonoBehaviour{
+public class Gamecontroller : MonoBehaviour {
     public ScoreManager scoreMan;
     public Player playerCon;
     [SerializeField] 
     GameObject menuPanel, inGamePanel, pausePanel, gameOverPanel;
     public move camMover;
     public Animator[] animators;
+    public GameObject HomeVolumeOff;
+    public GameObject HomeVolumeOn;
+
+    public GameObject PauseSoundOff;
+    public GameObject PauseSoundOn;
+
+
+    public AudioSource HomeBackground;
+    public AudioSource Playbackground;
 
     private void Start()
     {
@@ -19,6 +28,30 @@ public class Gamecontroller : MonoBehaviour{
         {
             bgAnim.enabled = false;
         }
+
+        if(AudioListener.volume == 0)
+        {
+            HomeVolumeOff.SetActive(true);
+            HomeVolumeOn.SetActive(false);
+        }
+        else
+        {
+            HomeVolumeOff.SetActive(true);
+            HomeVolumeOn.SetActive(false);
+        }
+
+
+        if(AudioListener.volume == 0)
+        {
+            PauseSoundOff.SetActive(true);
+            PauseSoundOn.SetActive(false);
+        }
+        else
+        {
+            PauseSoundOff.SetActive(false);
+            PauseSoundOn.SetActive(true);
+        }
+
     }
     public void StartGame()
     {
@@ -43,7 +76,6 @@ public class Gamecontroller : MonoBehaviour{
         }
         playerCon.gameon = false;
         scoreMan.gameon = false;
-
     }
 
     public void CoinIncrement(int coinCount)
@@ -68,4 +100,30 @@ public class Gamecontroller : MonoBehaviour{
         pausePanel.SetActive(false);
     }
 
+    public void VolOn()
+    {
+        AudioListener.volume = 1f;
+        HomeVolumeOff.SetActive(true);
+        HomeVolumeOn.SetActive(false);
+    }
+    public void VolOff() 
+    {
+        AudioListener.volume = 0f;
+        HomeVolumeOff.SetActive(false);
+        HomeVolumeOn.SetActive(true);
+    }
+
+    public void PauseVolOn()
+    {
+        AudioListener.volume = 1f;
+        PauseSoundOff.SetActive(true);
+        PauseSoundOn.SetActive(false);
+    }
+
+    public void PauseVolOff()
+    {
+        AudioListener.volume = 0f;
+        PauseSoundOff.SetActive(false);
+        PauseSoundOn.SetActive(true);
+    }
 }
