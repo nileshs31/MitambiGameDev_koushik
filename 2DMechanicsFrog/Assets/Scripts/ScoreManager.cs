@@ -27,6 +27,7 @@ public class ScoreManager : MonoBehaviour
     private void Start() 
     {
         coins = PlayerPrefs.GetInt("CoinPoint",0);
+        highscore = PlayerPrefs.GetFloat("HighScore");
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
     }

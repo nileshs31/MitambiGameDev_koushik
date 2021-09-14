@@ -9,7 +9,7 @@ public class Gamecontroller : MonoBehaviour {
     public ScoreManager scoreMan;
     public Player playerCon;
     [SerializeField] 
-    GameObject menuPanel, inGamePanel, pausePanel, gameOverPanel;
+    GameObject menuPanel, inGamePanel, pausePanel,settingHomePannel, gameOverPanel , quitPannel;
     public move camMover;
     public Animator[] animators;
     public GameObject HomeVolumeOff;
@@ -29,7 +29,7 @@ public class Gamecontroller : MonoBehaviour {
             bgAnim.enabled = false;
         }
 
-        if(AudioListener.volume == 0)
+        if (AudioListener.volume == 0)
         {
             HomeVolumeOff.SetActive(true);
             HomeVolumeOn.SetActive(false);
@@ -41,7 +41,7 @@ public class Gamecontroller : MonoBehaviour {
         }
 
 
-        if(AudioListener.volume == 0)
+        if (AudioListener.volume == 0)
         {
             PauseSoundOff.SetActive(true);
             PauseSoundOn.SetActive(false);
@@ -92,6 +92,7 @@ public class Gamecontroller : MonoBehaviour {
     {
         Time.timeScale = 0;
         pausePanel.SetActive(true);
+        Time.timeScale = 1;
     }
 
     public void Resume()
@@ -100,13 +101,37 @@ public class Gamecontroller : MonoBehaviour {
         pausePanel.SetActive(false);
     }
 
+    public void QuitPannel()
+    {
+        quitPannel.SetActive(true);
+    }
+
+    public void yesAppQuit()
+    {
+        Debug.Log("application quit");
+        Application.Quit();
+    }
+    public void noAppQuit()
+    {
+        quitPannel.SetActive(false);
+    }
+
+    public void HomeSetting()
+    {
+        settingHomePannel.SetActive(true);
+    }
+    public void HomeSettingClose()
+    {
+        settingHomePannel.SetActive(false);
+    }
+
     public void VolOn()
     {
         AudioListener.volume = 1f;
         HomeVolumeOff.SetActive(true);
         HomeVolumeOn.SetActive(false);
     }
-    public void VolOff() 
+    public void VolOff()
     {
         AudioListener.volume = 0f;
         HomeVolumeOff.SetActive(false);
@@ -125,5 +150,21 @@ public class Gamecontroller : MonoBehaviour {
         AudioListener.volume = 0f;
         PauseSoundOff.SetActive(false);
         PauseSoundOn.SetActive(true);
+    }
+
+    //socialhandles
+    public void Instagram()
+    {
+        Application.OpenURL("https://www.instagram.com/mightyhardstudios/");
+    }
+
+    public void Website()
+    {
+        Application.OpenURL("https://mitambisolutions.com/contactus");
+    }
+
+    public void PlayStore()
+    {
+        Application.OpenURL("https://play.google.com/store/apps/dev?id=6545217765197016792");
     }
 }
