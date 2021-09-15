@@ -8,7 +8,7 @@ public class ScoreManager : MonoBehaviour
    public static ScoreManager instance;
 
     public TextMeshProUGUI scoreText;
-    public Text highscoreText;
+    public TextMeshProUGUI highscoreText;
     public TextMeshProUGUI coinText;
 
     public int coins = 0;
@@ -27,7 +27,7 @@ public class ScoreManager : MonoBehaviour
     private void Start() 
     {
         coins = PlayerPrefs.GetInt("CoinPoint",0);
-        highscore = PlayerPrefs.GetFloat("HighScore");
+        highscore = PlayerPrefs.GetFloat("HighScore",0);
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
     }

@@ -15,12 +15,13 @@ public class Gamecontroller : MonoBehaviour {
     public GameObject HomeVolumeOff;
     public GameObject HomeVolumeOn;
 
+/*
     public GameObject PauseSoundOff;
     public GameObject PauseSoundOn;
-
+*/
 
     public AudioSource HomeBackground;
-    public AudioSource Playbackground;
+
 
     private void Start()
     {
@@ -41,16 +42,16 @@ public class Gamecontroller : MonoBehaviour {
         }
 
 
-        if (AudioListener.volume == 0)
-        {
-            PauseSoundOff.SetActive(true);
-            PauseSoundOn.SetActive(false);
-        }
-        else
-        {
-            PauseSoundOff.SetActive(false);
-            PauseSoundOn.SetActive(true);
-        }
+        /* if (AudioListener.volume == 0)
+         {
+             PauseSoundOff.SetActive(true);
+             PauseSoundOn.SetActive(false);
+         }
+         else
+         {
+             PauseSoundOff.SetActive(false);
+             PauseSoundOn.SetActive(true);
+         }*/
 
     }
     public void StartGame()
@@ -85,6 +86,14 @@ public class Gamecontroller : MonoBehaviour {
 
     public void Retry()
     {
+        //Time.timeScale = 1;
+        gameOverPanel.SetActive(false);
+        SceneManager.LoadScene("GP");
+        menuPanel.SetActive(false);
+    }
+    
+    public void Home()
+    {
         SceneManager.LoadScene("GP");
     }
 
@@ -92,7 +101,6 @@ public class Gamecontroller : MonoBehaviour {
     {
         Time.timeScale = 0;
         pausePanel.SetActive(true);
-        Time.timeScale = 1;
     }
 
     public void Resume()
@@ -127,30 +135,35 @@ public class Gamecontroller : MonoBehaviour {
 
     public void VolOn()
     {
-        AudioListener.volume = 1f;
+       /* AudioListener.volume = 1f;
         HomeVolumeOff.SetActive(true);
-        HomeVolumeOn.SetActive(false);
+        HomeVolumeOn.SetActive(false);*/
     }
     public void VolOff()
     {
-        AudioListener.volume = 0f;
+        /*AudioListener.volume = 0f;
         HomeVolumeOff.SetActive(false);
-        HomeVolumeOn.SetActive(true);
+        HomeVolumeOn.SetActive(true);*/
     }
 
-    public void PauseVolOn()
+
+    /*public void PauseVolOn()
     {
         AudioListener.volume = 1f;
-        PauseSoundOff.SetActive(true);
-        PauseSoundOn.SetActive(false);
+        HomeVolumeOff.SetActive(false);
+        HomeVolumeOn.SetActive(true);
+*//*        PauseSoundOff.SetActive(true);
+        PauseSoundOn.SetActive(false);*//*
     }
 
     public void PauseVolOff()
     {
-        AudioListener.volume = 0f;
-        PauseSoundOff.SetActive(false);
-        PauseSoundOn.SetActive(true);
-    }
+        AudioListener.volume = 0f; 
+        HomeVolumeOff.SetActive(false);
+        HomeVolumeOn.SetActive(true);
+        *//*        PauseSoundOff.SetActive(false);
+                PauseSoundOn.SetActive(true);*//*
+    }*/
 
     //socialhandles
     public void Instagram()
