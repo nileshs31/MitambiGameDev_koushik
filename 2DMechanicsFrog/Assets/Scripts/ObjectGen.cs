@@ -15,7 +15,7 @@ public class ObjectGen : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		InvokeRepeating("InfiniteGroundPower",10f,60f);
+		InvokeRepeating("InfiniteGroundPower",40f,60f);
 		InvokeRepeating("CoinSpawn", 1f, 3f);
 		//StartCoroutine(Ground());
 	}
