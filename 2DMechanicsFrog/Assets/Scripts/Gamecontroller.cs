@@ -14,8 +14,12 @@ public class Gamecontroller : MonoBehaviour {
     public Animator[] animators;
 
     public AudioSource HomeBackground;
-    [SerializeField] private TextMeshProUGUI soundOn;
-    [SerializeField] private TextMeshProUGUI soundOff;
+    [SerializeField] private GameObject soundOn;
+    [SerializeField] private GameObject soundOff;
+
+    [SerializeField] private GameObject pausesoundOn;
+    [SerializeField] private GameObject pausesoundOff;
+
     private bool muted;
     public void startOnButtonPress()
     {
@@ -59,29 +63,30 @@ public class Gamecontroller : MonoBehaviour {
         }
         UpdateTextSound();
         AudioListener.pause = muted;
-        /*if (AudioListener.volume == 0)
-        {
-            HomeVolumeOffPrefab.SetActive(true);
-            HomeVolumeOnPrefab.SetActive(false);
-        }
-        else
-        {
-            HomeVolumeOffPrefab.SetActive(true);
-            HomeVolumeOnPrefab.SetActive(false);
-        }*/
     }
 
     private void UpdateTextSound()
     {
         if (muted == false)
         {
-            soundOn.enabled = true;
-            soundOff.enabled = false;
+            soundOn.SetActive(true);
+            soundOff.SetActive(false);
         }
         else
         {
-            soundOn.enabled = false;
-            soundOff.enabled = true;
+            soundOn.SetActive(false);
+            soundOff.SetActive(true);
+        }
+
+        if (muted == true)
+        {
+            pausesoundOff.SetActive(true);
+            pausesoundOn.SetActive(false);
+        }
+        else
+        {
+            pausesoundOn.SetActive(true);
+            pausesoundOff.SetActive(false);
         }
     }
 
@@ -116,8 +121,9 @@ public class Gamecontroller : MonoBehaviour {
     }
 
     public void Retry()
-    {
-        
+    { 
+        Debug.Log("Player Respawn");
+        respawnManager.instance.RestartGame();
     }
     
     public void Home()
@@ -165,39 +171,18 @@ public class Gamecontroller : MonoBehaviour {
     {
         addstoContinuePannel.SetActive(true);
     }
+
+    public void ShowAdds()
+    {
+        ShowAdds();
+        GameOver();
+    }
+
     public void CloseAddsPannel()
     {
         addstoContinuePannel.SetActive(false);
+        GameOver();
     }
-
-    //sounds
-/*    public void VolOn()
-    {
-        AudioListener.volume = 1f;
-        HomeVolumeOffPrefab.SetActive(true);
-        HomeVolumeOnPrefab.SetActive(false);
-    }
-    public void VolOff()
-    {
-        AudioListener.volume = 0f;
-        HomeVolumeOffPrefab.SetActive(false);
-        HomeVolumeOnPrefab.SetActive(true);
-    }
-
-    public void PauseVolOn()
-    {
-        AudioListener.volume = 1f;
-        HomeVolumeOffPrefab.SetActive(false);
-        HomeVolumeOnPrefab.SetActive(true);
-    }
-
-    public void PauseVolOff()
-    {
-        AudioListener.volume = 0f;
-        HomeVolumeOffPrefab.SetActive(true);
-        HomeVolumeOnPrefab.SetActive(false);
-    }*/
-
 
     //socialhandles
     public void Instagram()

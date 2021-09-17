@@ -77,6 +77,7 @@ public class Player : MonoBehaviour
         {
             StopAllCoroutines();
             GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
+
         }
         else if (collision.tag == "coins")
         {
