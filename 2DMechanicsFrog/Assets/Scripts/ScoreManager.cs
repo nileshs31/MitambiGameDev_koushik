@@ -10,6 +10,7 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highscoreText;
     public TextMeshProUGUI coinText;
+    public TextMeshProUGUI scoreoverText;
 
     public int coins = 0;
     public float score = 0;
@@ -28,6 +29,7 @@ public class ScoreManager : MonoBehaviour
     {
         coins = PlayerPrefs.GetInt("CoinPoint",0);
         highscore = PlayerPrefs.GetFloat("HighScore",0);
+        //score = PlayerPrefs.GetFloat("Score", 0);
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
     }
@@ -40,7 +42,9 @@ public class ScoreManager : MonoBehaviour
 
             score += scorePerSecond * Time.deltaTime;
             scoreText.text = "" + Mathf.Round(score);
-            highscoreText.text = "HighScore: " + Mathf.Round(highscore);
+            highscoreText.text = "" + Mathf.Round(highscore);
+
+            scoreoverText.text = "" + Mathf.Round(score);
 
             if (score > highscore)
             {
@@ -48,6 +52,7 @@ public class ScoreManager : MonoBehaviour
                 PlayerPrefs.SetFloat("HighScore", highscore);
             }
             PlayerPrefs.SetInt("CoinPoint", coins);
+            //PlayerPrefs.SetFloat("Score", score);
         }
     }
 

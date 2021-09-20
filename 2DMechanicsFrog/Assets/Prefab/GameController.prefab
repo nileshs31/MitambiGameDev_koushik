@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7207962508923805984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7207962508923805990}
+  - component: {fileID: 7207962508923805985}
+  - component: {fileID: 7207962508923805991}
+  - component: {fileID: 7207962508923805988}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7207962508923805990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207962508923805984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7207962508923805985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207962508923805984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e3f122bb9d923d468fd8e24befea8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  menu: {fileID: 0}
+  scoreMan: {fileID: 7207962508923805988}
+  playerCon: {fileID: 0}
+  pausePanel: {fileID: 0}
+  addstoContinuePannel: {fileID: 0}
+  gameOverPanel: {fileID: 0}
+  quitPannel: {fileID: 0}
+  camMover: {fileID: 0}
+  animators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  soundOn: {fileID: 106317577872103608, guid: 014c112d1615e564890f0d37df1f3d15, type: 3}
+  soundOff: {fileID: 4406502290037357177, guid: 81af07d853ff7514fb8cdbcca53755b4,
+    type: 3}
+  pausesoundOn: {fileID: 0}
+  pausesoundOff: {fileID: 0}
+--- !u!114 &7207962508923805991
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207962508923805984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6affc8d84e1610a4d8df22207c57bcf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GroundPrefabs:
+  - {fileID: 4172186154320924558, guid: 6d7ec7f1e6d9e8640aeba5a435790f44, type: 3}
+  - {fileID: 4947011273178848119, guid: 402e0c25b72023c4c953c751b1e87016, type: 3}
+  - {fileID: 2553172138798725107, guid: 0c45d5a4d43520d4dbc30aad71609689, type: 3}
+  - {fileID: 1705507918561628081, guid: 061ff829a160b0e41a9b9c5a71ac78ea, type: 3}
+  coinsPrefab: {fileID: 3006920892978944712, guid: ebe6694ea03cc604e97eb8e8357dda88,
+    type: 3}
+  powerPrefab: {fileID: 3679444857279445295, guid: f3bcf69d673a9f741afa2ff4fddd2533,
+    type: 3}
+  InfinitePath: {fileID: 7543902630861521360, guid: fe1617618fe023b4aabf15f754e95f39,
+    type: 3}
+  GenerationPoint: {fileID: 0}
+  GenerationPoint2: {fileID: 0}
+  ObjectWidth: 5.5
+  powerup: 0
+--- !u!114 &7207962508923805988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7207962508923805984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0a93abd0d355745807a5295f5a6691, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scoreText: {fileID: 0}
+  highscoreText: {fileID: 0}
+  coinText: {fileID: 0}
+  scoreoverText: {fileID: 0}
+  coins: 0
+  score: 0
+  scorePerSecond: 0.5
+  highscore: 0
+  gameon: 0

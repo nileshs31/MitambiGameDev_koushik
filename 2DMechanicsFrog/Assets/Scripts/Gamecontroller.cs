@@ -6,21 +6,26 @@ using DG.Tweening;
 using UnityEngine.SceneManagement;
 
 public class Gamecontroller : MonoBehaviour {
+
+    public static Gamecontroller instance;
+
+    public Menu menu;
+
     public ScoreManager scoreMan;
     public Player playerCon;
     [SerializeField] 
-    GameObject menuPanel, inGamePanel, pausePanel,settingHomePannel,addstoContinuePannel, gameOverPanel , quitPannel;
+    GameObject pausePanel,addstoContinuePannel, gameOverPanel , quitPannel;
     public move camMover;
     public Animator[] animators;
 
-    public AudioSource HomeBackground;
+  /*  //public AudioSource HomeBackground;
     [SerializeField] private GameObject soundOn;
     [SerializeField] private GameObject soundOff;
 
     [SerializeField] private GameObject pausesoundOn;
-    [SerializeField] private GameObject pausesoundOff;
+    [SerializeField] private GameObject pausesoundOff;*/
 
-    private bool muted;
+ /*   private bool muted;
     public void startOnButtonPress()
     {
         if (muted == false)
@@ -88,15 +93,13 @@ public class Gamecontroller : MonoBehaviour {
             pausesoundOn.SetActive(true);
             pausesoundOff.SetActive(false);
         }
-    }
+    }*/
 
     public void StartGame()
     {
         camMover.speed = 1.25f;
         playerCon.gameon = true;
         scoreMan.gameon = true;
-        inGamePanel.SetActive(true);
-        menuPanel.SetActive(false);
         foreach (Animator bgAnim in animators)
         {
             bgAnim.enabled = true;
@@ -123,12 +126,12 @@ public class Gamecontroller : MonoBehaviour {
     public void Retry()
     { 
         Debug.Log("Player Respawn");
-        respawnManager.instance.RestartGame();
+        SceneManager.LoadScene("GP");
     }
     
     public void Home()
     {
-        SceneManager.LoadScene("GP");
+        SceneManager.LoadScene("Menu");
     }
 
     public void Pause()
@@ -148,25 +151,6 @@ public class Gamecontroller : MonoBehaviour {
         quitPannel.SetActive(true);
     }
 
-    public void yesAppQuit()
-    {
-        Debug.Log("application quit");
-        Application.Quit();
-    }
-    public void noAppQuit()
-    {
-        quitPannel.SetActive(false);
-    }
-
-    public void HomeSetting()
-    {
-        settingHomePannel.SetActive(true);
-    }
-    public void HomeSettingClose()
-    {
-        settingHomePannel.SetActive(false);
-    }
-
     public void ShowAddsPannel()
     {
         addstoContinuePannel.SetActive(true);
@@ -182,21 +166,5 @@ public class Gamecontroller : MonoBehaviour {
     {
         addstoContinuePannel.SetActive(false);
         GameOver();
-    }
-
-    //socialhandles
-    public void Instagram()
-    {
-        Application.OpenURL("https://www.instagram.com/mightyhardstudios/");
-    }
-
-    public void Website()
-    {
-        Application.OpenURL("https://mitambisolutions.com/contactus");
-    }
-
-    public void PlayStore()
-    {
-        Application.OpenURL("https://play.google.com/store/apps/dev?id=6545217765197016792");
     }
 }

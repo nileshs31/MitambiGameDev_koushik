@@ -9,6 +9,9 @@ public class respawnManager : MonoBehaviour
     public Transform platformGenerate;
     private Vector3 platformstartpoint;
 
+    public Camera cam;
+    private Vector3 cameraposition;
+
     public Player player;
     private Vector3 playerStartPoint;
 
@@ -20,7 +23,7 @@ public class respawnManager : MonoBehaviour
 
     public void RestartGame()
     {
-        StartCoroutine("RestartGameOn");
+        
     }
 
     public IEnumerator RestartGameOn()
@@ -30,5 +33,7 @@ public class respawnManager : MonoBehaviour
         player.transform.position = playerStartPoint;
         platformGenerate.position = platformstartpoint;
         player.gameObject.SetActive(true);
+
+        cam.transform.position = cameraposition;
     }
 }

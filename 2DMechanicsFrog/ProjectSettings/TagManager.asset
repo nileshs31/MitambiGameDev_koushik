@@ -11,6 +11,7 @@ TagManager:
   - Kill
   - Ground
   - DestroyPlatforms
+  - MenuManager
   layers:
   - Default
   - TransparentFX
