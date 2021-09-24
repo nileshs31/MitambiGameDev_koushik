@@ -4503,7 +4503,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 15
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d2a2acb26019ddb4ab73aa98a9247029, type: 2}
   m_sharedMaterial: {fileID: -6712948283903393361, guid: d2a2acb26019ddb4ab73aa98a9247029,
@@ -6525,8 +6525,9 @@ MonoBehaviour:
   VolumeOffButton: {fileID: 1688713090}
   VolumeOnButton: {fileID: 1051722455}
   timeLeftToDie: 1
-  timeToDie: 5
+  timeToDie: 10
   promtToContinue: 0
+  continueScore: 0
   animators:
   - {fileID: 2139975494}
   - {fileID: 1223673231}
@@ -6590,12 +6591,14 @@ MonoBehaviour:
   highscoreText: {fileID: 2143174275}
   coinText: {fileID: 1216780802}
   scoreoverText: {fileID: 554613578}
+  continueScoreText: {fileID: 0}
   coins: 0
   score: 0
   scorePerSecond: 0.5
   highscore: 0
   continueScore: 0
   gameon: 0
+  conti: 0
 --- !u!1 &2069786107
 GameObject:
   m_ObjectHideFlags: 0

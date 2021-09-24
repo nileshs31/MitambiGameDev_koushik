@@ -14,15 +14,17 @@ public class ScoreManager : MonoBehaviour
     public TextMeshProUGUI coinText;
     public TextMeshProUGUI scoreoverText;
 
+    public TextMeshProUGUI continueScoreText;
+
     public int coins = 0;
     public float score = 0;
     public float scorePerSecond=0.5f;
     public float highscore;
-    public float continueScore;
+    public float continueScore=0;
 
     [HideInInspector]
     public bool gameon;
-
+    public bool conti = false;
     private void Awake()
     {
         instance = this;
@@ -34,6 +36,7 @@ public class ScoreManager : MonoBehaviour
         highscore = PlayerPrefs.GetFloat("HighScore",0);
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
+        continueScore = PlayerPrefs.GetFloat("Score", score);
     }
 
     private void Update()
@@ -53,8 +56,7 @@ public class ScoreManager : MonoBehaviour
                 PlayerPrefs.SetFloat("HighScore", highscore);
             }
             PlayerPrefs.SetInt("CoinPoint", coins);
-            //PlayerPrefs.SetFloat("Score", score);
-        }   
+        }
     }
 
 
@@ -62,5 +64,11 @@ public class ScoreManager : MonoBehaviour
     {
         coins+=i;
         coinText.text = "" + coins;
+    }
+
+    public void ContinueScore()
+    {
+            continueScoreText.text = "" + score;
+            PlayerPrefs.SetFloat("Score", score);
     }
 }

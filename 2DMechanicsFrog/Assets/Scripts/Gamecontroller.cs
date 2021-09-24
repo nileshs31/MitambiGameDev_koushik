@@ -17,7 +17,7 @@ public class Gamecontroller : MonoBehaviour {
     public float timeLeftToDie;
     public float timeToDie;
     public bool promtToContinue = false;
-
+    public bool continueScore = false;
     public Animator[] animators;
     public Slider sliderCont;
 
@@ -36,7 +36,7 @@ public class Gamecontroller : MonoBehaviour {
             VolumeOffButton.SetActive(true);
             VolumeOnButton.SetActive(false);
         }
-        promtToContinue = false;
+        //promtToContinue = false;
     }
 
     private void Update()
@@ -46,13 +46,17 @@ public class Gamecontroller : MonoBehaviour {
             if(timeLeftToDie > 0)
             {
                 sliderCont.value = timeLeftToDie;
-                timeLeftToDie -= Time.unscaledTime;
+                timeLeftToDie -= Time.unscaledDeltaTime;
             }
             else
             {
                 promtToContinue = false;
-                //GameOver();
+                GameOver();
             }
+        }
+        if (continueScore)
+        {
+
         }
     }
 
@@ -82,7 +86,7 @@ public class Gamecontroller : MonoBehaviour {
 
     public void StartGame()
     {
-        //PlayerPrefs.SetFloat("Score", scoreMan.score);
+        Time.timeScale = 1f;
         scoreMan.scoreText.text = scoreMan.score + "";
         camMover.speed = Random.Range(1.25f,2f);
         playerCon.gameon = true;
@@ -137,14 +141,12 @@ public class Gamecontroller : MonoBehaviour {
         Time.timeScale = 1f;
         addstoContinuePannel.SetActive(false);
         promtToContinue = false;
-        timeToDie = 3;
+        timeToDie = 5;
         timeLeftToDie = timeToDie;
-        /*  PlayerPrefs.GetFloat("Score", scoreMan.score);
-          scoreMan.scoreText.text = "" + Mathf.Round (scoreMan.score);*/
-        ResumeScore();
-        Debug.Log("scoreMan saved");
+
         SceneManager.LoadScene("GP");
         Debug.Log("Continue");
+        
     }
 
     public void Retry()
@@ -180,7 +182,7 @@ public class Gamecontroller : MonoBehaviour {
     {
         addstoContinuePannel.SetActive(true);
         playerCon.gameObject.SetActive(false);
-        timeToDie = 50;
+        timeToDie = 5;
         timeLeftToDie = timeToDie;
         sliderCont.maxValue = timeToDie;
         promtToContinue = true;
