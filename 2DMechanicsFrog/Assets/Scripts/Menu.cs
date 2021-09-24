@@ -5,11 +5,44 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     [SerializeField] GameObject settingHomePannel, quitPannel;
-    [SerializeField] GameObject gameController;
-    public void StarGameplay()
+    public GameObject VolumeOffButton, VolumeOnButton ;
+    void Start()
+    {
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
+        {
+            VolumeOffButton.SetActive(false);
+            VolumeOnButton.SetActive(true);
+        }
+        else
+        {
+            VolumeOffButton.SetActive(true);
+            VolumeOnButton.SetActive(false);
+        }
+    }
+
+    public void VolOn()
+    {
+        VolumeOffButton.SetActive(true);
+        VolumeOnButton.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
+
+    }
+
+    public void VolOff()
+    {
+        VolumeOffButton.SetActive(false);
+        VolumeOnButton.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+
+    }
+
+    public void StartGameplay()
     {
         SceneManager.LoadScene("GP");
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().StartGame();
     }
 
     public void QuitPannel()

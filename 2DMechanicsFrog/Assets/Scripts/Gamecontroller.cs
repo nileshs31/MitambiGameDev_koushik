@@ -4,100 +4,87 @@ using UnityEngine;
 using TMPro;
 using DG.Tweening;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Gamecontroller : MonoBehaviour {
-
-    public static Gamecontroller instance;
-
-    public Menu menu;
-
     public ScoreManager scoreMan;
     public Player playerCon;
-    [SerializeField] 
-    GameObject pausePanel,addstoContinuePannel, gameOverPanel , quitPannel;
     public move camMover;
+    [SerializeField] 
+    GameObject pausePanel,addstoContinuePannel, gameOverPanel , hudCanvas ,quitPannel;
+
+    public GameObject VolumeOffButton, VolumeOnButton;
+    public float timeLeftToDie;
+    public float timeToDie;
+    public bool promtToContinue = false;
+
     public Animator[] animators;
-
-  /*  //public AudioSource HomeBackground;
-    [SerializeField] private GameObject soundOn;
-    [SerializeField] private GameObject soundOff;
-
-    [SerializeField] private GameObject pausesoundOn;
-    [SerializeField] private GameObject pausesoundOff;*/
-
- /*   private bool muted;
-    public void startOnButtonPress()
-    {
-        if (muted == false)
-        {
-            muted = true;
-            AudioListener.pause = true;
-        }
-        else
-        {
-            muted = false;
-            AudioListener.pause = false;
-        }
-        OnSave();
-        UpdateTextSound();
-    }
-
-    public void OnLoad()
-    {
-        muted = PlayerPrefs.GetInt("muted") == 1;
-    }
-    public void OnSave()
-    {
-        PlayerPrefs.SetInt("muted", muted ? 1 : 0);
-    }
+    public Slider sliderCont;
 
     private void Start()
     {
-        foreach(Animator bgAnim in animators)
+        StartGame();
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
         {
-            bgAnim.enabled = false;
-        }
-        if (!PlayerPrefs.HasKey("muted"))
-        {
-            PlayerPrefs.SetInt("muted", 0);
-            OnLoad();
+            VolumeOffButton.SetActive(false);
+            VolumeOnButton.SetActive(true);
         }
         else
         {
-            OnLoad();
+            VolumeOffButton.SetActive(true);
+            VolumeOnButton.SetActive(false);
         }
-        UpdateTextSound();
-        AudioListener.pause = muted;
+        promtToContinue = false;
     }
 
-    private void UpdateTextSound()
+    private void Update()
     {
-        if (muted == false)
+        if (promtToContinue)
         {
-            soundOn.SetActive(true);
-            soundOff.SetActive(false);
+            if(timeLeftToDie > 0)
+            {
+                sliderCont.value = timeLeftToDie;
+                timeLeftToDie -= Time.unscaledTime;
+            }
+            else
+            {
+                promtToContinue = false;
+                //GameOver();
+            }
         }
-        else
-        {
-            soundOn.SetActive(false);
-            soundOff.SetActive(true);
-        }
+    }
 
-        if (muted == true)
-        {
-            pausesoundOff.SetActive(true);
-            pausesoundOn.SetActive(false);
-        }
-        else
-        {
-            pausesoundOn.SetActive(true);
-            pausesoundOff.SetActive(false);
-        }
-    }*/
+    public void ResumeScore()
+    {
+        scoreMan.continueScore = PlayerPrefs.GetFloat("conScore", scoreMan.score);
+        scoreMan.scoreText.text = "" + Mathf.Round(scoreMan.continueScore);
+    }
+
+    public void VolOn()
+    {
+        VolumeOffButton.SetActive(true);
+        VolumeOnButton.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
+
+    }
+
+    public void VolOff()
+    {
+        VolumeOffButton.SetActive(false);
+        VolumeOnButton.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+
+    }
 
     public void StartGame()
     {
-        camMover.speed = 1.25f;
+        //PlayerPrefs.SetFloat("Score", scoreMan.score);
+        scoreMan.scoreText.text = scoreMan.score + "";
+        camMover.speed = Random.Range(1.25f,2f);
         playerCon.gameon = true;
         scoreMan.gameon = true;
         foreach (Animator bgAnim in animators)
@@ -116,6 +103,8 @@ public class Gamecontroller : MonoBehaviour {
         }
         playerCon.gameon = false;
         scoreMan.gameon = false;
+        hudCanvas.SetActive(false);
+        addstoContinuePannel.SetActive(false);
     }
 
     public void CoinIncrement(int coinCount)
@@ -123,10 +112,46 @@ public class Gamecontroller : MonoBehaviour {
         scoreMan.CoinIncrement(coinCount);
     }
 
+    public void ContinueWithAd()
+    {
+        //adcon.ShowVideoBasedRewarded();
+    }
+
+    public void ContinueWithCoins()
+    {
+       if( scoreMan.coins >= 5)
+       {
+            scoreMan.coins -= 5;
+            PlayerPrefs.SetInt("CoinPoint", scoreMan.coins);
+            scoreMan.coinText.text = scoreMan.coins + "";
+            ContinueGame();
+       }
+        else
+        {
+            Debug.Log("Not enought coins");
+        }
+    }
+
+    public void ContinueGame()
+    {
+        Time.timeScale = 1f;
+        addstoContinuePannel.SetActive(false);
+        promtToContinue = false;
+        timeToDie = 3;
+        timeLeftToDie = timeToDie;
+        /*  PlayerPrefs.GetFloat("Score", scoreMan.score);
+          scoreMan.scoreText.text = "" + Mathf.Round (scoreMan.score);*/
+        ResumeScore();
+        Debug.Log("scoreMan saved");
+        SceneManager.LoadScene("GP");
+        Debug.Log("Continue");
+    }
+
     public void Retry()
     { 
         Debug.Log("Player Respawn");
         SceneManager.LoadScene("GP");
+        Time.timeScale = 1f;
     }
     
     public void Home()
@@ -154,12 +179,12 @@ public class Gamecontroller : MonoBehaviour {
     public void ShowAddsPannel()
     {
         addstoContinuePannel.SetActive(true);
-    }
-
-    public void ShowAdds()
-    {
-        ShowAdds();
-        GameOver();
+        playerCon.gameObject.SetActive(false);
+        timeToDie = 50;
+        timeLeftToDie = timeToDie;
+        sliderCont.maxValue = timeToDie;
+        promtToContinue = true;
+        Time.timeScale = 0f;
     }
 
     public void CloseAddsPannel()

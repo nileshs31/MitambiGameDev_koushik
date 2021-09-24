@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+
 public class ScoreManager : MonoBehaviour
 {
    public static ScoreManager instance;
@@ -16,20 +18,20 @@ public class ScoreManager : MonoBehaviour
     public float score = 0;
     public float scorePerSecond=0.5f;
     public float highscore;
+    public float continueScore;
 
     [HideInInspector]
     public bool gameon;
 
     private void Awake()
-  {
-      instance = this;
-  }
+    {
+        instance = this;
+    }
 
     private void Start() 
     {
         coins = PlayerPrefs.GetInt("CoinPoint",0);
         highscore = PlayerPrefs.GetFloat("HighScore",0);
-        //score = PlayerPrefs.GetFloat("Score", 0);
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
     }
@@ -43,7 +45,6 @@ public class ScoreManager : MonoBehaviour
             score += scorePerSecond * Time.deltaTime;
             scoreText.text = "" + Mathf.Round(score);
             highscoreText.text = "" + Mathf.Round(highscore);
-
             scoreoverText.text = "" + Mathf.Round(score);
 
             if (score > highscore)
@@ -53,13 +54,13 @@ public class ScoreManager : MonoBehaviour
             }
             PlayerPrefs.SetInt("CoinPoint", coins);
             //PlayerPrefs.SetFloat("Score", score);
-        }
+        }   
     }
+
 
     public void CoinIncrement(int i)
     {
         coins+=i;
         coinText.text = "" + coins;
     }
-
 }

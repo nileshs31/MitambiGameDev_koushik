@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
                 StartCoroutine(canbeTappedAgain());
             }
 
-        }
+       }
        
         if (this.gameObject.transform.localPosition.y < -4.5f)
         {
@@ -75,8 +75,8 @@ public class Player : MonoBehaviour
     {
         if (collision.tag == "Kill")
         {
-            StopAllCoroutines();
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().GameOver();
+            //StopAllCoroutines();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().ShowAddsPannel();
 
         }
         else if (collision.tag == "coins")
