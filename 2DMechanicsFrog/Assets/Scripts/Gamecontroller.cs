@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using DG.Tweening;
+//using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -10,16 +10,16 @@ public class Gamecontroller : MonoBehaviour {
     public ScoreManager scoreMan;
     public Player playerCon;
     public move camMover;
+    public Animator[] animators;
+    public Slider sliderCont;
+    [SerializeField]public UnityAds UnityAds;
     [SerializeField] 
-    GameObject pausePanel,addstoContinuePannel, gameOverPanel , hudCanvas ,quitPannel;
-
+    GameObject pausePanel,addstoContinuePannel,adsToPlayPannel, gameOverPanel , hudCanvas ,quitPannel;
     public GameObject VolumeOffButton, VolumeOnButton;
     public float timeLeftToDie;
     public float timeToDie;
     public bool promtToContinue = false;
     public bool continueScore = false;
-    public Animator[] animators;
-    public Slider sliderCont;
 
     private void Start()
     {
@@ -53,10 +53,6 @@ public class Gamecontroller : MonoBehaviour {
                 promtToContinue = false;
                 GameOver();
             }
-        }
-        if (continueScore)
-        {
-
         }
     }
 
@@ -118,14 +114,18 @@ public class Gamecontroller : MonoBehaviour {
 
     public void ContinueWithAd()
     {
-        //adcon.ShowVideoBasedRewarded();
+        Time.timeScale = 0;
+        promtToContinue = false;
+        addstoContinuePannel.SetActive(false);
+        UnityAds.ShowRewardedAdd();
+        adsToPlayPannel.SetActive(true);
     }
 
     public void ContinueWithCoins()
     {
-       if( scoreMan.coins >= 5)
+       if( scoreMan.coins >= 500)
        {
-            scoreMan.coins -= 5;
+            scoreMan.coins -= 500;
             PlayerPrefs.SetInt("CoinPoint", scoreMan.coins);
             scoreMan.coinText.text = scoreMan.coins + "";
             ContinueGame();
