@@ -9,5 +9,6 @@ public class move : MonoBehaviour
 	{
 		//Controls the movement of main camera.
 		GetComponent<Rigidbody2D>().velocity = new Vector2(speed, 0f);
+		speed += 0.0002f;
 	}
 }

@@ -20,7 +20,8 @@ public class Gamecontroller : MonoBehaviour {
     public float timeToDie;
     public bool promtToContinue = false;
     public bool continueScore = false;
-
+    public GameObject errorPanel;
+    public TextMeshProUGUI errorText;
     private void Start()
     {
         StartGame();
@@ -114,10 +115,10 @@ public class Gamecontroller : MonoBehaviour {
 
     public void ContinueWithAd()
     {
-        Time.timeScale = 0;
+        Time.timeScale = 1;
         promtToContinue = false;
         addstoContinuePannel.SetActive(false);
-        UnityAds.ShowRewardedAdd();
+        //UnityAds.ShowRewardedAdd();
         adsToPlayPannel.SetActive(true);
     }
 
@@ -133,8 +134,15 @@ public class Gamecontroller : MonoBehaviour {
         else
         {
             Debug.Log("Not enought coins");
+            Error("Not enought coins");
         }
     }
+        public void Error(string errorStr)
+        {
+            errorPanel.SetActive(true);
+            //errorPanel.SetActive(false);
+            errorText.text = errorStr;
+        }
 
     public void ContinueGame()
     {
