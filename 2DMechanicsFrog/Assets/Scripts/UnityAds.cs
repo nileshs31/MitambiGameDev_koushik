@@ -2,21 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class UnityAds : MonoBehaviour , IUnityAdsListener
 {
     private string GAME_ID = "4381333";
-  //  private bool testmode = true;
+    private bool testmode = true;
     [SerializeField] private string BannerId = "Banner_Android";
     [SerializeField] private string InterstitialId = "Interstitial_Android";
     [SerializeField] private string RewardId = "Rewarded_Android";
 
+    [Header("OnFinishedAds Callback")]
+    public UnityEvent OnFinishedAds;
+    [Header("OnSkippedAds Callback")]
+    public UnityEvent OnSkippedAds;
+    [Header("OnFailedAds Callback")]
+    public UnityEvent OnFailedAds;
+
+
     private void Start()
     {
-        Advertisement.Initialize(GAME_ID);
+        Advertisement.Initialize(GAME_ID,true);
         StartCoroutine(ShowBannerAdd());
-        
     }
 
     IEnumerator ShowBannerAdd()
@@ -41,6 +49,7 @@ public class UnityAds : MonoBehaviour , IUnityAdsListener
         }
     }
 
+ 
     public void ShowRewardedVideo()
     {
         OnUnityAdsReady("Rewarded_Android");
@@ -50,7 +59,7 @@ public class UnityAds : MonoBehaviour , IUnityAdsListener
     {
         if (showResult == ShowResult.Finished)
         {
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<Gamecontroller>().ContinueWithAd();
+            Debug.Log("Ads Playing");
         }
         else if (showResult == ShowResult.Skipped)
         {
@@ -62,11 +71,43 @@ public class UnityAds : MonoBehaviour , IUnityAdsListener
         }
     }
 
+    private void HandleShowResult(ShowResult result)
+    {
+        switch (result)
+        {
+            case ShowResult.Finished:
+                Debug.Log("The ad was successfully shown.");
+                Time.timeScale = 1f;
+                OnFinished();
+                break;
+            case ShowResult.Skipped:
+                Debug.Log("The ad was skipped before reaching the end.");
+                OnSkipped();
+                break;
+            case ShowResult.Failed:
+                Debug.LogError("The ad failed to be shown.");
+                OnFailed();
+                break; 
+        }
+    }
+    void OnFinished()
+    {
+        OnFinishedAds.Invoke();
+    }
+    void OnSkipped()
+    {
+        OnSkippedAds.Invoke();
+    }
+
+    void OnFailed()
+    {
+        OnFailedAds.Invoke();
+    }
     public void OnUnityAdsReady(string placementId)
     {
         if (placementId == RewardId)
         {
-            var options = new ShowOptions { resultCallback = };
+            var options = new ShowOptions { resultCallback = HandleShowResult };
             Advertisement.Show(RewardId,options);
         }
     }

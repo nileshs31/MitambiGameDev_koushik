@@ -2786,6 +2786,48 @@ MonoBehaviour:
   BannerId: Banner_Android
   InterstitialId: Interstitial_Android
   RewardId: Rewarded_Android
+  OnFinishedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2063919363}
+        m_MethodName: ContinueWithAd
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkippedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2063919363}
+        m_MethodName: OnSkippedAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFailedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2063919363}
+        m_MethodName: OnFailedAds
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!4 &871767801
 Transform:
   m_ObjectHideFlags: 0
@@ -4871,8 +4913,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 871767800}
-        m_MethodName: OnUnityAdsReady
-        m_Mode: 5
+        m_MethodName: ShowRewardedVideo
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6604,8 +6646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0.25, y: -0.9000015}
+  m_SizeDelta: {x: -12.043945, y: -30.264645}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1883346726
 CanvasRenderer:
@@ -6649,8 +6691,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 80}
+  m_AnchoredPosition: {x: 0, y: 1.3552}
+  m_SizeDelta: {x: 0, y: 54.015633}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1890707603
 CanvasRenderer:

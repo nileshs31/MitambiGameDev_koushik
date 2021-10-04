@@ -85,7 +85,7 @@ public class Gamecontroller : MonoBehaviour {
     {
         Time.timeScale = 1f;
         scoreMan.scoreText.text = scoreMan.score + "";
-        camMover.speed = Random.Range(1.25f,2f);
+        camMover.speed = 2f;
         playerCon.gameon = true;
         scoreMan.gameon = true;
         foreach (Animator bgAnim in animators)
@@ -115,13 +115,15 @@ public class Gamecontroller : MonoBehaviour {
 
     public void ContinueWithAd()
     {
-        Time.timeScale = 1;
+
         promtToContinue = false;
+        //Time.timeScale = 1f;
         addstoContinuePannel.SetActive(false);
-        //UnityAds.ShowRewardedAdd();
+        gameOverPanel.SetActive(false);
         adsToPlayPannel.SetActive(true);
     }
-
+    public void OnSkippedAds() { Error("You Skipped the ads! No reward"); }
+    public void OnFailedAds() { Error("Video failed to load"); }
     public void ContinueWithCoins()
     {
        if( scoreMan.coins >= 500)
@@ -137,12 +139,11 @@ public class Gamecontroller : MonoBehaviour {
             Error("Not enought coins");
         }
     }
-        public void Error(string errorStr)
-        {
+    public void Error(string errorStr)
+    {
             errorPanel.SetActive(true);
-            //errorPanel.SetActive(false);
             errorText.text = errorStr;
-        }
+    }
 
     public void ContinueGame()
     {
