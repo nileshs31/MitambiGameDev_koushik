@@ -77,7 +77,7 @@ public class UnityAds : MonoBehaviour , IUnityAdsListener
         {
             case ShowResult.Finished:
                 Debug.Log("The ad was successfully shown.");
-                Time.timeScale = 1f;
+                //Time.timeScale = 1f;
                 OnFinished();
                 break;
             case ShowResult.Skipped:

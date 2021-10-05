@@ -96,7 +96,7 @@ public class Gamecontroller : MonoBehaviour {
 
     public void GameOver()
     {
-        camMover.speed = 0;
+        camMover.speed = 0f;
         gameOverPanel.SetActive(true);
         foreach (Animator bgAnim in animators)
         {
@@ -117,7 +117,7 @@ public class Gamecontroller : MonoBehaviour {
     {
 
         promtToContinue = false;
-        //Time.timeScale = 1f;
+        Time.timeScale = 1f;
         addstoContinuePannel.SetActive(false);
         gameOverPanel.SetActive(false);
         adsToPlayPannel.SetActive(true);
