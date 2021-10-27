@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-
   [SerializeField] GameController gameController;
   private Rigidbody2D rb;
   [SerializeField] float playerSpeed = 2f;
+    private int coins;
   // Start is called before the first frame update
   void Start()
   {
@@ -43,19 +43,24 @@ public class PlayerController : MonoBehaviour
     rb.velocity = new Vector2(x, rb.velocity.y);
   }
 
+   // public void StarsIncrement(int starCount)
+    //{
+      //  gameController.StarsIncrement(starCount);
+    //}
 
   void OnTriggerEnter2D(Collider2D other)
   {
     if (other.tag == "Kill")
     {
       Destroy(this.gameObject);
-      GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GameOverPannel();
+      GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
     }
 
     if(other.tag == "Star"){
       Destroy(other.gameObject);
-      //coins increment
-      Debug.Log("I point");
+            //StarsIncrement(1);
+            gameController.StarsIncrement(1);
+            Debug.Log("I point");
     }
   }
 }

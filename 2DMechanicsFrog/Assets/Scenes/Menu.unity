@@ -5431,6 +5431,15 @@ MonoBehaviour:
   BannerId: Banner_Android
   InterstitialId: Interstitial_Android
   RewardId: Rewarded_Android
+  OnFinishedAds:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSkippedAds:
+    m_PersistentCalls:
+      m_Calls: []
+  OnFailedAds:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2072294188
 GameObject:
   m_ObjectHideFlags: 0

@@ -40,7 +40,6 @@ public class PlatformController : MonoBehaviour
     gameObject.SetActive(false);
   }
 
-
   //on trigger spike
   private void OnTriggerEnter2D(Collider2D trigger)
   {
@@ -49,7 +48,7 @@ public class PlatformController : MonoBehaviour
       if (isSpike)
       {
         //gamover
-        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GameOverPannel();
+        GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
       }
     }
   }
