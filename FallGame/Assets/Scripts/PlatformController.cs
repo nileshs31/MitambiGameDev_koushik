@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
   [SerializeField] GameController gameController;
-  [SerializeField] private float moveSpeed = 2f;
+  [SerializeField] private float moveSpeed = 1f;
   [SerializeField] private float moveY = 7f;
 
   public bool moveingPlatformLeft, moveingPlatformRight, isCrack, isSpike, isPlatform, isStar;

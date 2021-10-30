@@ -4,9 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private GameObject gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel;
+    [SerializeField] private GameObject pausePannel,gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel;
 
     public Slider slidercount;
     private int stars = 0;
@@ -58,6 +59,16 @@ public class GameController : MonoBehaviour
                 GameOver();
             }
         }
+
+        //if (!EventSystem.current.IsPointerOverGameObject(0) && Input.GetMouseButtonDown(0))
+
+
+            //PAUSE
+            if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePannel.SetActive(true);
+            Time.timeScale = 0f;
+        }
     }
 
     public void ShowAddsPannel()
@@ -70,9 +81,43 @@ public class GameController : MonoBehaviour
         Time.timeScale = 0f;
     }
 
+    public void PausePannel(int choice)
+    {
+        
+            if (choice == 0)
+            {
+                Time.timeScale = 0f;
+                pausePannel.SetActive(true);
+            }
+            else
+            {
+                pausePannel.SetActive(false);
+                Time.timeScale = 1f;
+
+            }
+        
+    }
+
     public void continueWithCoins()
     {
+        if (stars >= 1)
+        {
+            stars -= 1;
+            PlayerPrefs.SetInt("Star",stars);
+            scoreStarText.text = stars + "";
+            Continue2();
+        }
+        else
+        {
+            Debug.Log("no coins");
+        }
+    }
 
+    public void Continue2()
+    {
+        PlayerPrefs.SetInt("score", (int)score);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
     }
 
     //score
@@ -82,13 +127,6 @@ public class GameController : MonoBehaviour
         PlayerPrefs.SetInt("Star", stars);
         scoreStarText.text = "" + stars;
     }
-
-  /*  public void GameOverPannel()
-    {
-        Time.timeScale = 0f;
-        gameOverPannel.SetActive(true);
-        hudCanvasPannel.SetActive(false);
-     }*/
 
   public void GameOver()
   {
@@ -103,6 +141,7 @@ public class GameController : MonoBehaviour
     }
     public void Retry()
     {
+        PlayerPrefs.SetInt("score", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }

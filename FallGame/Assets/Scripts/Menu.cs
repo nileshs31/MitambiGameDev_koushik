@@ -5,9 +5,41 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel;
-    [SerializeField] GameObject HudCanvasPannel;
-    [SerializeField] GameObject settingPannel;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton;
+
+    void Start()
+    {
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
+        {
+            VolumeOffButton.SetActive(false);
+            VolumeOnButton.SetActive(true);
+        }
+        else
+        {
+            VolumeOffButton.SetActive(true);
+            VolumeOnButton.SetActive(false);
+        }
+    }
+
+    public void VolOn()
+    {
+        VolumeOffButton.SetActive(true);
+        VolumeOnButton.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
+
+    }
+
+    public void VolOff()
+    {
+        VolumeOffButton.SetActive(false);
+        VolumeOnButton.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+
+    }
 
     private void Update()
     {
@@ -23,7 +55,7 @@ public class Menu : MonoBehaviour
                 HudCanvasPannel.SetActive(false);
             }
         }
-    }
+          }
     public void OnYesNo(int choice)
     {
         if(choice == 1) { 
@@ -32,10 +64,30 @@ public class Menu : MonoBehaviour
         } exitPannel.SetActive(false);
                 HudCanvasPannel.SetActive(true);
     }
+
+    public void setting()
+    {
+        settingPannel.SetActive(true);
+        HudCanvasPannel.SetActive(false);
+    }
+
+    public void closeSetting()
+    {
+        settingPannel.SetActive(false);
+        HudCanvasPannel.SetActive(true);
+    }
+
     public void Play()
     {
+        PlayerPrefs.SetInt("score", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         Time.timeScale = 1f;
+    }
+
+    public void quitButton()
+    {
+        exitPannel.SetActive(true);
+        HudCanvasPannel.SetActive(false);
     }
 
     public void Instagram()
