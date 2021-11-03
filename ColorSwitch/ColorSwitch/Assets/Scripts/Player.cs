@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -15,34 +15,51 @@ public class Player : MonoBehaviour
     public Color Yellow;
     public Color Purple;
     public Color Pink;
-    // Start is called before the first frame update
+
+    bool playerReady = true;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+
+        rb.simulated = false;
+        
         RandomColor();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        playerMovement();
+        if (playerReady)
+        {
+            playerMovement();
+        }
+        
     }
 
     void playerMovement()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
             rb.velocity = Vector2.up * jumpforce;
+            rb.simulated = true;
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag != currentColor)
+        if(collision.tag == "ColorChange")
+        {
+            RandomColor();
+            Destroy(collision.gameObject);
+            return;
+           // Debug.Log("Color Change");
+        }
+
+        if (collision.tag != currentColor || collision.tag == "KillPlane")
         {
             Debug.Log("GAME OVER!");
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GameOver();
         }
     }
 

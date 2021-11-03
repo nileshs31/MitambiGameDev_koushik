@@ -8,6 +8,8 @@ TagManager:
   - Yellow
   - Purple
   - Pink
+  - ColorChange
+  - KillPlane
   layers:
   - Default
   - TransparentFX
