@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     Rigidbody2D rb;
     SpriteRenderer sr;
 
-    float jumpforce = 10f;
+    public float jumpforce = 9f;
     string currentColor;
 
     public Color Blue;
@@ -22,7 +22,6 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
-
         rb.simulated = false;
         
         RandomColor();
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) || Input.GetKeyDown(KeyCode.Space))
         {
-            rb.velocity = Vector2.up * jumpforce;
+            rb.velocity = new Vector2(0, 1 * jumpforce);
             rb.simulated = true;
         }
     }
