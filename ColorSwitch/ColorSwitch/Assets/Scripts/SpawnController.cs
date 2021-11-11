@@ -38,8 +38,9 @@ public class SpawnController : MonoBehaviour
     {
         if (transform.position.y < generateColorChange.position.y)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + 12f, transform.position.z);
-            Instantiate(colorChangePrefab, transform.position, Quaternion.identity);
+            transform.position = new Vector3(transform.position.x, transform.position.y + 10f, transform.position.z);
+            GameObject cobject =  Instantiate(colorChangePrefab, transform.position, Quaternion.identity);
+            cobject.SetActive(true);
         }
     }
 

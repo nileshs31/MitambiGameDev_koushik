@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
         if (collision.tag != currentColor || collision.tag == "KillPlane")
         {
             Debug.Log("GAME OVER!");
-            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().GameOver();
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
         }
     }
 
