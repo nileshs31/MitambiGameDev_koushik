@@ -306,8 +306,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -122, y: 46}
-  m_SizeDelta: {x: 61.129013, y: 55.292587}
+  m_AnchoredPosition: {x: -82.8, y: 46}
+  m_SizeDelta: {x: 42.766464, y: 40.268677}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155159563
 MonoBehaviour:
@@ -354,6 +354,17 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1205284436}
         m_MethodName: setting
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1205284437}
+        m_MethodName: ShowInterstitialAdd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -436,8 +447,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 34, y: 46}
-  m_SizeDelta: {x: 61.129013, y: 55.292587}
+  m_AnchoredPosition: {x: 31.5, y: 46}
+  m_SizeDelta: {x: 44.43576, y: 40.26857}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &183960912
 MonoBehaviour:
@@ -1373,8 +1384,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 11
+  m_fontSizeBase: 11
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2192,8 +2203,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -45, y: 46}
-  m_SizeDelta: {x: 61.129013, y: 55.292587}
+  m_AnchoredPosition: {x: -26.6, y: 46}
+  m_SizeDelta: {x: 42.76645, y: 40.26863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1199899563
 MonoBehaviour:
@@ -2429,6 +2440,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1205284435}
   - component: {fileID: 1205284436}
+  - component: {fileID: 1205284437}
   m_Layer: 0
   m_Name: MenuController
   m_TagString: Untagged
@@ -2467,6 +2479,63 @@ MonoBehaviour:
   settingPannel: {fileID: 915934492}
   VolumeOffButton: {fileID: 441325430}
   VolumeOnButton: {fileID: 1367583987}
+--- !u!114 &1205284437
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1205284434}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f49ab52822dbb50428c9f89bd97c1e52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BannerId: Banner_Android
+  InterstitialId: Interstitial_Android
+  RewardId: Rewarded_Android
+  OnFinishedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnSkippedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnFailedAds:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1210134370
 GameObject:
   m_ObjectHideFlags: 0
@@ -3305,8 +3374,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 112, y: 46}
-  m_SizeDelta: {x: 61.129013, y: 55.292587}
+  m_AnchoredPosition: {x: 87.8, y: 46}
+  m_SizeDelta: {x: 43.561462, y: 40.26863}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1591642457
 MonoBehaviour:

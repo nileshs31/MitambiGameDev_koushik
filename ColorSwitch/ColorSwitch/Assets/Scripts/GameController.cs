@@ -10,13 +10,15 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel;
 
     public Slider slidercount;
-    private int stars = 0;
+    private int stars = 100;
     private float score = 0;
-    private float highscore = 0;
+    private float Highscore = 0;
     public float timeLeftToDie;
     public float timeToDie;
     private string scorePrefs = "Score";
     private string highScorePrefs= "HighScore";
+
+    bool tap = false;
 
     public TextMeshProUGUI scoreStarText;
     public TextMeshProUGUI scoreText;
@@ -32,20 +34,27 @@ public class GameController : MonoBehaviour
         score = PlayerPrefs.GetInt(scorePrefs, 0);
         scoreText.text = "" + score;
 
-        highscore = PlayerPrefs.GetFloat(highScorePrefs, 0);
-        highScoreText.text = "" + highscore;
+        Highscore = PlayerPrefs.GetFloat(highScorePrefs,0);
+        highScoreText.text = "" + Highscore;
     }
 
     private void Update()
     {
-        score += 0.5f * Time.deltaTime;
-        scoreText.text = "" + (int)score;
-        highScoreText.text = "" + (int)highscore;
-        scoreOverText.text = "" + (int)score;
-        if (score > highscore)
+        if (tap)
         {
-            highscore = score;
-            PlayerPrefs.SetFloat(highScorePrefs, highscore);
+            Debug.Log("Game not start");
+        }
+        else
+        {
+            score += 0.5f * Time.deltaTime;
+        }
+        scoreText.text = "" + (int)score;
+        highScoreText.text = "" + (int)Highscore;
+        scoreOverText.text = "" + (int)score;
+        if (score > Highscore)
+        {
+            Highscore = score;
+            PlayerPrefs.SetFloat(highScorePrefs, Highscore);
         }
 
         if (promtToContinue)
@@ -96,7 +105,6 @@ public class GameController : MonoBehaviour
         {
             pausePannel.SetActive(false);
             Time.timeScale = 1f;
-
         }
 
     }
@@ -105,7 +113,7 @@ public class GameController : MonoBehaviour
     {
         if (stars >= 0)
         {
-            stars -= 1;
+            stars -= 0;
             PlayerPrefs.SetInt("Star", stars);
             scoreStarText.text = stars + "";
             Continue2();
