@@ -7,12 +7,12 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
-
+    //GameController gc;
     public float jumpforce = 9f;
     string currentColor;
 
     public Color Blue;
-    public Color Yellow;
+    public Color Green;
     public Color Purple;
     public Color Pink;
 
@@ -52,10 +52,14 @@ public class Player : MonoBehaviour
             RandomColor();
             Destroy(collision.gameObject);
             return;
-           // Debug.Log("Color Change");
         }
-
-        if (collision.tag != currentColor || collision.tag == "KillPlane")
+        else if (collision.tag == "Diamond")
+        {
+            //gc.DiamondIncrement(1); 
+            Destroy(collision.gameObject);
+            GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DiamondIncrement(1);
+        }
+        else if (collision.tag != currentColor || collision.tag == "KillPlane")
         {
             Debug.Log("GAME OVER!");
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
@@ -74,8 +78,8 @@ public class Player : MonoBehaviour
                 sr.color = Blue;
                 break;
             case 1:
-                currentColor = "Yellow";
-                sr.color = Yellow;
+                currentColor = "Green";
+                sr.color = Green;
                 break;
             case 2:
                 currentColor = "Purple";

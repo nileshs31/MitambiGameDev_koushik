@@ -10,15 +10,16 @@ public class GameController : MonoBehaviour
     [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel;
 
     public Slider slidercount;
-    private int stars = 100;
+    private int diamond = 0;
     private float score = 0;
     private float Highscore = 0;
     public float timeLeftToDie;
     public float timeToDie;
     private string scorePrefs = "Score";
     private string highScorePrefs= "HighScore";
+    private string diamondPrefs = "Diamond";
 
-    bool tap = false;
+    bool tap = true;
 
     public TextMeshProUGUI scoreStarText;
     public TextMeshProUGUI scoreText;
@@ -28,8 +29,8 @@ public class GameController : MonoBehaviour
     public bool promtToContinue = false;
     private void Start()
     {
-        stars = PlayerPrefs.GetInt("Star", 0);
-        scoreStarText.text = "" + stars;
+        diamond = PlayerPrefs.GetInt(diamondPrefs, 0);
+        scoreStarText.text = "" + diamond;
 
         score = PlayerPrefs.GetInt(scorePrefs, 0);
         scoreText.text = "" + score;
@@ -40,14 +41,8 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (tap)
-        {
-            Debug.Log("Game not start");
-        }
-        else
-        {
-            score += 0.5f * Time.deltaTime;
-        }
+        score += 0.5f * Time.deltaTime;
+
         scoreText.text = "" + (int)score;
         highScoreText.text = "" + (int)Highscore;
         scoreOverText.text = "" + (int)score;
@@ -111,11 +106,11 @@ public class GameController : MonoBehaviour
 
     public void continueWithCoins()
     {
-        if (stars >= 0)
+        if (diamond >= 1)
         {
-            stars -= 0;
-            PlayerPrefs.SetInt("Star", stars);
-            scoreStarText.text = stars + "";
+            diamond -= 1;
+            PlayerPrefs.SetInt(diamondPrefs, diamond);
+            scoreStarText.text = diamond + "";
             Continue2();
         }
         else
@@ -132,11 +127,11 @@ public class GameController : MonoBehaviour
     }
 
     //score
-    public void StarsIncrement(int count)
+    public void DiamondIncrement(int count)
     {
-        stars += count;
-        PlayerPrefs.SetInt("Star", stars);
-        scoreStarText.text = "" + stars;
+        diamond += count;
+        PlayerPrefs.SetInt(diamondPrefs, diamond);
+        scoreStarText.text = "" + diamond;
     }
 
     public void GameOver()
