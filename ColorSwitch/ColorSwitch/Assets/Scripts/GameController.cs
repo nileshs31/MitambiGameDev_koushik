@@ -4,14 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel;
-
+    [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel , VolumeOffButton , VolumeOnButton;
+    public GameObject pauseButton;
     public Slider slidercount;
     private int diamond = 0;
-    private float score = 0;
+    public float score = 0;
     private float Highscore = 0;
     public float timeLeftToDie;
     public float timeToDie;
@@ -66,7 +67,7 @@ public class GameController : MonoBehaviour
             }
         }
 
-        //if (!EventSystem.current.IsPointerOverGameObject(0) && Input.GetMouseButtonDown(0))
+        
 
 
         //PAUSE
@@ -75,8 +76,36 @@ public class GameController : MonoBehaviour
             pausePannel.SetActive(true);
             Time.timeScale = 0f;
         }
+
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
+        {
+            VolumeOffButton.SetActive(false);
+            VolumeOnButton.SetActive(true);
+        }
+        else
+        {
+            VolumeOffButton.SetActive(true);
+            VolumeOnButton.SetActive(false);
+        }
+    }
+    public void VolOn()
+    {
+        VolumeOffButton.SetActive(true);
+        VolumeOnButton.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
     }
 
+    public void VolOff()
+    {
+        VolumeOffButton.SetActive(false);
+        VolumeOnButton.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+
+    }
     public void ShowAddsPannel()
     {
         adsToContinuePannel.SetActive(true);
@@ -90,11 +119,13 @@ public class GameController : MonoBehaviour
 
     public void PausePannel(int choice)
     {
-
+        
         if (choice == 0)
         {
             Time.timeScale = 0f;
             pausePannel.SetActive(true);
+            pauseButton.SetActive(false);
+            
         }
         else
         {
@@ -118,6 +149,7 @@ public class GameController : MonoBehaviour
             Debug.Log("no coins");
         }
     }
+
 
     public void Continue2()
     {

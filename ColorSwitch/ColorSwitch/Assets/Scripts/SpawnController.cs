@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    public GameObject CirclesPrefab;
+    public GameObject[] CirclesPrefab;
     public GameObject colorChangePrefab;
     public Transform generateCirclePoint;
 
@@ -20,8 +20,7 @@ public class SpawnController : MonoBehaviour
         if (transform.position.y < generateCirclePoint.position.y)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + 8f, transform.position.z);
-
-            GameObject newObject = Instantiate(CirclesPrefab, transform.position, Quaternion.identity) as GameObject;
+            GameObject newObject = Instantiate(CirclesPrefab[Random.Range(0,CirclesPrefab.Length)], transform.position, Quaternion.identity) as GameObject;
             float scale = Random.Range(0.7f, 1.5f);
             newObject.transform.localScale = new Vector3(scale, scale, 0);
             newObject.SetActive(true);

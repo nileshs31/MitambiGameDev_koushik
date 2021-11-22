@@ -7,8 +7,8 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
-    //GameController gc;
-    public float jumpforce = 9f;
+   // public GameController gamecontroller;
+    public float jumpforce = 7f;
     string currentColor;
 
     public Color Blue;
@@ -42,6 +42,7 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 1 * jumpforce);
             rb.simulated = true;
+           // gamecontroller.scoreText.text = gamecontroller.score + "";
         }
     }
 
