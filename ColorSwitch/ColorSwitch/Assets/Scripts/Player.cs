@@ -42,7 +42,6 @@ public class Player : MonoBehaviour
         {
             rb.velocity = new Vector2(0, 1 * jumpforce);
             rb.simulated = true;
-           // gamecontroller.scoreText.text = gamecontroller.score + "";
         }
     }
 
@@ -69,7 +68,6 @@ public class Player : MonoBehaviour
 
     void RandomColor()
     {
-
         int index = Random.Range(0, 4);
 
         switch (index)

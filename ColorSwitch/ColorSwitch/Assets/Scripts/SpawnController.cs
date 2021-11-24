@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnController : MonoBehaviour
 {
     public GameObject[] CirclesPrefab;
-    public GameObject colorChangePrefab;
+   // public GameObject colorChangePrefab;
     public Transform generateCirclePoint;
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class SpawnController : MonoBehaviour
         }
     }
 
-    void colorchange()
+    /*void colorchange()
     {
         if (transform.position.y < generateCirclePoint.position.y)
         {
@@ -36,5 +36,5 @@ public class SpawnController : MonoBehaviour
             color.SetActive(true);
         }
     }
-
+*/
 }
