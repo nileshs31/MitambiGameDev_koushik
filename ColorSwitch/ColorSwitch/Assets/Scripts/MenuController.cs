@@ -69,7 +69,7 @@ public class MenuController : MonoBehaviour
     public void setting()
     {
         settingPannel.SetActive(true);
-        //HudCanvasPannel.SetActive(false);
+        HudCanvasPannel.SetActive(false);
     }
 
     public void closeSetting()

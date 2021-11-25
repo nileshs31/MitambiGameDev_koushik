@@ -7,7 +7,6 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
-   // public GameController gamecontroller;
     public float jumpforce = 7f;
     string currentColor;
 
@@ -54,8 +53,7 @@ public class Player : MonoBehaviour
             return;
         }
         else if (collision.tag == "Diamond")
-        {
-            //gc.DiamondIncrement(1); 
+        { 
             Destroy(collision.gameObject);
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DiamondIncrement(1);
         }
