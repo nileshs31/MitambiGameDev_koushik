@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public Sprite playerAfterDeath;
   [SerializeField] GameController gameController;
   private Rigidbody2D rb;
   [SerializeField] float playerSpeed = 2f;
@@ -52,8 +53,9 @@ public class PlayerController : MonoBehaviour
   {
     if (other.tag == "Kill")
     {
-      Destroy(this.gameObject);
+    //Destroy(this.gameObject);
       GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerAfterDeath;
     }
 
     if(other.tag == "Star"){

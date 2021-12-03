@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton, playbutton;
 
     void Start()
     {
@@ -69,12 +69,14 @@ public class Menu : MonoBehaviour
     {
         settingPannel.SetActive(true);
         HudCanvasPannel.SetActive(false);
+      //  playbutton.SetActive(false);
     }
 
     public void closeSetting()
     {
         settingPannel.SetActive(false);
         HudCanvasPannel.SetActive(true);
+        //playbutton.SetActive(true);
     }
 
     public void Play()
