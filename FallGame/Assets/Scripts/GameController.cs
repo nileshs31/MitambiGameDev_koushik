@@ -7,7 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
-    [SerializeField] private GameObject pausePannel,gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel;
+    [SerializeField] private GameObject pausePannel,gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel,VolumeOffButton, VolumeOnButton;
 
     public Slider slidercount;
     private int stars = 0;
@@ -32,6 +32,37 @@ public class GameController : MonoBehaviour
 
         highscore = PlayerPrefs.GetFloat("highscore", 0);
         highScoreText.text = "" + highscore;
+
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
+        {
+            VolumeOffButton.SetActive(false);
+            VolumeOnButton.SetActive(true);
+        }
+        else
+        {
+            VolumeOffButton.SetActive(true);
+            VolumeOnButton.SetActive(false);
+        }
+    }
+
+    public void VolOn()
+    {
+        VolumeOffButton.SetActive(true);
+        VolumeOnButton.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
+
+    }
+
+    public void VolOff()
+    {
+        VolumeOffButton.SetActive(false);
+        VolumeOnButton.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+
     }
 
     private void Update()

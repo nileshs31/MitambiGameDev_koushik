@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-    [SerializeField] GameObject platformPrefab, spikePlatformPrefab, crackPlatformPrefab, starPrefab;
+    [SerializeField] GameObject platformPrefab, spikePlatformPrefab, crackPlatformPrefab, starPrefab, enemyPlatformPrefab;
     [SerializeField] GameObject[] movingPlatforms;
 
     [SerializeField] float platformSpawnTime = 1.5f,currentPlatformSpawnTime;
@@ -41,29 +41,37 @@ public class SpawnController : MonoBehaviour
             if (platformSpawnCount < 1) { 
                 newPlatform = Instantiate(platformPrefab,temp,Quaternion.identity); 
             }else if(platformSpawnCount == 1) {
-                if (Random.Range(0, 2) > 0) { 
+                if (Random.Range(0, 3) > 0) { 
                 newPlatform = Instantiate(platformPrefab,temp,Quaternion.identity);
                 }
                 else { 
                     newPlatform = Instantiate(movingPlatforms[Random.Range(0,movingPlatforms.Length)],temp,Quaternion.identity);
                 }
             }else if(platformSpawnCount == 2){
-                if(Random.Range(0,2) > 0){
+                if(Random.Range(0,3) > 0){
                     newPlatform = Instantiate(platformPrefab,temp,Quaternion.identity);
                 }else{
                     newPlatform = Instantiate(spikePlatformPrefab,temp,Quaternion.identity);
                 }
             }else if(platformSpawnCount == 3){
-                if(Random.Range(0,2) > 0){
+                if(Random.Range(0,3) > 0){
                     newPlatform = Instantiate(platformPrefab,temp,Quaternion.identity);
                 }else{
                     newPlatform = Instantiate(crackPlatformPrefab,temp,Quaternion.identity);
                 }
-                platformSpawnCount = 0;
             }
-            /*else if(platformSpawnCount == 4){
+            else if(platformSpawnCount == 4){
+                if (Random.Range(0, 3) > 0)
+                {
+                    newPlatform = Instantiate(platformPrefab, temp, Quaternion.identity);
+                }
+                else
+                {
+                    newPlatform = Instantiate(enemyPlatformPrefab, temp, Quaternion.identity);
+                }
+                platformSpawnCount = 0;
 
-            }*/
+            }
             if (newPlatform)
                  newPlatform.transform.parent = transform;
             

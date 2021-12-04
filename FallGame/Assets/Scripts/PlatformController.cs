@@ -5,10 +5,11 @@ using UnityEngine;
 public class PlatformController : MonoBehaviour
 {
   [SerializeField] GameController gameController;
+    [SerializeField] PlayerController playerController;
   [SerializeField] private float moveSpeed = 1f;
   [SerializeField] private float moveY = 7f;
 
-  public bool moveingPlatformLeft, moveingPlatformRight, isCrack, isSpike, isPlatform, isStar;
+  public bool moveingPlatformLeft, moveingPlatformRight, isCrack, isSpike, isPlatform, isStar , isEnemy;
 
   private Animator anim;
 
@@ -45,12 +46,13 @@ public class PlatformController : MonoBehaviour
   {
     if (trigger.tag == "Player")
     {
-      if (isSpike)
+      if (isSpike || isEnemy)
       {
         //gamover
         GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
-      }
-    }
+              //      this.gameObject.GetComponent<SpriteRenderer>().sprite = playerController.playerAfterDeath;
+            }
+        }
   }
 
   void OnCollisionEnter2D(Collision2D col)
