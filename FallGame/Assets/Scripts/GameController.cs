@@ -91,9 +91,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        //if (!EventSystem.current.IsPointerOverGameObject(0) && Input.GetMouseButtonDown(0))
-
-
             //PAUSE
             if (Input.GetKeyDown(KeyCode.Escape))
         {
