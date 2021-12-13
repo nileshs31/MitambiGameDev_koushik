@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     public Sprite playerAfterDeath;
     [SerializeField] GameController gameController;
-    PlatformController pc;
     private Rigidbody2D rb;
     [SerializeField] float playerSpeed = 2f;
     // private int coins;
-    [SerializeField] bool isPlatform, isair;
+    bool isair = false;
     public Sprite[] playerExpression;
     // Start is called before the first frame update
     void Start()
@@ -21,28 +20,34 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
         if (Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width / 2)
         {
             LeftMovement();
         }
         else if (Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width / 2)
-        {
-            RightMovement();
-        }
-
+                {
+                    RightMovement();
+                }
         //inside screen
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -2.5f, 2.5f), transform.position.y, transform.position.z);
     }
     public void LeftMovement()
     {
         rb.velocity = new Vector2(-playerSpeed, rb.velocity.y);
-        //this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[1];
+       /* if (isair)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[1];
+        }*/
 
     }
     private void RightMovement()
     {
         rb.velocity = new Vector2(playerSpeed, rb.velocity.y);
-        // this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
+       /* if (isair)
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
+        }*/
     }
 
     public void PlatformPlayerMove(float x)
@@ -54,7 +59,6 @@ public class PlayerController : MonoBehaviour
     {
         if (other.tag == "Kill")
         {
-            //Destroy(this.gameObject);
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAddsPannel();
             //this.gameObject.GetComponent<SpriteRenderer>().sprite = playerAfterDeath;
         }
@@ -62,7 +66,6 @@ public class PlayerController : MonoBehaviour
         if (other.tag == "Star")
         {
             Destroy(other.gameObject);
-            //StarsIncrement(1);
             gameController.StarsIncrement(1);
             Debug.Log("I point");
         }
@@ -70,13 +73,14 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+
         if(collision.gameObject.tag == "Platform")
         {
-             if (Input.mousePosition.x < Screen.width / 2)
-            {
+             if (Input.mousePosition.x < Screen.width/2)
+             {
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[1];
-            }
-            if (Input.mousePosition.x > Screen.width / 2)
+             }
+            else
             {
                 this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
             }
@@ -84,7 +88,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Platform")
+        if (collision.gameObject.tag == "Platform" || !isair)
         {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[2];
         }
