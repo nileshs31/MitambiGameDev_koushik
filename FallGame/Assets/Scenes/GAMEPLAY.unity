@@ -4498,8 +4498,6 @@ MonoBehaviour:
   playerAfterDeath: {fileID: 0}
   gameController: {fileID: 1723959375}
   playerSpeed: 2
-  isPlatform: 0
-  isair: 0
   playerExpression:
   - {fileID: 21300000, guid: 33b01256205fb25408fb02d4a96f4c31, type: 3}
   - {fileID: 21300000, guid: 1baefd40e7b1d834a8ef5cc9dcf11731, type: 3}
@@ -4537,7 +4535,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1206892212
 RectTransform:
   m_ObjectHideFlags: 0

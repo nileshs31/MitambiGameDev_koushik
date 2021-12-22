@@ -9,8 +9,9 @@ public class PlayerController : MonoBehaviour
     public float speed;
     Vector3 dir;
     bool isDead;
-    [SerializeField] GameObject taptoPlay,retryBtn;
- 
+    [SerializeField] TextMeshProUGUI scoreText, tapToPlayText;
+    [SerializeField] GameObject scoretext;
+    [SerializeField] GameController gameController;
     void Start()
     {
         dir = Vector3.zero;
@@ -18,10 +19,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        
         if (Input.GetMouseButtonDown(0) && !isDead)
         {
-            taptoPlay.SetActive(false);
+            tapToPlayText.enabled = false;
+            scoretext.SetActive(true);
+            gameController.gameon = true;
             if (dir == Vector3.forward)
             {
                 dir = Vector3.left;
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Diamond"))
         {
             other.gameObject.SetActive(false);
-            //diamond add
+            gameController.DiamondCount(1);
         }
     }
 
@@ -57,7 +59,8 @@ public class PlayerController : MonoBehaviour
                 {
                     transform.GetChild(0).transform.parent = null; //camera
                 }
-                retryBtn.SetActive(true);
+                // retryBtn.SetActive(true);
+                GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().ShowAdsPannel();
             }
         }
     }
