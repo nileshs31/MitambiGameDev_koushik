@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public float timeLeftToDie = 1f;
     public float timeToDie = 5f;
     [SerializeField] TextMeshProUGUI diamondsText,scoreText,scoreOverText,highScoreText;
-    [SerializeField] GameObject adsToContinuePannel,gameOverPannel;
+    [SerializeField] GameObject adsToContinuePannel,gameOverPannel,volumeOff,volumeOn,settingPannel,hudCanvas,popCanvas;
 
     public Slider slidercount;
     private void Start()
@@ -27,6 +27,19 @@ public class GameController : MonoBehaviour
 
         highscore = PlayerPrefs.GetFloat("highscore", 0);
         highScoreText.text = "" + highscore;
+
+        var vol = PlayerPrefs.GetInt("Volume", 1);
+        AudioListener.volume = vol;
+        if (AudioListener.volume == 0f)
+        {
+            volumeOff.SetActive(false);
+            volumeOn.SetActive(true);
+        }
+        else
+        {
+            volumeOff.SetActive(true);
+            volumeOn.SetActive(false);
+        }
     }
 
     private void Update()
@@ -59,6 +72,29 @@ public class GameController : MonoBehaviour
         }
     }
 
+    public void VolOn()
+    {
+        volumeOff.SetActive(true);
+        volumeOn.SetActive(false);
+        AudioListener.volume = 1f;
+        PlayerPrefs.SetInt("Volume", 1);
+        Debug.Log("Volume On");
+    }
+
+    public void VolOff()
+    {
+        volumeOff.SetActive(false);
+        volumeOn.SetActive(true);
+        AudioListener.volume = 0f;
+        PlayerPrefs.SetInt("Volume", 0);
+        Debug.Log("Volume OFF");
+    }
+
+    public void Setting()
+    {
+        hudCanvas.SetActive(false);
+        settingPannel.SetActive(true);
+    }
     public void ShowAdsPannel()
     {
         adsToContinuePannel.SetActive(true);

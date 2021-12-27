@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameController gameController;
     void Start()
     {
-        dir = Vector3.zero;
+        dir = Vector3.forward;
     }
 
     void Update()
