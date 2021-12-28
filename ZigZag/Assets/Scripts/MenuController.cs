@@ -96,17 +96,20 @@ public class MenuController : MonoBehaviour
         HudCanvasPannel.SetActive(false);
     }
 
-    public void Instagram()
+    public void Socials(int num)
     {
-        Application.OpenURL("https://www.instagram.com/mightyhardstudios/");
-    }
-    public void Website()
-    {
-        Application.OpenURL("https://mitambisolutions.com/contactus");
-    }
 
-    public void PlayStore()
-    {
-        Application.OpenURL("https://play.google.com/store/apps/dev?id=6545217765197016792");
+        switch (num)
+        {
+            case 1:
+                Application.OpenURL("https://mitambisolutions.com/contactus");
+                break;
+            case 2:
+                Application.OpenURL("https://www.instagram.com/mightyhardstudios");
+                break;
+            case 3:
+                Application.OpenURL("https://play.google.com/store/apps/dev?id=6545217765197016792");
+                break;
+        }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class PlayerController : MonoBehaviour
@@ -19,7 +19,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isDead)
+        if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0) && !isDead)
+        //if (Input.GetMouseButtonDown(0) && !isDead)
         {
             tapToPlayText.enabled = false;
             scoretext.SetActive(true);

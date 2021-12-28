@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
     public float timeLeftToDie = 1f;
     public float timeToDie = 5f;
     [SerializeField] TextMeshProUGUI diamondsText,scoreText,scoreOverText,highScoreText;
-    [SerializeField] GameObject adsToContinuePannel,gameOverPannel,volumeOff,volumeOn,settingPannel,hudCanvas,popCanvas;
+    [SerializeField] GameObject adsToContinuePannel,gameOverPannel,volumeOff,volumeOn,pausePannel,hudCanvas,popCanvas;
 
     public Slider slidercount;
     private void Start()
@@ -90,11 +90,20 @@ public class GameController : MonoBehaviour
         Debug.Log("Volume OFF");
     }
 
-    public void Setting()
+    public void Pause()
     {
         hudCanvas.SetActive(false);
-        settingPannel.SetActive(true);
+        pausePannel.SetActive(true);
+        Time.timeScale = 0;
     }
+
+    public void ClosePause()
+    {
+        hudCanvas.SetActive(true);
+        pausePannel.SetActive(false);
+        Time.timeScale = 1;
+    }
+
     public void ShowAdsPannel()
     {
         adsToContinuePannel.SetActive(true);
@@ -137,12 +146,11 @@ public class GameController : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         /*PlayerPrefs.SetInt("score", 0);*/
         Time.timeScale = 1f;
-
     }
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
         Time.timeScale = 1f;
     }
 
@@ -151,11 +159,6 @@ public class GameController : MonoBehaviour
         diamonds += count;
         PlayerPrefs.SetInt("Diamond", diamonds);
         diamondsText.text = "" + diamonds;
-    }
-
-    public void ScoreCount(float c)
-    {
-
     }
 
     public void GameOver()
