@@ -1331,6 +1331,7 @@ MonoBehaviour:
   - {fileID: 4619359688614579908, guid: 20f6243e4b811434b89c911c3060a6cf, type: 3}
   - {fileID: 8837261418241942455, guid: d9d56ad25fed08a47b5aee8adaa45d4e, type: 3}
   currentPlatform: {fileID: 267264572}
+  playerController: {fileID: 1254367692}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,6 +2364,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 10
+  isDead: 0
+  isPowerup: 0
   scoreText: {fileID: 1344813214}
   tapToPlayText: {fileID: 1791865692}
   scoretext: {fileID: 1344813212}

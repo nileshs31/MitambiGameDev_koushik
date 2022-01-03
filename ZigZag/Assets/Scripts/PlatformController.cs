@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class PlatformController : MonoBehaviour
 {
+    bool isPpowerup;
     public GameObject[] platformPrefab;
     public GameObject currentPlatform;
-
+    [SerializeField] PlayerController playerController;
     private static PlatformController instance;
-
     private Stack<GameObject> leftPlatform = new Stack<GameObject>();
     private Stack<GameObject> topPlatform = new Stack<GameObject>();
+    private Stack<GameObject> platform = new Stack<GameObject>();
 
+    Vector3 lastpos; float size;
     public static PlatformController Instance 
     { 
        get
@@ -26,14 +28,28 @@ public class PlatformController : MonoBehaviour
 
     public Stack<GameObject> LeftPlatform { get => leftPlatform; set => leftPlatform = value; }
     public Stack<GameObject> TopPlatform { get => topPlatform; set => topPlatform = value; }
+    public Stack<GameObject> powerPlatform { get => platform; set => platform = value; }
+
 
     void Start()
     {
-        CreatePlatform(20);
-        for(int i = 0; i < 30; i++)
+        if(!playerController.isPowerup)
         {
-            SpawnPlatform();
+           // CreatePlatform(20);
+            for (int i = 0; i < 20; i++)
+            {
+                SpawnPlatform();
+            }
         }
+
+        if (playerController.isPowerup == true)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                SpawnPlatformPowerup();
+            }
+        }
+
     }
     public void CreatePlatform(int amount)
     {
@@ -46,25 +62,26 @@ public class PlatformController : MonoBehaviour
             topPlatform.Peek().SetActive(false);
             topPlatform.Peek().name = "TopPlatform";
         }
+
     }
 
     public void SpawnPlatform()
     {
-        if(leftPlatform.Count == 0 || topPlatform.Count == 0)
+        if (leftPlatform.Count == 0 || topPlatform.Count == 0)
         {
-            CreatePlatform(10);
+            CreatePlatform(1);
         }
 
         int randomPlatformidx = Random.Range(0, 2);
-        
-        if(randomPlatformidx == 0)
+
+        if (randomPlatformidx == 0)
         {
             GameObject temp = leftPlatform.Pop();
             temp.SetActive(true);
             temp.transform.position = currentPlatform.transform.GetChild(0).transform.GetChild(randomPlatformidx).position;
             currentPlatform = temp;
         }
-        else if(randomPlatformidx == 1)
+        else if (randomPlatformidx == 1)
         {
             GameObject temp = topPlatform.Pop();
             temp.SetActive(true);
@@ -73,10 +90,57 @@ public class PlatformController : MonoBehaviour
 
         }
 
-        int spawnPickup = Random.Range(0, 10);
+        int spawnPickup = Random.Range(0, 20);
         if (spawnPickup == 0)
         {
             currentPlatform.transform.GetChild(1).gameObject.SetActive(true);
         }
+        if(spawnPickup == 1)
+        {
+            currentPlatform.transform.GetChild(2).gameObject.SetActive(true);
+        }
+
+    }
+
+    public void DeactivatePlatform()
+    {
+        leftPlatform.Clear();
+        topPlatform.Clear();
+        InvokeRepeating("SpawnPlatformPowerup",1f,1f);
+    }
+
+
+    public void SpawnPlatformPowerup()
+    {
+        //if platform contain powerup
+        //player trigger with power up
+        //take the position of current powerup platorm 
+        //spawn the top platform into iot for 6 sec
+        //again calling the normal spawning
+
+
+        /*if (playerController.isPowerup == true)
+        {
+            for (int i = 0; i < 20; i++)
+            {
+                platform.Push(Instantiate(platformPrefab[0]));
+            }
+            playerController.isPowerup = false;
+        }   */
+
+       /* if ( topPlatform.Count == 0)
+        {
+            CreatePlatform(1);
+        }
+       
+        
+            GameObject temp = topPlatform.Pop();
+            temp.SetActive(true);
+            temp.transform.position = currentPlatform.transform.GetChild(0).transform.GetChild(1).position;
+            currentPlatform = temp;*/
+
+        
+
+
     }
 }

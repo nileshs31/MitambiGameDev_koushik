@@ -32,6 +32,9 @@ public class Platform : MonoBehaviour
                 gameObject.GetComponent<Rigidbody>().isKinematic = true;
                 gameObject.SetActive(false);
                 break;
+
+            case "Platform":
+                break;
         }
     }
 }

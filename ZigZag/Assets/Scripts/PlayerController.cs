@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
 {
     public float speed;
     Vector3 dir;
-    bool isDead;
+    public bool isDead , isPowerup;
     [SerializeField] TextMeshProUGUI scoreText, tapToPlayText;
     [SerializeField] GameObject scoretext;
     [SerializeField] GameController gameController;
@@ -43,6 +43,14 @@ public class PlayerController : MonoBehaviour
         {
             other.gameObject.SetActive(false);
             gameController.DiamondCount(1);
+        }
+
+        if (other.CompareTag("PowerUp"))
+        {
+            other.gameObject.SetActive(false);
+            isPowerup = true;
+            PlatformController.Instance.DeactivatePlatform();
+            PlatformController.Instance.SpawnPlatformPowerup();
         }
     }
 
