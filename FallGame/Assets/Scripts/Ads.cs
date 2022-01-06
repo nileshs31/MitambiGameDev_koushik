@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 public class Ads : MonoBehaviour,IUnityAdsListener
 {
-    private string GAME_ID = "4422775";
-    private bool testmode = true;
+    private string GAME_ID = "4528381";
     [SerializeField] private string BannerId = "Banner_Android";
     [SerializeField] private string InterstitialId = "Interstitial_Android";
     [SerializeField] private string RewardId = "Rewarded_Android";
@@ -35,6 +34,16 @@ public class Ads : MonoBehaviour,IUnityAdsListener
         Advertisement.Banner.Show(BannerId);
     }
 
+    public void InterstitialRandomly()
+    {
+        int x = Random.Range(0, 3);
+        if (x == 0)
+        {
+            ShowInterstitialAdd();
+        }
+    }
+
+
     public void ShowInterstitialAdd()
     {
         if (Advertisement.IsReady())
@@ -50,7 +59,8 @@ public class Ads : MonoBehaviour,IUnityAdsListener
 
     public void ShowRewardedVideo()
     {
-        OnUnityAdsReady("Rewarded_Android");
+        OnUnityAdsReady(RewardId);
+        
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
@@ -102,7 +112,6 @@ public class Ads : MonoBehaviour,IUnityAdsListener
         OnFailedAds.Invoke();
     }
 
-    [System.Obsolete]
     public void OnUnityAdsReady(string placementId)
     {
         if (placementId == RewardId)

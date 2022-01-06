@@ -15,7 +15,7 @@ public class SpawnController : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating("Stars",10f,15f);
+        InvokeRepeating("Stars",5f,2f);
     }
     // Start is called before the first frame update
     void Awake()

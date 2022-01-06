@@ -15,6 +15,8 @@ public class GameController : MonoBehaviour
     private float highscore = 0;
     public float timeLeftToDie;
     public float timeToDie;
+    public Tweener textPopup;
+    public TextMeshProUGUI popUpText;
 
     public TextMeshProUGUI scoreStarText;
     public TextMeshProUGUI scoreText;
@@ -128,19 +130,21 @@ public class GameController : MonoBehaviour
 
     public void continueWithCoins()
     {
-        if (stars >= 1)
+        if (stars >= 10)
         {
-            stars -= 1;
+            stars -= 10;
             PlayerPrefs.SetInt("Star",stars);
             scoreStarText.text = stars + "";
             Continue2();
         }
         else
         {
-            Debug.Log("no coins");
+            popUpText.text = "Not Enough Coins";
+            textPopup.Show(textPopup.CloseAfter);
         }
     }
 
+    
     public void Continue2()
     {
         PlayerPrefs.SetInt("score", (int)score);
@@ -185,10 +189,13 @@ public class GameController : MonoBehaviour
     }
     public void OnSkippedAds()
     {
-        Debug.Log("No reward");
+
+        popUpText.text = "Please Watch the Whole Ad!";
+        textPopup.Show(textPopup.CloseAfter);
     }
     public void OnFailedAds()
     {
-        Debug.Log("Ads failed to load");
+        popUpText.text = "Ads Loading...";
+        textPopup.Show(textPopup.CloseAfter);
     }
 }

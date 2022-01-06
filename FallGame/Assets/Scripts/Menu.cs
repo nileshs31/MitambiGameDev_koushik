@@ -2,13 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton, playbutton;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton, htpPanel, creditsPanel;
+
+    public TextMeshProUGUI highScoreText;
 
     void Start()
     {
+
+        highScoreText.text = "" + (int)PlayerPrefs.GetFloat("highscore", 0);
+
         var vol = PlayerPrefs.GetInt("Volume", 1);
         AudioListener.volume = vol;
         if (AudioListener.volume == 0f)
@@ -41,28 +47,15 @@ public class Menu : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(SceneManager.GetActiveScene().buildIndex != 0)
-            {
-                SceneManager.LoadScene(0);
-            }
-            else
-            {
-                exitPannel.SetActive(true);
-                HudCanvasPannel.SetActive(false);
-            }
-        }
-          }
     public void OnYesNo(int choice)
     {
         if(choice == 1) { 
+            //show ad then quit
             Application.Quit();
-            Debug.Log("Application Quit");
-        } exitPannel.SetActive(false);
-                HudCanvasPannel.SetActive(true);
+        } 
+        
+        exitPannel.SetActive(false);
+        HudCanvasPannel.SetActive(true);
     }
 
     public void setting()
@@ -70,6 +63,28 @@ public class Menu : MonoBehaviour
         settingPannel.SetActive(true);
         HudCanvasPannel.SetActive(false);
       //  playbutton.SetActive(false);
+    }
+
+    public void ShowHTP()
+    {
+        htpPanel.SetActive(true);
+    }
+
+
+    public void CloseHTP()
+    {
+        htpPanel.SetActive(false);
+    }
+
+    public void ShowCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
     }
 
     public void closeSetting()

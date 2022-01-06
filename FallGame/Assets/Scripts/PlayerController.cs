@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
-    public Sprite playerAfterDeath;
     [SerializeField] GameController gameController;
     private Rigidbody2D rb;
     [SerializeField] float playerSpeed = 2f;
@@ -21,11 +21,11 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
 
-        if (Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width / 2)
+        if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width / 2)
         {
             LeftMovement();
         }
-        else if (Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width / 2)
+        else if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width / 2)
                 {
                     RightMovement();
                 }
@@ -35,19 +35,19 @@ public class PlayerController : MonoBehaviour
     public void LeftMovement()
     {
         rb.velocity = new Vector2(-playerSpeed, rb.velocity.y);
-       /* if (isair)
+        if (!isair)
         {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[1];
-        }*/
+        }
 
     }
     private void RightMovement()
     {
         rb.velocity = new Vector2(playerSpeed, rb.velocity.y);
-       /* if (isair)
+        if (!isair)
         {
             this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
-        }*/
+        }
     }
 
     public void PlatformPlayerMove(float x)
@@ -76,20 +76,15 @@ public class PlayerController : MonoBehaviour
 
         if(collision.gameObject.tag == "Platform")
         {
-             if (Input.mousePosition.x < Screen.width/2)
-             {
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[1];
-             }
-            else
-            {
-                this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
-            }
+            isair = false;
+            this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[0];
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Platform" || !isair)
         {
+            isair = true;
             this.gameObject.GetComponent<SpriteRenderer>().sprite = playerExpression[2];
         }
     }
