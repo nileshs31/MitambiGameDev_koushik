@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     public float speed;
     Vector3 dir;
     public bool isDead , isPowerup;
-    [SerializeField] TextMeshProUGUI scoreText, tapToPlayText;
-    [SerializeField] GameObject scoretext;
+    [SerializeField] TextMeshProUGUI tapToPlayText;
+   // [SerializeField] GameObject scoretext;
     [SerializeField] GameController gameController;
     void Start()
     {
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
         //if (Input.GetMouseButtonDown(0) && !isDead)
         {
             tapToPlayText.enabled = false;
-            scoretext.SetActive(true);
+           // scoretext.SetActive(true);
             gameController.gameon = true;
             if (dir == Vector3.forward)
             {

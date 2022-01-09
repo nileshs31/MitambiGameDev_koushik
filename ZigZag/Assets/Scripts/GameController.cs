@@ -22,7 +22,7 @@ public class GameController : MonoBehaviour
         diamonds = PlayerPrefs.GetInt("Diamond", 0);
         diamondsText.text = "" + diamonds;
 
-        score = PlayerPrefs.GetInt("Score", 0);
+        score = PlayerPrefs.GetInt("score", 0);
         scoreText.text = "" + score;
 
         highscore = PlayerPrefs.GetFloat("highscore", 0);
@@ -44,10 +44,7 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (gameon)
-        {
-            score += 0.5f * Time.deltaTime;
-        }
+        score += 0.5f * Time.deltaTime;
         scoreText.text = "" + (int)score;
         highScoreText.text = "" + (int)highscore;
         scoreOverText.text = "" + (int)score;
@@ -144,7 +141,7 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        /*PlayerPrefs.SetInt("score", 0);*/
+        PlayerPrefs.SetInt("score", 0);
         Time.timeScale = 1f;
     }
 
