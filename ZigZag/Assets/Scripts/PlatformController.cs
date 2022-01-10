@@ -41,15 +41,6 @@ public class PlatformController : MonoBehaviour
                 SpawnPlatform();
             }
         }
-
-        if (playerController.isPowerup == true)
-        {
-            for (int i = 0; i < 20; i++)
-            {
-                SpawnPlatformPowerup();
-            }
-        }
-
     }
     public void CreatePlatform(int amount)
     {
@@ -62,7 +53,11 @@ public class PlatformController : MonoBehaviour
             topPlatform.Peek().SetActive(false);
             topPlatform.Peek().name = "TopPlatform";
         }
-
+        /*if(playerController.isPowerup == true)
+        {
+           // leftPlatform.Clear();
+           // topPlatform.Clear();
+        }*/
     }
 
     public void SpawnPlatform()
@@ -90,23 +85,22 @@ public class PlatformController : MonoBehaviour
 
         }
 
-        int spawnPickup = Random.Range(0, 20);
+        int spawnPickup = Random.Range(0, 10);
         if (spawnPickup == 0)
         {
             currentPlatform.transform.GetChild(1).gameObject.SetActive(true);
         }
-        if(spawnPickup == 1)
+        /*if (spawnPickup == 1)
         {
             currentPlatform.transform.GetChild(2).gameObject.SetActive(true);
-        }
+        }*/
 
     }
 
     public void DeactivatePlatform()
     {
-        leftPlatform.Clear();
-        topPlatform.Clear();
-        InvokeRepeating("SpawnPlatformPowerup",1f,1f);
+        
+       // InvokeRepeating("SpawnPlatformPowerup",1f,1f);
     }
 
 
@@ -118,29 +112,14 @@ public class PlatformController : MonoBehaviour
         //spawn the top platform into iot for 6 sec
         //again calling the normal spawning
 
-
-        /*if (playerController.isPowerup == true)
+        /*Vector3 currPos = playerController.dir;
+        if (playerController.isPowerup == true)
         {
             for (int i = 0; i < 20; i++)
             {
-                platform.Push(Instantiate(platformPrefab[0]));
+               
             }
             playerController.isPowerup = false;
-        }   */
-
-       /* if ( topPlatform.Count == 0)
-        {
-            CreatePlatform(1);
-        }
-       
-        
-            GameObject temp = topPlatform.Pop();
-            temp.SetActive(true);
-            temp.transform.position = currentPlatform.transform.GetChild(0).transform.GetChild(1).position;
-            currentPlatform = temp;*/
-
-        
-
-
+        }*/
     }
 }

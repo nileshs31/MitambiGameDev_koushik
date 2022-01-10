@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.EventSystems;
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel, VolumeOffButton, VolumeOnButton, playbutton;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel, VolumeOffButton, VolumeOnButton, playbutton , HTPPannel,CredPannel;
 
     void Start()
     {
@@ -53,10 +53,10 @@ public class MenuController : MonoBehaviour
                 HudCanvasPannel.SetActive(false);
             }
         }
-        if(!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0))
+       /* if(!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButtonDown(0))
         {
             Play();
-        }
+        }*/
     }
     public void OnYesNo(int choice)
     {
@@ -94,6 +94,32 @@ public class MenuController : MonoBehaviour
     {
         exitPannel.SetActive(true);
         HudCanvasPannel.SetActive(false);
+    }
+
+    public void ShowHtpAndCred(int n)
+    {
+        switch (n)
+        {
+            case 1: HTPPannel.SetActive(true);
+                break;
+
+            case 2: CredPannel.SetActive(true);
+                break;
+        }
+    }
+
+    public void CloseShowHtpAndCred(int n)
+    {
+        switch (n)
+        {
+            case 1:
+                HTPPannel.SetActive(false);
+                break;
+
+            case 2:
+                CredPannel.SetActive(false);
+                break;
+        }
     }
 
     public void Socials(int num)

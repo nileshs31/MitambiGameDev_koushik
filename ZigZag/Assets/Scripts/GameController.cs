@@ -13,10 +13,12 @@ public class GameController : MonoBehaviour
     private float highscore;
     public float timeLeftToDie = 1f;
     public float timeToDie = 5f;
-    [SerializeField] TextMeshProUGUI diamondsText,scoreText,scoreOverText,highScoreText;
-    [SerializeField] GameObject adsToContinuePannel,gameOverPannel,volumeOff,volumeOn,pausePannel,hudCanvas,popCanvas;
+    
+    [SerializeField] TextMeshProUGUI diamondsText,scoreText,scoreOverText,highScoreText, popUpText;
+    [SerializeField] GameObject adsToContinuePannel,adsToPlayPannel,gameOverPannel,volumeOff,volumeOn,pausePannel,hudCanvas;
 
     public Slider slidercount;
+    public Tweener textPopUp;
     private void Start()
     {
         diamonds = PlayerPrefs.GetInt("Diamond", 0);
@@ -112,16 +114,17 @@ public class GameController : MonoBehaviour
     }
     public void ContinueWithCoins()
     {
-        if (diamonds >= 1)
+        if (diamonds >= 10)
         {
-            diamonds -= 1;
-            PlayerPrefs.SetInt("diamonds", diamonds);
+            diamonds -= 10;
+            PlayerPrefs.SetInt("Diamond", diamonds);
             diamondsText.text = diamonds + "";
             Continue2();
         }
         else
         {
-            Debug.Log("no coins");
+            popUpText.text = "Not Enough Coins";
+            textPopUp.Show(textPopUp.CloseAfter);
         }
     }
 
@@ -132,12 +135,6 @@ public class GameController : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void ContinueVideo()
-    {
-        PlayerPrefs.SetInt("score", (int)score);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        Time.timeScale = 1f;
-    }
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
@@ -162,5 +159,28 @@ public class GameController : MonoBehaviour
     {
         adsToContinuePannel.SetActive(false);
         gameOverPannel.SetActive(true);
+        hudCanvas.SetActive(false);
+    }
+
+    //ADs
+
+    public void OnFinishedAds()
+    {
+        promtToContinue = false;
+        Time.timeScale = 0f;
+        adsToContinuePannel.SetActive(false);
+        gameOverPannel.SetActive(false);
+        adsToPlayPannel.SetActive(true);
+    }
+    public void OnSkippedAds()
+    {
+
+        popUpText.text = "Please Watch the Whole Ad!";
+        textPopUp.Show(textPopUp.CloseAfter);
+    }
+    public void OnFailedAds()
+    {
+        popUpText.text = "Ads Loading...";
+        textPopUp.Show(textPopUp.CloseAfter);
     }
 }

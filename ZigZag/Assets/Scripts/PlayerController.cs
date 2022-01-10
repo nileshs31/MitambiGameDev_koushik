@@ -7,7 +7,7 @@ using TMPro;
 public class PlayerController : MonoBehaviour
 {
     public float speed;
-    Vector3 dir;
+    public Vector3 dir;
     public bool isDead , isPowerup;
     [SerializeField] TextMeshProUGUI tapToPlayText;
    // [SerializeField] GameObject scoretext;
@@ -36,6 +36,10 @@ public class PlayerController : MonoBehaviour
         }
         float move = speed * Time.deltaTime;
         transform.Translate(dir * move);
+
+        //playerpos
+  /*      Vector3 playerPos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        Debug.Log("Playerpos" + playerPos);*/
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -45,13 +49,13 @@ public class PlayerController : MonoBehaviour
             gameController.DiamondCount(1);
         }
 
-        if (other.CompareTag("PowerUp"))
+       /* if (other.CompareTag("PowerUp"))
         {
             other.gameObject.SetActive(false);
             isPowerup = true;
-            PlatformController.Instance.DeactivatePlatform();
-            PlatformController.Instance.SpawnPlatformPowerup();
-        }
+           // PlatformController.Instance.DeactivatePlatform();   
+          //  PlatformController.Instance.SpawnPlatformPowerup();
+        }*/
     }
 
     private void OnTriggerExit(Collider other)
