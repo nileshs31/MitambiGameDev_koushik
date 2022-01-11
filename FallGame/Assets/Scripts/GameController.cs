@@ -123,7 +123,6 @@ public class GameController : MonoBehaviour
             {
                 pausePannel.SetActive(false);
                 Time.timeScale = 1f;
-
             }
         
     }

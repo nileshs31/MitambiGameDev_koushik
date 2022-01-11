@@ -60,7 +60,6 @@ public class Ads : MonoBehaviour,IUnityAdsListener
     public void ShowRewardedVideo()
     {
         OnUnityAdsReady(RewardId);
-        
     }
 
     public void OnUnityAdsDidFinish(string placementId, ShowResult showResult)
