@@ -7,6 +7,8 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 public class GameController : MonoBehaviour
 {
+
+    public MemeController MemeController;
     [SerializeField] private GameObject pausePannel,gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel,VolumeOffButton, VolumeOnButton;
 
     public Slider slidercount;
@@ -29,7 +31,7 @@ public class GameController : MonoBehaviour
         stars = PlayerPrefs.GetInt("Star", 0);
         scoreStarText.text = "" + stars;
 
-        score = PlayerPrefs.GetInt("score",0);
+        score = PlayerPrefs.GetInt("score", 0);
         scoreText.text = "" + score;
 
         highscore = PlayerPrefs.GetFloat("highscore", 0);
@@ -46,6 +48,16 @@ public class GameController : MonoBehaviour
         {
             VolumeOffButton.SetActive(true);
             VolumeOnButton.SetActive(false);
+        }
+
+        MemeController.Soundobj = GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>();
+        
+        if (PlayerPrefs.GetInt("continue", 0) == 0) {
+            var x = MemeController.PlayGameStartMeme();
+        }
+        else
+        {
+            var x = MemeController.PlayAfterAdsMemes();
         }
     }
 
@@ -140,13 +152,24 @@ public class GameController : MonoBehaviour
         {
             popUpText.text = "Not Enough Coins";
             textPopup.Show(textPopup.CloseAfter);
+            var x = MemeController.PlayNoMoneyMemes();
+            StopAllCoroutines();
+            promtToContinue = false;
+            StartCoroutine(continuePromt(x));
         }
+    }
+
+    IEnumerator continuePromt(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        promtToContinue = true;
     }
 
     
     public void Continue2()
     {
         PlayerPrefs.SetInt("score", (int)score);
+        PlayerPrefs.SetInt("continue", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
@@ -161,6 +184,7 @@ public class GameController : MonoBehaviour
 
   public void GameOver()
   {
+        var x = MemeController.PlayGameEndMemes();
         gameOverPannel.SetActive(true);
         Time.timeScale = 0f;
         adsToContinuePannel.SetActive(false);
@@ -173,6 +197,7 @@ public class GameController : MonoBehaviour
     public void Retry()
     {
         PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }

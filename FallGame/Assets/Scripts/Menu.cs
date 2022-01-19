@@ -13,6 +13,8 @@ public class Menu : MonoBehaviour
     void Start()
     {
 
+        GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>().volume = 1f;
+
         highScoreText.text = "" + (int)PlayerPrefs.GetFloat("highscore", 0);
 
         var vol = PlayerPrefs.GetInt("Volume", 1);
@@ -97,6 +99,7 @@ public class Menu : MonoBehaviour
     public void Play()
     {
         PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
         Time.timeScale = 1f;
     }

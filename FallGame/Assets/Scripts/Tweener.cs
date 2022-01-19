@@ -40,7 +40,7 @@ public class Tweener : Tweening
 
     public IEnumerator ClosePopUp()
     {
-        yield return new WaitForSecondsRealtime(1);
+        yield return new WaitForSecondsRealtime(1.25f);
         CloseDisable();
 
     }

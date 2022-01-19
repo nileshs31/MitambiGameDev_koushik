@@ -4,136 +4,120 @@ using UnityEngine;
 
 public class MemeController : MonoBehaviour
 {
-    public GameObject[] happyMemes, noMoneyMemes, sadMemes, angryMemes, congratulationsMemes, startMemes, endMemes;
-    public float[] happyMemesTime, noMoneyMemesTime, sadMemesTime, angryMemesTime, congratulationsMemesTime, startMemesTime, endMemesTime;
-    AudioSource Soundobj;
+    public GameObject[] gameStartMemes, gameStartAfterAdsMemes, gameEndMemes, noMoneyMemes;
+    public float[] gameStartMemesTime, gameStartAfterAdsMemesTime, gameEndMemesTime, noMoneyMemesTime;
+    public AudioSource Soundobj;
+    int x = -1;
 
     public void Start()
     {
-
+        var go = GameObject.FindGameObjectWithTag("Backgroundmusic");
+        if(go !=null)
+            Soundobj = go.GetComponent<AudioSource>();
     }
-    public void playHappyMeme()
+    public float PlayGameStartMeme()
     {
         turnOffAllOthers();
-        var x = Random.Range(0, happyMemes.Length - 1);
+        x = RREx(0, gameStartMemes.Length, x);
 
-        Soundobj.volume = 0.05f;
+        if (Soundobj !=null)
+            Soundobj.volume = 0.05f;
 
-        happyMemes[x].SetActive(true);
+        gameStartMemes[x].SetActive(true);
 
-        StartCoroutine(turnoff(happyMemes[x],happyMemesTime[x]));
+        StartCoroutine(turnoff(gameStartMemes[x], gameStartMemesTime[x]));
 
+        return gameStartMemesTime[x];
     }
-    public void playNoMoneyMemes()
+
+    public float PlayAfterAdsMemes()
     {
         turnOffAllOthers();
-        var x = Random.Range(0, noMoneyMemes.Length - 1);
+        x = RREx(0, gameStartAfterAdsMemes.Length, x);
 
-        Soundobj.volume = 0.05f;
+        if (Soundobj != null)
+            Soundobj.volume = 0.05f;
+
+        gameStartAfterAdsMemes[x].SetActive(true);
+
+        StartCoroutine(turnoff(gameStartAfterAdsMemes[x], gameStartAfterAdsMemesTime[x]));
+
+        return gameStartAfterAdsMemesTime[x];
+    }
+
+    public float PlayGameEndMemes()
+    {
+        turnOffAllOthers();
+        x = RREx(0, gameEndMemes.Length, x);
+
+        if (Soundobj != null)
+            Soundobj.volume = 0.05f;
+
+        gameEndMemes[x].SetActive(true);
+
+        StartCoroutine(turnoff(gameEndMemes[x], gameEndMemesTime[x]));
+
+        return gameEndMemesTime[x];
+    }
+    
+    public float PlayNoMoneyMemes()
+    {
+        turnOffAllOthers();
+        x = RREx(0, noMoneyMemes.Length, x);
+
+        if (Soundobj != null)
+            Soundobj.volume = 0.05f;
 
         noMoneyMemes[x].SetActive(true);
 
         StartCoroutine(turnoff(noMoneyMemes[x], noMoneyMemesTime[x]));
 
-    }
-    public void playSadMeme()
-    {
-        turnOffAllOthers();
-        var x = Random.Range(0, sadMemes.Length - 1);
-
-        Soundobj.volume = 0.05f;
-
-        sadMemes[x].SetActive(true);
-
-        StartCoroutine(turnoff(sadMemes[x], sadMemesTime[x]));
-    }
-    public void playAngryMeme()
-    {
-        turnOffAllOthers();
-        var x = Random.Range(0, angryMemes.Length - 1);
-
-        Soundobj.volume = 0.05f;
-
-        angryMemes[x].SetActive(true);
-
-        StartCoroutine(turnoff(angryMemes[x], angryMemesTime[x]));
-
-    }
-    public void playCongratulationsMeme()
-    {
-        turnOffAllOthers();
-        var x = Random.Range(0, congratulationsMemes.Length - 1);
-
-        Soundobj.volume = 0.05f;
-
-        congratulationsMemes[x].SetActive(true);
-
-        StartCoroutine(turnoff(congratulationsMemes[x], congratulationsMemesTime[x]));
-
-    }
-    public void playStartMeme()
-    {
-        turnOffAllOthers();
-        var x = Random.Range(0, startMemes.Length - 1);
-
-        Soundobj.volume = 0.05f;
-
-        startMemes[x].SetActive(true);
-
-        StartCoroutine(turnoff(startMemes[x], startMemesTime[x]));
-
-    }
-    public void playEndMeme()
-    {
-        turnOffAllOthers();
-        var x = Random.Range(0, endMemes.Length - 1);
-
-        Soundobj.volume = 0.05f;
-
-        endMemes[x].SetActive(true);
-
-        StartCoroutine(turnoff(endMemes[x], endMemesTime[x]));
-
+        return noMoneyMemesTime[x];
     }
 
     void turnOffAllOthers()
     {
         StopAllCoroutines();
 
-        foreach (GameObject go in happyMemes)
+        foreach (GameObject go in gameStartMemes)
         {
             go.SetActive(false);
         }
-        foreach (GameObject go in sadMemes)
+        foreach (GameObject go in gameStartAfterAdsMemes)
         {
             go.SetActive(false);
         }
-        foreach (GameObject go in angryMemes)
+        foreach (GameObject go in gameEndMemes)
         {
             go.SetActive(false);
         }
-        foreach (GameObject go in congratulationsMemes)
-        {
-            go.SetActive(false);
-        }
-        foreach (GameObject go in startMemes)
-        {
-            go.SetActive(false);
-        }
-        foreach (GameObject go in endMemes)
+        foreach (GameObject go in noMoneyMemes)
         {
             go.SetActive(false);
         }
 
-        Soundobj.volume = 1f;
+        if (Soundobj != null)
+            Soundobj.volume = 1f;
     }
 
     IEnumerator turnoff(GameObject memeObj, float waitTime)
     {
 
         yield return new WaitForSecondsRealtime(waitTime);
-        memeObj.SetActive(false);
-        Soundobj.volume = 1f;
+        memeObj.GetComponent<Tweener>().CloseDisable();
+        if (Soundobj != null)
+            Soundobj.volume = 1f;
+
     }
 
+
+    int RREx(int i, int j, int k)
+    {         //Random Range Exclusion
+        int num;
+        do
+        {
+            num = Random.Range(i, j);
+        } while (num == k);
+        return num;
+    }
 }

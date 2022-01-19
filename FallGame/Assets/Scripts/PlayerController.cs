@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameController gameController;
     private Rigidbody2D rb;
     [SerializeField] float playerSpeed = 2f;
+    AudioSource playerAS;
     // private int coins;
     bool isair = false;
     public Sprite[] playerExpression;
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAS = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -65,9 +67,10 @@ public class PlayerController : MonoBehaviour
 
         if (other.tag == "Star")
         {
+            playerAS.Play();
             Destroy(other.gameObject);
             gameController.StarsIncrement(1);
-            Debug.Log("I point");
+//            Debug.Log("I point");
         }
     }
 
