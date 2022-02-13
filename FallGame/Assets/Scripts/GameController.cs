@@ -1,15 +1,14 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using TMPro;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+//using UnityEngine.EventSystems;
+
 public class GameController : MonoBehaviour
 {
-
     public MemeController MemeController;
-    [SerializeField] private GameObject pausePannel,gameOverPannel,hudCanvasPannel,adsToContinuePannel,adsToPlayPannel,VolumeOffButton, VolumeOnButton;
+    [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel, VolumeOffButton, VolumeOnButton;
 
     public Slider slidercount;
     private int stars = 0;
@@ -17,15 +16,16 @@ public class GameController : MonoBehaviour
     private float highscore = 0;
     public float timeLeftToDie;
     public float timeToDie;
+    public float timer = 0;
     public Tweener textPopup;
     public TextMeshProUGUI popUpText;
-
     public TextMeshProUGUI scoreStarText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI scoreOverText;
 
-    public bool promtToContinue = false;
+    bool promtToContinue = false;
+    public bool midgame = false;
     private void Start()
     {
         stars = PlayerPrefs.GetInt("Star", 0);
@@ -51,14 +51,26 @@ public class GameController : MonoBehaviour
         }
 
         MemeController.Soundobj = GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>();
-        
-        if (PlayerPrefs.GetInt("continue", 0) == 0) {
+
+        if (PlayerPrefs.GetInt("continue", 0) == 0)
+        {
+            //var x = MemeController.PlayMidSounds();
             var x = MemeController.PlayGameStartMeme();
         }
         else
         {
             var x = MemeController.PlayAfterAdsMemes();
         }
+
+        /*if (!midgame)
+        {
+            if (timer >= Random.Range(8f, 12f))
+            {
+                MemeController.PlayMidSounds();
+                timer = 0;
+            }
+        }*/
+
     }
 
     public void VolOn()
@@ -67,7 +79,6 @@ public class GameController : MonoBehaviour
         VolumeOnButton.SetActive(false);
         AudioListener.volume = 1f;
         PlayerPrefs.SetInt("Volume", 1);
-
     }
 
     public void VolOff()
@@ -76,24 +87,30 @@ public class GameController : MonoBehaviour
         VolumeOnButton.SetActive(true);
         AudioListener.volume = 0f;
         PlayerPrefs.SetInt("Volume", 0);
-
     }
 
     private void Update()
-    {
+    { 
         score += 0.5f * Time.deltaTime;
         scoreText.text = "" + (int)score;
         highScoreText.text = "" + (int)highscore;
         scoreOverText.text = "" + (int)score;
-        if(score > highscore)
+
+        timer += Time.deltaTime;
+        if (timer >= Random.Range(8f, 12f))
+        {
+            MemeController.PlayMidSounds();
+            timer = 0;
+        }
+
+        if (score > highscore)
         {
             highscore = score;
             PlayerPrefs.SetFloat("highscore", highscore);
         }
-
         if (promtToContinue)
         {
-            if(timeLeftToDie > 0)
+            if (timeLeftToDie > 0)
             {
                 slidercount.value = timeLeftToDie;
                 timeLeftToDie -= Time.unscaledDeltaTime;
@@ -105,8 +122,8 @@ public class GameController : MonoBehaviour
             }
         }
 
-            //PAUSE
-            if (Input.GetKeyDown(KeyCode.Escape))
+        //PAUSE
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             pausePannel.SetActive(true);
             Time.timeScale = 0f;
@@ -125,18 +142,16 @@ public class GameController : MonoBehaviour
 
     public void PausePannel(int choice)
     {
-        
-            if (choice == 0)
-            {
-                Time.timeScale = 0f;
-                pausePannel.SetActive(true);
-            }
-            else
-            {
-                pausePannel.SetActive(false);
-                Time.timeScale = 1f;
-            }
-        
+        if (choice == 0)
+        {
+            Time.timeScale = 0f;
+            pausePannel.SetActive(true);
+        }
+        else
+        {
+            pausePannel.SetActive(false);
+            Time.timeScale = 1f;
+        }
     }
 
     public void continueWithCoins()
@@ -144,7 +159,7 @@ public class GameController : MonoBehaviour
         if (stars >= 10)
         {
             stars -= 10;
-            PlayerPrefs.SetInt("Star",stars);
+            PlayerPrefs.SetInt("Star", stars);
             scoreStarText.text = stars + "";
             Continue2();
         }
@@ -159,13 +174,13 @@ public class GameController : MonoBehaviour
         }
     }
 
+
     IEnumerator continuePromt(float waitTime)
     {
         yield return new WaitForSecondsRealtime(waitTime);
         promtToContinue = true;
     }
 
-    
     public void Continue2()
     {
         PlayerPrefs.SetInt("score", (int)score);
@@ -182,14 +197,14 @@ public class GameController : MonoBehaviour
         scoreStarText.text = "" + stars;
     }
 
-  public void GameOver()
-  {
+    public void GameOver()
+    {
         var x = MemeController.PlayGameEndMemes();
         gameOverPannel.SetActive(true);
         Time.timeScale = 0f;
         adsToContinuePannel.SetActive(false);
         hudCanvasPannel.SetActive(false);
-  } 
+    }
     public void HomeButton()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);

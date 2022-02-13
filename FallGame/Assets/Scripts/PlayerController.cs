@@ -17,20 +17,23 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         playerAS = GetComponent<AudioSource>();
+       
     }
 
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
+        gameController.midgame = true;
+        
 
         if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0) && Input.mousePosition.x < Screen.width / 2)
         {
             LeftMovement();
         }
         else if (!EventSystem.current.IsPointerOverGameObject(0) && !EventSystem.current.IsPointerOverGameObject() && Input.GetMouseButton(0) && Input.mousePosition.x > Screen.width / 2)
-                {
-                    RightMovement();
-                }
+        {
+            RightMovement();
+        }
         //inside screen
         transform.position = new Vector3(Mathf.Clamp(transform.position.x, -2.5f, 2.5f), transform.position.y, transform.position.z);
     }

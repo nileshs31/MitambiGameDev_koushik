@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MemeController : MonoBehaviour
 {
-    public GameObject[] gameStartMemes, gameStartAfterAdsMemes, gameEndMemes, noMoneyMemes;
-    public float[] gameStartMemesTime, gameStartAfterAdsMemesTime, gameEndMemesTime, noMoneyMemesTime;
+    public GameObject[] gameStartMemes, gameStartAfterAdsMemes, gameEndMemes, noMoneyMemes ,midGameSounds;
+    public float[] gameStartMemesTime, gameStartAfterAdsMemesTime, gameEndMemesTime, noMoneyMemesTime , midGameSoundTime;
     public AudioSource Soundobj;
     int x = -1;
-
+    bool midgame;
     public void Start()
     {
         var go = GameObject.FindGameObjectWithTag("Backgroundmusic");
@@ -28,6 +28,20 @@ public class MemeController : MonoBehaviour
         StartCoroutine(turnoff(gameStartMemes[x], gameStartMemesTime[x]));
 
         return gameStartMemesTime[x];
+    }
+
+    public float PlayMidSounds()
+    {
+        turnOffAllOthers();
+        x = RREx(0, midGameSounds.Length, x);
+       
+        if (Soundobj != null)
+            Soundobj.volume = 0.05f;
+        midGameSounds[x].SetActive(true);
+
+        StartCoroutine(turnoff(midGameSounds[x],midGameSoundTime[x]));
+        midgame = true;
+        return midGameSoundTime[x];
     }
 
     public float PlayAfterAdsMemes()
@@ -95,6 +109,10 @@ public class MemeController : MonoBehaviour
         {
             go.SetActive(false);
         }
+        foreach (GameObject go in midGameSounds)
+        {
+            go.SetActive(false);
+        }
 
         if (Soundobj != null)
             Soundobj.volume = 1f;
@@ -104,15 +122,24 @@ public class MemeController : MonoBehaviour
     {
 
         yield return new WaitForSecondsRealtime(waitTime);
-        memeObj.GetComponent<Tweener>().CloseDisable();
+        if (!midgame)
+        {
+            memeObj.GetComponent<Tweener>().CloseDisable();
+        }
         if (Soundobj != null)
             Soundobj.volume = 1f;
+    }
 
+    IEnumerator turnoffMidSound(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        if (Soundobj != null)
+            Soundobj.volume = 1f;
     }
 
 
     int RREx(int i, int j, int k)
-    {         //Random Range Exclusion
+    {   //Random Range Exclusion
         int num;
         do
         {
