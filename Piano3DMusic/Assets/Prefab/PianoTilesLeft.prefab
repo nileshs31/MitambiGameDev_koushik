@@ -107,5 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tileMaterial: {fileID: 2100000, guid: a7f8f97b46547624aabfc5e6fe6d7d64, type: 2}
-  startColor: {r: 0.37434313, g: 0.7735849, b: 0, a: 0}
-  mouseOverColor: {r: 1, g: 0, b: 0, a: 0}
+  clickColor: {r: 0, g: 0, b: 0, a: 0}
+  elColor:
+  - {r: 0.3443396, g: 0.35898647, b: 1, a: 0}
+  - {r: 1, g: 0, b: 0.033639908, a: 0}

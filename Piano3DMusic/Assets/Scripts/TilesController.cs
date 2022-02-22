@@ -5,30 +5,52 @@ using UnityEngine;
 public class TilesController : MonoBehaviour
 {
     [SerializeField] Material tileMaterial;
-    bool mouseover;
+    [SerializeField] Color clickColor;
+    //early late color
+    [SerializeField] Color[] elColor;
 
-    [SerializeField] Color startColor;
-    [SerializeField] Color mouseOverColor;
-
+    bool onClick = false;
     private void Start()
-    {
-       
+    { 
     }
 
     void Update()
     {
-        transform.Translate(Vector3.back * 5f * Time.deltaTime);
+        transform.Translate(5f * Time.deltaTime * Vector3.back);
     }
 
-    void OnMouseEnter()
-    {
-        mouseover = true;
-        GetComponent<Renderer>().material.SetColor("_Color", mouseOverColor);
+    private void OnMouseDown()
+    { 
+        if (gameObject.transform.position.z < -8.3f && gameObject.transform.position.z >= -18.8f)
+        {
+            if (transform.position.z < -8.3f && transform.position.z > -12.3f)
+            {
+                TooEarly();
+            }
+            else if(transform.position.z < -14.6f )
+            {
+                TooLate();
+            }
+            else
+            {
+                Perfect();
+            }
+        }
     }
 
-    void OnMouseExit()
+    private void TooEarly()
     {
-        mouseover = false;
-        GetComponent<Renderer>().material.SetColor("_Color", startColor);
+        //GetComponent<Renderer>().material.SetColor("_Color", elColor[0]);
+    }
+
+    private void TooLate()
+    { 
+        //GetComponent<Renderer>().material.SetColor("_Color", elColor[1]);
+    }
+
+    private void Perfect()
+    {
+        GetComponent<Renderer>().material.SetColor("_Color", clickColor);
+        onClick = false;
     }
 }
