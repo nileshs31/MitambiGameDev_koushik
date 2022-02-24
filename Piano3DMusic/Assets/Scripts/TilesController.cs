@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class TilesController : MonoBehaviour
 {
     [SerializeField] Material tileMaterial;
@@ -11,7 +12,8 @@ public class TilesController : MonoBehaviour
 
     bool onClick = false;
     private void Start()
-    { 
+    {
+        onClick = true;
     }
 
     void Update()
@@ -20,37 +22,55 @@ public class TilesController : MonoBehaviour
     }
 
     private void OnMouseDown()
-    { 
-        if (gameObject.transform.position.z < -8.3f && gameObject.transform.position.z >= -18.8f)
+    {
+        if (onClick)
         {
-            if (transform.position.z < -8.3f && transform.position.z > -12.3f)
-            {
-                TooEarly();
-            }
-            else if(transform.position.z < -14.6f )
-            {
-                TooLate();
-            }
-            else
+            if (gameObject.transform.position.z < -13.3f && gameObject.transform.position.z > -14.6f)
             {
                 Perfect();
             }
+            else if (gameObject.transform.position.z > -13f)
+            {
+                TooEarly();
+            }
+            else if (gameObject.transform.position.z < -14.6f)
+            {
+                TooLate();
+            }
         }
+        onClick = false;
     }
+/*
+    private void OnMouseDrag()
+    {
+        if (onClick)
+        {
+            TapandHold();
+        }
+        onClick = false;
+    }*/
 
     private void TooEarly()
     {
-        //GetComponent<Renderer>().material.SetColor("_Color", elColor[0]);
+        GetComponent<Renderer>().material.SetColor("_Color", elColor[0]);
+        Debug.Log("Too Early");
     }
 
     private void TooLate()
-    { 
-        //GetComponent<Renderer>().material.SetColor("_Color", elColor[1]);
+    {
+        Debug.Log("Too Late");
+        GetComponent<Renderer>().material.SetColor("_Color", elColor[1]);
     }
 
     private void Perfect()
     {
+        Debug.Log("Too Perfect");
         GetComponent<Renderer>().material.SetColor("_Color", clickColor);
-        onClick = false;
+        // sound
+    }
+
+    private void TapandHold()
+    {
+        GetComponent<Renderer>().material.SetColor("_Color", Color.cyan);
     }
 }
