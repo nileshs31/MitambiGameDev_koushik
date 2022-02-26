@@ -8,6 +8,7 @@ TagManager:
   - Platform
   - MainPlatform
   - PowerUp
+  - Backgroundmusic
   layers:
   - Default
   - TransparentFX

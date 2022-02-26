@@ -11053,13 +11053,14 @@ MonoBehaviour:
   slidercount: {fileID: 338304294}
   timeLeftToDie: 1
   timeToDie: 10
+  timer: 0
   textPopup: {fileID: 1734863272}
   popUpText: {fileID: 2052188448}
   scoreStarText: {fileID: 1521483684}
   scoreText: {fileID: 1504891786}
   highScoreText: {fileID: 1949171914}
   scoreOverText: {fileID: 1020133385}
-  promtToContinue: 0
+  midgame: 0
 --- !u!4 &1723959376
 Transform:
   m_ObjectHideFlags: 0

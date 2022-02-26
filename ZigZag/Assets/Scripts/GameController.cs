@@ -13,12 +13,15 @@ public class GameController : MonoBehaviour
     private float highscore;
     public float timeLeftToDie = 1f;
     public float timeToDie = 5f;
+    public float timer = 0;
     
     [SerializeField] TextMeshProUGUI diamondsText,scoreText,scoreOverText,highScoreText, popUpText;
     [SerializeField] GameObject adsToContinuePannel,adsToPlayPannel,gameOverPannel,volumeOff,volumeOn,pausePannel,hudCanvas;
 
     public Slider slidercount;
-    public Tweener textPopUp;
+    public Tweener textPopup;
+    public MemeController MemeController;
+
     private void Start()
     {
         diamonds = PlayerPrefs.GetInt("Diamond", 0);
@@ -42,6 +45,16 @@ public class GameController : MonoBehaviour
             volumeOff.SetActive(true);
             volumeOn.SetActive(false);
         }
+        MemeController.Soundobj = GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>();
+
+        if (PlayerPrefs.GetInt("continue", 0) == 0)
+        {
+            var x = MemeController.PlayGameStartMeme();
+        }
+        else
+        {
+            var x = MemeController.PlayAfterAdsMemes();
+        }
     }
 
     private void Update()
@@ -50,7 +63,15 @@ public class GameController : MonoBehaviour
         scoreText.text = "" + (int)score;
         highScoreText.text = "" + (int)highscore;
         scoreOverText.text = "" + (int)score;
-        if(score > highscore)
+
+        timer += Time.deltaTime;
+        if (timer >= Random.Range(8f, 12f))
+        {
+            MemeController.PlayMidSounds();
+            timer = 0;
+        }
+
+        if (score > highscore)
         {
             highscore = score;
             PlayerPrefs.SetFloat("highscore", highscore);
@@ -124,9 +145,20 @@ public class GameController : MonoBehaviour
         else
         {
             popUpText.text = "Not Enough Coins";
-            textPopUp.Show(textPopUp.CloseAfter);
+            textPopup.Show(textPopup.CloseAfter);
+            var x = MemeController.PlayNoMoneyMemes();
+            StopAllCoroutines();
+            promtToContinue = false;
+            StartCoroutine(continuePromt(x));
         }
     }
+
+    IEnumerator continuePromt(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        promtToContinue = true;
+    }
+
 
     public void Continue2()
     {
@@ -139,6 +171,7 @@ public class GameController : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
         Time.timeScale = 1f;
     }
 
@@ -157,8 +190,10 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
-        adsToContinuePannel.SetActive(false);
+        var x = MemeController.PlayGameEndMemes();
         gameOverPannel.SetActive(true);
+        Time.timeScale = 0f;
+        adsToContinuePannel.SetActive(false);
         hudCanvas.SetActive(false);
     }
 
@@ -176,11 +211,11 @@ public class GameController : MonoBehaviour
     {
 
         popUpText.text = "Please Watch the Whole Ad!";
-        textPopUp.Show(textPopUp.CloseAfter);
+        textPopup.Show(textPopup.CloseAfter);
     }
     public void OnFailedAds()
     {
         popUpText.text = "Ads Loading...";
-        textPopUp.Show(textPopUp.CloseAfter);
+        textPopup.Show(textPopup.CloseAfter);
     }
 }
