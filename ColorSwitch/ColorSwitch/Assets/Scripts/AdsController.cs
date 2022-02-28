@@ -7,7 +7,7 @@ using UnityEngine.Events;
 public class AdsController : MonoBehaviour, IUnityAdsListener
 {
     private string GAME_ID = "4451975";
-    private bool testmode = true;
+    //private bool testmode = true;
     [SerializeField] private string BannerId = "Banner_Android";
     [SerializeField] private string InterstitialId = "Interstitial_Android";
     [SerializeField] private string RewardId = "Rewarded_Android";
@@ -47,7 +47,17 @@ public class AdsController : MonoBehaviour, IUnityAdsListener
         }
     }
 
+    public void InterstitialRandomly()
+    {
+        int x = Random.Range(0, 3);
+        if (x == 0)
+        {
+            ShowInterstitialAdd();
+        }
+    }
 
+
+    [System.Obsolete]
     public void ShowRewardedVideo()
     {
         OnUnityAdsReady("Rewarded_Android");

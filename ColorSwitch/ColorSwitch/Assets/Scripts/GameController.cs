@@ -8,24 +8,29 @@ using UnityEngine.EventSystems;
 
 public class GameController : MonoBehaviour
 {
+    [SerializeField] MemeController MemeController;
     [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel , VolumeOffButton , VolumeOnButton;
     public GameObject pauseButton;
     public Slider slidercount;
+    public Tweener textPopup;
     private int diamond = 0;
     public float score = 0;
     private float Highscore = 0;
+    public float timer = 0;
     public float timeLeftToDie;
     public float timeToDie;
     private string scorePrefs = "Score";
     private string highScorePrefs= "HighScore";
     private string diamondPrefs = "Diamond";
 
-    bool tap = true;
+    //bool tap = true;
 
     public TextMeshProUGUI scoreStarText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI scoreOverText;
+    public TextMeshProUGUI popUpText;
+
 
     public bool promtToContinue = false;
     private void Start()
@@ -38,6 +43,18 @@ public class GameController : MonoBehaviour
 
         Highscore = PlayerPrefs.GetFloat(highScorePrefs,0);
         highScoreText.text = "" + Highscore;
+
+        MemeController.Soundobj = GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>();
+
+        if (PlayerPrefs.GetInt("continue", 0) == 0)
+        {
+            //var x = MemeController.PlayMidSounds();
+            var x = MemeController.PlayGameStartMeme();
+        }
+        else
+        {
+            var x = MemeController.PlayAfterAdsMemes();
+        }
     }
 
     private void Update()
@@ -47,6 +64,14 @@ public class GameController : MonoBehaviour
         scoreText.text = "" + (int)score;
         highScoreText.text = "" + (int)Highscore;
         scoreOverText.text = "" + (int)score;
+
+        timer += Time.deltaTime;
+        if (timer >= Random.Range(8f, 12f))
+        {
+            MemeController.PlayMidSounds();
+            timer = 0;
+        }
+
         if (score > Highscore)
         {
             Highscore = score;
@@ -67,9 +92,6 @@ public class GameController : MonoBehaviour
             }
         }
 
-        
-
-
         //PAUSE
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -89,6 +111,8 @@ public class GameController : MonoBehaviour
             VolumeOffButton.SetActive(true);
             VolumeOnButton.SetActive(false);
         }
+
+       
     }
     public void VolOn()
     {
@@ -137,19 +161,29 @@ public class GameController : MonoBehaviour
 
     public void continueWithCoins()
     {
-        if (diamond >= 1)
+        if (diamond >= 10)
         {
-            diamond -= 1;
+            diamond -= 10;
             PlayerPrefs.SetInt(diamondPrefs, diamond);
             scoreStarText.text = diamond + "";
             Continue2();
         }
         else
         {
-            Debug.Log("no coins");
+            popUpText.text = "Not Enough Coins";
+            textPopup.Show(textPopup.CloseAfter);
+            var x = MemeController.PlayNoMoneyMemes();
+            StopAllCoroutines();
+            promtToContinue = false;
+            StartCoroutine(continuePromt(x));
         }
     }
 
+    IEnumerator continuePromt(float waitTime)
+    {
+        yield return new WaitForSecondsRealtime(waitTime);
+        promtToContinue = true;
+    }
 
     public void Continue2()
     {
@@ -168,6 +202,7 @@ public class GameController : MonoBehaviour
 
     public void GameOver()
     {
+        var x = MemeController.PlayGameEndMemes();
         gameOverPannel.SetActive(true);
         Time.timeScale = 0f;
         adsToContinuePannel.SetActive(false);
@@ -180,6 +215,7 @@ public class GameController : MonoBehaviour
     public void Retry()
     {
         PlayerPrefs.SetInt(scorePrefs, 0);
+        PlayerPrefs.SetInt("continue", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
@@ -196,9 +232,13 @@ public class GameController : MonoBehaviour
     public void OnSkippedAds()
     {
         Debug.Log("No reward");
+        popUpText.text = "Please Watch the Whole Ad!";
+        textPopup.Show(textPopup.CloseAfter);
     }
     public void OnFailedAds()
     {
         Debug.Log("Ads failed to load");
+        popUpText.text = "Ads Loading...";
+        textPopup.Show(textPopup.CloseAfter);
     }
 }

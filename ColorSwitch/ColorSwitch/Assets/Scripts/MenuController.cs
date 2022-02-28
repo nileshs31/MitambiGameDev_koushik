@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel, VolumeOffButton, VolumeOnButton;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel, VolumeOffButton, VolumeOnButton,htpPanel,creditsPanel;
 
     void Start()
     {
@@ -81,6 +81,7 @@ public class MenuController : MonoBehaviour
     public void Play()
     {
         PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         Time.timeScale = 1f;
     }
@@ -103,5 +104,31 @@ public class MenuController : MonoBehaviour
     public void PlayStore()
     {
         Application.OpenURL("https://play.google.com/store/apps/dev?id=6545217765197016792");
+    }
+
+    public void ShowHTP()
+    {
+        htpPanel.SetActive(true);
+        settingPannel.SetActive(false);
+    }
+
+
+    public void CloseHTP()
+    {
+        htpPanel.SetActive(false);
+        settingPannel.SetActive(true);
+    }
+
+    public void ShowCredits()
+    {
+        creditsPanel.SetActive(true);
+        settingPannel.SetActive(false);
+    }
+
+
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
+        settingPannel.SetActive(true);
     }
 }

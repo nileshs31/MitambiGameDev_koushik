@@ -1400,8 +1400,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00003051758, y: -94.62006}
-  m_SizeDelta: {x: 244.9641, y: 115.9632}
+  m_AnchoredPosition: {x: 0.00003051758, y: -73.2}
+  m_SizeDelta: {x: 244.9641, y: 200.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &247280167
 MonoBehaviour:
@@ -2365,8 +2365,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00003051758, y: -94.62006}
-  m_SizeDelta: {x: 244.9641, y: 115.9632}
+  m_AnchoredPosition: {x: 0.00003051758, y: -78.17}
+  m_SizeDelta: {x: 244.9641, y: 154.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &518063622
 MonoBehaviour:
@@ -4327,8 +4327,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00003051758, y: -94.62006}
-  m_SizeDelta: {x: 244.9641, y: 115.9632}
+  m_AnchoredPosition: {x: 0.00003051758, y: -50.5}
+  m_SizeDelta: {x: 244.9641, y: 166.95}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &749478535
 MonoBehaviour:
@@ -5408,6 +5408,7 @@ MonoBehaviour:
   gameon: 0
   timeLeftToDie: 1
   timeToDie: 5
+  timer: 0
   diamondsText: {fileID: 103128641}
   scoreText: {fileID: 1344813214}
   scoreOverText: {fileID: 1079406680}
@@ -5555,7 +5556,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0.00003051758, y: -94.62006}
-  m_SizeDelta: {x: 244.9641, y: 115.9632}
+  m_SizeDelta: {x: 246.17, y: 162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1006767346
 MonoBehaviour:
@@ -6362,7 +6363,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0.00003051758, y: -94.62006}
-  m_SizeDelta: {x: 244.9641, y: 115.9632}
+  m_SizeDelta: {x: 244.9641, y: 137.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1148893490
 MonoBehaviour:
