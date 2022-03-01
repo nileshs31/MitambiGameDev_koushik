@@ -54,23 +54,12 @@ public class GameController : MonoBehaviour
 
         if (PlayerPrefs.GetInt("continue", 0) == 0)
         {
-            //var x = MemeController.PlayMidSounds();
             var x = MemeController.PlayGameStartMeme();
         }
         else
         {
             var x = MemeController.PlayAfterAdsMemes();
         }
-
-        /*if (!midgame)
-        {
-            if (timer >= Random.Range(8f, 12f))
-            {
-                MemeController.PlayMidSounds();
-                timer = 0;
-            }
-        }*/
-
     }
 
     public void VolOn()

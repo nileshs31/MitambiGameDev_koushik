@@ -32,7 +32,7 @@ public class ScoreManager : MonoBehaviour
 
     private void Start() 
     {
-        coins = PlayerPrefs.GetInt("CoinPoint",0);
+        coins = PlayerPrefs.GetInt("Coin",0);
         highscore = PlayerPrefs.GetFloat("HighScore",0);
         coinText.text = "" + coins;
         scoreText.text = ""+ score;
@@ -55,7 +55,7 @@ public class ScoreManager : MonoBehaviour
                 highscore = score;
                 PlayerPrefs.SetFloat("HighScore", highscore);
             }
-            PlayerPrefs.SetInt("CoinPoint", coins);
+            PlayerPrefs.SetInt("Coin", coins);
         }
     }
 
@@ -67,8 +67,7 @@ public class ScoreManager : MonoBehaviour
     }
 
     public void ContinueScore()
-    {
-            continueScoreText.text = "" + score;
-            PlayerPrefs.SetFloat("Score", score);
+    {   continueScoreText.text = "" + score;
+        PlayerPrefs.SetFloat("Score", score);
     }
 }

@@ -6,7 +6,7 @@ using UnityEngine.Events;
 
 public class Ads : MonoBehaviour, IUnityAdsListener
 {
-    private string GAME_ID = "4528381";
+    private string GAME_ID = "4637801";
     [SerializeField] private string BannerId = "Banner_Android";
     [SerializeField] private string InterstitialId = "Interstitial_Android";
     [SerializeField] private string RewardId = "Rewarded_Android";

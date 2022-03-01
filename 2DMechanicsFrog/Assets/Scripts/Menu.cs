@@ -4,10 +4,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject settingHomePannel, quitPannel;
-    public GameObject VolumeOffButton, VolumeOnButton ;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel, VolumeOffButton, VolumeOnButton, htpPanel, creditsPanel;
+
     void Start()
     {
+
+        GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>().volume = 1f;
+
         var vol = PlayerPrefs.GetInt("Volume", 1);
         AudioListener.volume = vol;
         if (AudioListener.volume == 0f)
@@ -40,44 +43,72 @@ public class Menu : MonoBehaviour
 
     }
 
-    public void StartGameplay()
+    public void OnYesNo(int choice)
     {
-        SceneManager.LoadScene("GP");
+        if (choice == 1)
+        {
+            //show ad then quit
+            Application.Quit();
+        }
+
+        exitPannel.SetActive(false);
+        HudCanvasPannel.SetActive(true);
     }
 
-    public void QuitPannel()
+    public void setting()
     {
-        quitPannel.SetActive(true);
+        settingPannel.SetActive(true);
+        HudCanvasPannel.SetActive(false);
+        //  playbutton.SetActive(false);
     }
 
-    public void YesAppQuit()
+    public void ShowHTP()
     {
-        Debug.Log("application quit");
-        Application.Quit();
-    }
-
-    public void noAppQuit()
-    {
-        quitPannel.SetActive(false);
+        htpPanel.SetActive(true);
     }
 
 
-
-    public void HomeSetting()
+    public void CloseHTP()
     {
-        settingHomePannel.SetActive(true);
-    }
-    public void HomeSettingClose()
-    {
-        settingHomePannel.SetActive(false);
+        htpPanel.SetActive(false);
     }
 
-    //socialhandles
+    public void ShowCredits()
+    {
+        creditsPanel.SetActive(true);
+    }
+
+
+    public void CloseCredits()
+    {
+        creditsPanel.SetActive(false);
+    }
+
+    public void closeSetting()
+    {
+        settingPannel.SetActive(false);
+        HudCanvasPannel.SetActive(true);
+        //playbutton.SetActive(true);
+    }
+
+    public void Play()
+    {
+        /*PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);*/
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        /*Time.timeScale = 1f;*/
+    }
+
+    public void quitButton()
+    {
+        exitPannel.SetActive(true);
+        HudCanvasPannel.SetActive(false);
+    }
+
     public void Instagram()
     {
         Application.OpenURL("https://www.instagram.com/mightyhardstudios/");
     }
-
     public void Website()
     {
         Application.OpenURL("https://mitambisolutions.com/contactus");

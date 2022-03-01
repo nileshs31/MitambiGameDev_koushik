@@ -2,29 +2,51 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-//using DG.Tweening;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Gamecontroller : MonoBehaviour {
     public ScoreManager scoreMan;
     public Player playerCon;
+    public MemeController MemeController;
+
     public move camMover;
     public Animator[] animators;
     public Slider sliderCont;
-    [SerializeField]public UnityAds UnityAds;
+    public Tweener textPopup;
+
+    [SerializeField]private UnityAds UnityAds;
     [SerializeField] 
     GameObject pausePanel,addstoContinuePannel,adsToPlayPannel, gameOverPanel , hudCanvas ,quitPannel;
     public GameObject VolumeOffButton, VolumeOnButton;
-    public float timeLeftToDie;
-    public float timeToDie;
-    public bool promtToContinue = false;
-    public bool continueScore = false;
-    public GameObject errorPanel;
-    public TextMeshProUGUI errorText;
+    [SerializeField]float timeLeftToDie;
+    [SerializeField]float timeToDie;
+    bool promtToContinue = false;
+
+    private float score = 0;
+    private float highscore = 0;
+    private int coins = 0;
+    public float timer = 0;
+    public TextMeshProUGUI popUpText;
+    public TextMeshProUGUI CoinsText;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI scoreOverText;
+
     private void Start()
     {
         StartGame();
+
+        coins = PlayerPrefs.GetInt("Coin", 0);
+        CoinsText.text = "" + coins;
+
+        score = PlayerPrefs.GetInt("score", 0);
+        scoreText.text = "" + score;
+
+        highscore = PlayerPrefs.GetFloat("highscore", 0);
+        highScoreText.text = "" + highscore;
+
+
         var vol = PlayerPrefs.GetInt("Volume", 1);
         AudioListener.volume = vol;
         if (AudioListener.volume == 0f)
@@ -37,11 +59,39 @@ public class Gamecontroller : MonoBehaviour {
             VolumeOffButton.SetActive(true);
             VolumeOnButton.SetActive(false);
         }
-        //promtToContinue = false;
+
+        MemeController.Soundobj = GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>();
+
+        if (PlayerPrefs.GetInt("continue", 0) == 0)
+        {
+            var x = MemeController.PlayGameStartMeme();
+        }
+        else
+        {
+            var x = MemeController.PlayAfterAdsMemes();
+        }
     }
 
     private void Update()
     {
+        score += 0.5f * Time.deltaTime;
+        scoreText.text = "" + (int)score;
+        highScoreText.text = "" + (int)highscore;
+        scoreOverText.text = "" + (int)score;
+
+        timer += Time.deltaTime;
+        if (timer >= Random.Range(8f, 12f))
+        {
+            MemeController.PlayMidSounds();
+            timer = 0;
+        }
+
+        if (score > highscore)
+        {
+            highscore = score;
+            PlayerPrefs.SetFloat("highscore", highscore);
+        }
+
         if (promtToContinue)
         {
             if(timeLeftToDie > 0)
@@ -57,11 +107,13 @@ public class Gamecontroller : MonoBehaviour {
         }
     }
 
-    public void ResumeScore()
+    internal void CoinIncrement(int v)
     {
-        scoreMan.continueScore = PlayerPrefs.GetFloat("conScore", scoreMan.score);
-        scoreMan.scoreText.text = "" + Mathf.Round(scoreMan.continueScore);
+        coins += v;
+        PlayerPrefs.SetInt("Coin", coins);
+        CoinsText.text = "" + coins;
     }
+
 
     public void VolOn()
     {
@@ -84,18 +136,20 @@ public class Gamecontroller : MonoBehaviour {
     public void StartGame()
     {
         Time.timeScale = 1f;
-        scoreMan.scoreText.text = scoreMan.score + "";
         camMover.speed = 2f;
         playerCon.gameon = true;
-        scoreMan.gameon = true;
         foreach (Animator bgAnim in animators)
         {
             bgAnim.enabled = true;
         }
+       /* PlayerPrefs.SetInt("Score", 0);
+        PlayerPrefs.SetInt("continue", 0);*/
+
     }
 
     public void GameOver()
     {
+        var x = MemeController.PlayGameEndMemes();
         camMover.speed = 0f;
         gameOverPanel.SetActive(true);
         foreach (Animator bgAnim in animators)
@@ -108,66 +162,51 @@ public class Gamecontroller : MonoBehaviour {
         addstoContinuePannel.SetActive(false);
     }
 
-    public void CoinIncrement(int coinCount)
-    {
-        scoreMan.CoinIncrement(coinCount);
-    }
-
-    public void ContinueWithAd()
-    {
-
-        promtToContinue = false;
-        Time.timeScale = 1f;
-        addstoContinuePannel.SetActive(false);
-        gameOverPanel.SetActive(false);
-        adsToPlayPannel.SetActive(true);
-    }
-    public void OnSkippedAds() { Error("You Skipped the ads! No reward"); }
-    public void OnFailedAds() { Error("Video failed to load"); }
     public void ContinueWithCoins()
     {
-       if( scoreMan.coins >= 500)
+       if(coins >= 10)
        {
-            scoreMan.coins -= 500;
-            PlayerPrefs.SetInt("CoinPoint", scoreMan.coins);
-            scoreMan.coinText.text = scoreMan.coins + "";
+            coins -= 10;
+            PlayerPrefs.SetInt("Coin", coins);
+            CoinsText.text = "" + coins;
             ContinueGame();
        }
         else
         {
             Debug.Log("Not enought coins");
-            Error("Not enought coins");
+            textPopup.Show(textPopup.CloseAfter);
+            var x = MemeController.PlayNoMoneyMemes();
+            StopAllCoroutines();
+            promtToContinue = false;
+            StartCoroutine(continuePromt(x));
         }
     }
-    public void Error(string errorStr)
+
+    IEnumerator continuePromt(float waitTime)
     {
-            errorPanel.SetActive(true);
-            errorText.text = errorStr;
+        yield return new WaitForSecondsRealtime(waitTime);
+        promtToContinue = true;
     }
 
     public void ContinueGame()
     {
+        PlayerPrefs.SetInt("score", (int)score);
+        PlayerPrefs.SetInt("continue", 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
-        addstoContinuePannel.SetActive(false);
-        promtToContinue = false;
-        timeToDie = 5;
-        timeLeftToDie = timeToDie;
-
-        SceneManager.LoadScene("GP");
-        Debug.Log("Continue");
-        
     }
 
     public void Retry()
-    { 
-        Debug.Log("Player Respawn");
-        SceneManager.LoadScene("GP");
+    {
+        PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
     
     public void Home()
     {
-        SceneManager.LoadScene("Menu");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
 
     public void Pause()
@@ -182,11 +221,6 @@ public class Gamecontroller : MonoBehaviour {
         pausePanel.SetActive(false);
     }
 
-    public void QuitPannel()
-    {
-        quitPannel.SetActive(true);
-    }
-
     public void ShowAddsPannel()
     {
         addstoContinuePannel.SetActive(true);
@@ -198,9 +232,23 @@ public class Gamecontroller : MonoBehaviour {
         Time.timeScale = 0f;
     }
 
-    public void CloseAddsPannel()
+    //ads
+    public void OnFinishedAds()
     {
+        promtToContinue = false;
+        Time.timeScale = 0f;
         addstoContinuePannel.SetActive(false);
-        GameOver();
+        gameOverPanel.SetActive(false);
+        adsToPlayPannel.SetActive(true);
+    }
+    public void OnSkippedAds()
+    {
+        popUpText.text = "Please Watch the Whole Ad!";
+        textPopup.Show(textPopup.CloseAfter);
+    }
+    public void OnFailedAds()
+    {
+        popUpText.text = "Ads Loading...";
+        textPopup.Show(textPopup.CloseAfter);
     }
 }
