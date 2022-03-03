@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Gamecontroller : MonoBehaviour {
-    public ScoreManager scoreMan;
+    
     public Player playerCon;
     public MemeController MemeController;
 
@@ -157,7 +157,7 @@ public class Gamecontroller : MonoBehaviour {
             bgAnim.enabled = false;
         }
         playerCon.gameon = false;
-        scoreMan.gameon = false;
+        //scoreMan.gameon = false;
         hudCanvas.SetActive(false);
         addstoContinuePannel.SetActive(false);
     }
@@ -225,6 +225,7 @@ public class Gamecontroller : MonoBehaviour {
     {
         addstoContinuePannel.SetActive(true);
         playerCon.gameObject.SetActive(false);
+        pausePanel.SetActive(false);
         timeToDie = 5;
         timeLeftToDie = timeToDie;
         sliderCont.maxValue = timeToDie;

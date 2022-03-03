@@ -93,10 +93,10 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
-        /*PlayerPrefs.SetInt("score", 0);
-        PlayerPrefs.SetInt("continue", 0);*/
+        PlayerPrefs.SetInt("score", 0);
+        PlayerPrefs.SetInt("continue", 0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        /*Time.timeScale = 1f;*/
+        Time.timeScale = 1f;
     }
 
     public void quitButton()

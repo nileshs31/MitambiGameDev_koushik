@@ -11877,7 +11877,6 @@ GameObject:
   - component: {fileID: 2063919364}
   - component: {fileID: 2063919363}
   - component: {fileID: 2063919365}
-  - component: {fileID: 2063919366}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -11897,7 +11896,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e3f122bb9d923d468fd8e24befea8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreMan: {fileID: 2063919366}
   playerCon: {fileID: 1799533606}
   MemeController: {fileID: 517089377}
   camMover: {fileID: 1323382127873569787}
@@ -11966,30 +11964,6 @@ MonoBehaviour:
   GenerationPoint2: {fileID: 1453348501}
   ObjectWidth: 5.5
   powerup: 0
---- !u!114 &2063919366
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2063919362}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0a93abd0d355745807a5295f5a6691, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 1311720726}
-  highscoreText: {fileID: 2143174275}
-  coinText: {fileID: 1216780802}
-  scoreoverText: {fileID: 554613578}
-  continueScoreText: {fileID: 0}
-  coins: 0
-  score: 0
-  scorePerSecond: 0.5
-  highscore: 0
-  continueScore: 0
-  gameon: 0
-  conti: 0
 --- !u!1 &2073206167
 GameObject:
   m_ObjectHideFlags: 0
@@ -13060,11 +13034,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: player
-      objectReference: {fileID: 0}
-    - target: {fileID: 2458376519557799168, guid: 18fb25d65b73df04983729fe97f59662,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2458376519557799225, guid: 18fb25d65b73df04983729fe97f59662,
         type: 3}

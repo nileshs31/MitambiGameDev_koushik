@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animPlayer;
     public Gamecontroller gameCon;
+    AudioSource playerAS;
     [HideInInspector]
     public bool gameon;
     public float canBeTappedAgainAfter;
@@ -15,9 +16,11 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        gameon = false;
         animPlayer = GetComponent<Animator>();
         rb = gameObject.GetComponent<Rigidbody2D>();
-        gameon = false;
+        playerAS = GetComponent<AudioSource>();
+
     }
 
     private void Update()
@@ -80,6 +83,7 @@ public class Player : MonoBehaviour
         }
         else if (collision.tag == "coins")
         {
+            playerAS.Play();
             Destroy(collision.gameObject);
             gameCon.CoinIncrement(1);
         }

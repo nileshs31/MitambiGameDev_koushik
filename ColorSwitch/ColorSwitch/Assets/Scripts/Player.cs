@@ -7,6 +7,8 @@ public class Player : MonoBehaviour
 {
     Rigidbody2D rb;
     SpriteRenderer sr;
+    AudioSource PAds;
+    
     public float jumpforce = 7f;
     string currentColor;
 
@@ -22,7 +24,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
         rb.simulated = false;
-        
+        PAds = GetComponent<AudioSource>();
         RandomColor();
     }
 
@@ -53,7 +55,8 @@ public class Player : MonoBehaviour
             return;
         }
         else if (collision.tag == "Diamond")
-        { 
+        {
+            PAds.Play();
             Destroy(collision.gameObject);
             GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>().DiamondIncrement(1);
         }

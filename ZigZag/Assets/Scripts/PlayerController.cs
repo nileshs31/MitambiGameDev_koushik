@@ -12,9 +12,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField] TextMeshProUGUI tapToPlayText;
    // [SerializeField] GameObject scoretext;
     [SerializeField] GameController gameController;
+    AudioSource playerAS;
+
     void Start()
     {
         dir = Vector3.forward;
+        playerAS = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -45,6 +48,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Diamond"))
         {
+            playerAS.Play();
             other.gameObject.SetActive(false);
             gameController.DiamondCount(1);
         }
