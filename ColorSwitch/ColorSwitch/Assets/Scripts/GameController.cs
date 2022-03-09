@@ -188,6 +188,7 @@ public class GameController : MonoBehaviour
     public void Continue2()
     {
         PlayerPrefs.SetInt(scorePrefs, (int)score);
+        PlayerPrefs.SetInt("continue", 1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1f;
     }
