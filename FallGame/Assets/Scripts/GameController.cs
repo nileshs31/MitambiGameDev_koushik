@@ -110,13 +110,6 @@ public class GameController : MonoBehaviour
                 GameOver();
             }
         }
-
-        //PAUSE
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pausePannel.SetActive(true);
-            Time.timeScale = 0f;
-        }
     }
 
     public void ShowAddsPannel()
