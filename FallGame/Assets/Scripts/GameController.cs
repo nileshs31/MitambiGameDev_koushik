@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
     public bool midgame = false;
     private void Start()
     {
+        PlayerPrefs.GetInt("currentcharacter");
         stars = PlayerPrefs.GetInt("Star", 0);
         scoreStarText.text = "" + stars;
 

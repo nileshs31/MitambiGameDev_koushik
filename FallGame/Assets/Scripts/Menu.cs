@@ -6,9 +6,9 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
-    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton, htpPanel, creditsPanel;
+    [SerializeField] GameObject exitPannel, HudCanvasPannel, settingPannel,VolumeOffButton, VolumeOnButton, htpPanel, creditsPanel, characterPanel;
 
-    public TextMeshProUGUI highScoreText;
+    public TextMeshProUGUI highScoreText,coinsText;
 
     void Start()
     {
@@ -16,6 +16,8 @@ public class Menu : MonoBehaviour
         GameObject.FindGameObjectWithTag("Backgroundmusic").GetComponent<AudioSource>().volume = 1f;
 
         highScoreText.text = "" + (int)PlayerPrefs.GetFloat("highscore", 0);
+        coinsText.text = "" + PlayerPrefs.GetInt("Star", 0);
+        
 
         var vol = PlayerPrefs.GetInt("Volume", 1);
         AudioListener.volume = vol;
@@ -110,6 +112,17 @@ public class Menu : MonoBehaviour
         HudCanvasPannel.SetActive(false);
     }
 
+    public void showCharacterPannel()
+    {
+        HudCanvasPannel.SetActive(false);
+        characterPanel.SetActive(true);
+    }
+
+    public void closeCharacterPannel()
+    {
+        HudCanvasPannel.SetActive(true);
+        characterPanel.SetActive(false);
+    }
     public void Instagram()
     {
         Application.OpenURL("https://www.instagram.com/mightyhardstudios/");
