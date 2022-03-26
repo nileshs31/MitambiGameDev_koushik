@@ -17,7 +17,6 @@ namespace ShopSystem
         public bool isUnlocked;
         public int unlockCost;
     }
-    //
     public class Playerprefabs 
     {
         public List<GameObject> playerPrefabs = new List<GameObject>();

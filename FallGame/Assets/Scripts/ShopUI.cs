@@ -5,9 +5,28 @@ using UnityEngine;
 public class ShopUI : MonoBehaviour
 {
     
-    public GameObject[] characterList;
+    public GameObject[] playerSkin;
     public void SelectCharacter(int i)
     {
-        PlayerPrefs.SetInt("currentcharacter",i); 
+        PlayerPrefs.SetInt("currentcharacter",i);
+    }
+
+    private void Awake()
+    {/*
+        foreach(GameObject player in playerSkin)
+        {
+            player.SetActive(false);
+        }*/ 
+    }
+
+    public void ChangeNext()
+    {
+
+    }
+    
+    public void PreviousNext()
+    {
+
     }
 }
+

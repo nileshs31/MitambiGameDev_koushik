@@ -10636,6 +10636,7 @@ MonoBehaviour:
   VolumeOffButton: {fileID: 954460288}
   VolumeOnButton: {fileID: 544055010}
   slidercount: {fileID: 338304294}
+  characterIndex: 0
   timeLeftToDie: 1
   timeToDie: 10
   timer: 0
@@ -10645,6 +10646,7 @@ MonoBehaviour:
   scoreText: {fileID: 1504891786}
   highScoreText: {fileID: 1949171914}
   scoreOverText: {fileID: 1020133385}
+  playerPrefabs: []
   midgame: 0
 --- !u!4 &1723959376
 Transform:
@@ -13063,7 +13065,7 @@ PrefabInstance:
     - target: {fileID: 5461580954491597776, guid: ed78e834a8749924db533c6c61aba6ff,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5461580954491597778, guid: ed78e834a8749924db533c6c61aba6ff,
         type: 3}

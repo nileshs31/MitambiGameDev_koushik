@@ -8,9 +8,12 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public MemeController MemeController;
+    public ShopUI SUI;
     [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel, VolumeOffButton, VolumeOnButton;
-
     public Slider slidercount;
+
+    public int characterIndex=1;
+
     private int stars = 0;
     private float score = 0;
     private float highscore = 0;
@@ -24,11 +27,27 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI highScoreText;
     public TextMeshProUGUI scoreOverText;
 
+    //public static Vector2 lastCheckPointPos = new Vector2(0, 0);
+
+    public GameObject[] playerPrefabs;
+
     bool promtToContinue = false;
     public bool midgame = false;
+
+    private void Awake()
+    {
+        //GameObject player = Instantiate(playerPrefabs[characterIndex], lastCheckPointPos, Quaternion.identity);
+    }
     private void Start()
     {
-        PlayerPrefs.GetInt("currentcharacter");
+        characterIndex =  PlayerPrefs.GetInt("currentcharacter",0);
+        foreach (GameObject player in SUI.playerSkin)
+            player.SetActive(false);
+
+        SUI.playerSkin[characterIndex].SetActive(true); 
+
+
+
         stars = PlayerPrefs.GetInt("Star", 0);
         scoreStarText.text = "" + stars;
 
