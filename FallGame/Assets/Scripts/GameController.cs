@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public MemeController MemeController;
-    public ShopUI SUI;
+    //public ShopUI SUI;
     [SerializeField] private GameObject pausePannel, gameOverPannel, hudCanvasPannel, adsToContinuePannel, adsToPlayPannel, VolumeOffButton, VolumeOnButton;
     public Slider slidercount;
 
@@ -40,11 +40,11 @@ public class GameController : MonoBehaviour
     }
     private void Start()
     {
-        characterIndex =  PlayerPrefs.GetInt("currentcharacter",0);
+       /* characterIndex =  PlayerPrefs.GetInt("currentcharacter",0);
         foreach (GameObject player in SUI.playerSkin)
-            player.SetActive(false);
+            player.SetActive(true);
 
-        SUI.playerSkin[characterIndex].SetActive(true); 
+        SUI.playerSkin[characterIndex].SetActive(true); */
 
 
 

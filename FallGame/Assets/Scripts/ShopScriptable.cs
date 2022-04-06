@@ -2,24 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShopSystem
-{
     [CreateAssetMenu(fileName = "ShopData",menuName = "Scriptable/Create ShopData")]
     public class ShopScriptable : ScriptableObject
     {
         public ShopItems[] shopItems;
-    }
-    [System.Serializable]
-    public class ShopItems
-    {
-        public string characterName;
-        public string characterDescription;
-        public bool isUnlocked;
-        public int unlockCost;
-    }
-    public class Playerprefabs 
-    {
-        public List<GameObject> playerPrefabs = new List<GameObject>();
+
+        public int CharacterCount
+        {
+            get
+            {
+                return shopItems.Length;
+            }
+        }
+
+        public ShopItems GetShopItems(int index)
+        {
+            return shopItems[index]; 
+        }
+
     }
 
+[System.Serializable]
+public class ShopItems
+{
+    public string characterName;
+    public Sprite characterSprite;
+    public string characterDescription;
+    /* public string characterDescription;
+     public bool isUnlocked;
+     public int unlockCost;*/
 }
