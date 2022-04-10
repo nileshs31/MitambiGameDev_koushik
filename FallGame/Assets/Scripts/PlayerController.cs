@@ -6,12 +6,14 @@ using UnityEngine.EventSystems;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] GameController gameController;
-    private Rigidbody2D rb;
     [SerializeField] float playerSpeed = 2f;
+    
     AudioSource playerAS;
-    // private int coins;
     bool isair = false;
     public Sprite[] playerExpression;
+
+
+    private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
     {

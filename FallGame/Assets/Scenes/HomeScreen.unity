@@ -5464,7 +5464,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 96.884766, y: 92.5793}
+  m_SizeDelta: {x: 129.99998, y: 121.54753}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1221418976
 MonoBehaviour:
@@ -6848,7 +6848,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 96.884766, y: 92.5793}
+  m_SizeDelta: {x: 121.62845, y: 114.90906}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1450525603
 MonoBehaviour:
@@ -6904,7 +6904,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1475630289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7284,6 +7284,7 @@ MonoBehaviour:
   shopScript: {fileID: 0}
   nameText: {fileID: 0}
   charDescriptionText: {fileID: 0}
+  charUnlockcostText: {fileID: 0}
   charSprite: {fileID: 0}
 --- !u!1 &1518719680
 GameObject:
@@ -8056,7 +8057,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1714874094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9724,6 +9725,7 @@ MonoBehaviour:
   shopScript: {fileID: 11400000, guid: a53bdcfdb58eeda43ac31e424c064b38, type: 2}
   nameText: {fileID: 675533968}
   charDescriptionText: {fileID: 1090527930}
+  charUnlockcostText: {fileID: 572852313}
   charSprite: {fileID: 2020553849}
 --- !u!1 &2028313955
 GameObject:

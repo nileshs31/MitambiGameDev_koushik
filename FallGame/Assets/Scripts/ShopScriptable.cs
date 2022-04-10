@@ -19,7 +19,6 @@ using UnityEngine;
         {
             return shopItems[index]; 
         }
-
     }
 
 [System.Serializable]
@@ -28,7 +27,5 @@ public class ShopItems
     public string characterName;
     public Sprite characterSprite;
     public string characterDescription;
-    /* public string characterDescription;
-     public bool isUnlocked;
-     public int unlockCost;*/
+    public string characterUnlockcost;
 }

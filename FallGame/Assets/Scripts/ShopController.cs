@@ -9,6 +9,7 @@ public class ShopController : MonoBehaviour
     public ShopScriptable shopScript;
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI charDescriptionText;
+    public TextMeshProUGUI charUnlockcostText;
     public Image charSprite;
 
     private int selectOption = 0;
@@ -49,16 +50,17 @@ public class ShopController : MonoBehaviour
         charSprite.sprite = shopitems.characterSprite;
         nameText.text = shopitems.characterName;
         charDescriptionText.text = shopitems.characterDescription;
+        charUnlockcostText.text = shopitems.characterUnlockcost;
     }
 
     private void Load()
     {
-        selectOption = PlayerPrefs.GetInt("selectoption");
+        selectOption = PlayerPrefs.GetInt("selectChar");
     }
 
     private void Save()
     {
-        PlayerPrefs.SetInt("selectoption",selectOption);
+        PlayerPrefs.SetInt("selectChar",selectOption);
     }
 }
 

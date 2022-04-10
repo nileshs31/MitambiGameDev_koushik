@@ -118,7 +118,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c12f395a782f4e41a8947c7d0538742, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
+  gameController: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+    type: 3}
   playerSpeed: 2
   playerExpression:
   - {fileID: 21300000, guid: 33b01256205fb25408fb02d4a96f4c31, type: 3}

@@ -10597,128 +10597,30 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &1723959374
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1723959376}
-  - component: {fileID: 1723959375}
-  - component: {fileID: 1723959377}
-  m_Layer: 0
-  m_Name: GameController
-  m_TagString: GameController
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1723959375
+--- !u!114 &1723959375 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+    type: 3}
+  m_PrefabInstance: {fileID: 8654501603408531473}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723959374}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c1a5dd830bf32a446acd02c73f749702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MemeController: {fileID: 7132240940188030891}
-  pausePannel: {fileID: 942323970}
-  gameOverPannel: {fileID: 1206892211}
-  hudCanvasPannel: {fileID: 1338303815}
-  adsToContinuePannel: {fileID: 689269410}
-  adsToPlayPannel: {fileID: 133402460}
-  VolumeOffButton: {fileID: 954460288}
-  VolumeOnButton: {fileID: 544055010}
-  slidercount: {fileID: 338304294}
-  characterIndex: 0
-  timeLeftToDie: 1
-  timeToDie: 10
-  timer: 0
-  textPopup: {fileID: 1734863272}
-  popUpText: {fileID: 2052188448}
-  scoreStarText: {fileID: 1521483684}
-  scoreText: {fileID: 1504891786}
-  highScoreText: {fileID: 1949171914}
-  scoreOverText: {fileID: 1020133385}
-  playerPrefabs: []
-  midgame: 0
---- !u!4 &1723959376
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723959374}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1723959377
+--- !u!114 &1723959377 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 8654501602917832768, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+    type: 3}
+  m_PrefabInstance: {fileID: 8654501603408531473}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723959374}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4e3a90ef20a6a6438a7abb7b98e781e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BannerId: Banner_Android
-  InterstitialId: Interstitial_Android
-  RewardId: Rewarded_Android
-  OnFinishedAds:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1723959375}
-        m_MethodName: OnFinishedAds
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnSkippedAds:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1723959375}
-        m_MethodName: OnSkippedAds
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  OnFailedAds:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1723959375}
-        m_MethodName: OnFailedAds
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1 &1724659666
 GameObject:
   m_ObjectHideFlags: 0
@@ -14197,3 +14099,147 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2582fbe7d3e8f144b92abd383b388cb9, type: 3}
+--- !u!1001 &8654501603408531473
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832769, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: popUpText
+      value: 
+      objectReference: {fileID: 2052188448}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: scoreText
+      value: 
+      objectReference: {fileID: 1504891786}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: textPopup
+      value: 
+      objectReference: {fileID: 1734863272}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: pausePannel
+      value: 
+      objectReference: {fileID: 942323970}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: slidercount
+      value: 
+      objectReference: {fileID: 338304294}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: highScoreText
+      value: 
+      objectReference: {fileID: 1949171914}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: scoreOverText
+      value: 
+      objectReference: {fileID: 1020133385}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: scoreStarText
+      value: 
+      objectReference: {fileID: 1521483684}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: MemeController
+      value: 
+      objectReference: {fileID: 7132240940188030891}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: VolumeOnButton
+      value: 
+      objectReference: {fileID: 544055010}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: gameOverPannel
+      value: 
+      objectReference: {fileID: 1206892211}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: VolumeOffButton
+      value: 
+      objectReference: {fileID: 954460288}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: adsToPlayPannel
+      value: 
+      objectReference: {fileID: 133402460}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: hudCanvasPannel
+      value: 
+      objectReference: {fileID: 1338303815}
+    - target: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: adsToContinuePannel
+      value: 
+      objectReference: {fileID: 689269410}
+    - target: {fileID: 8654501602917832799, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+        type: 3}
+      propertyPath: m_Name
+      value: GameController
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 9ac7ff3ce2c7b614eb6c39f33149d907, type: 3}
