@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
     [CreateAssetMenu(fileName = "ShopData",menuName = "Scriptable/Create ShopData")]
     public class ShopScriptable : ScriptableObject
@@ -28,4 +26,6 @@ public class ShopItems
     public Sprite characterSprite;
     public string characterDescription;
     public string characterUnlockcost;
+    public int price;
+    public bool isUnlocked;
 }

@@ -74,7 +74,6 @@ public class PlayerController : MonoBehaviour
             playerAS.Play();
             Destroy(other.gameObject);
             gameController.StarsIncrement(1);
-//            Debug.Log("I point");
         }
     }
 

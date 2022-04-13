@@ -1,12 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 //Main Player(Select Character) Object in Hierarchy(Home Screen)
 public class ShopController : MonoBehaviour
 {
     public ShopScriptable shopScript;
+
     public TextMeshProUGUI nameText;
     public TextMeshProUGUI charDescriptionText;
     public TextMeshProUGUI charUnlockcostText;
@@ -14,9 +13,31 @@ public class ShopController : MonoBehaviour
 
     private int selectOption = 0;
 
+    public Button unlockButton;
+
     private void Start()
     {
-        UpdateCharacterSprite(selectOption); 
+        UpdateCharacterSprite(selectOption);
+        foreach (ShopItems s in shopScript.shopItems)
+        {
+            if(s.price == 0)
+            {
+                s.isUnlocked = true;
+            }
+            else
+            {
+                //s.isUnlocked = PlayerPrefs.GetInt(s.characterName, 0) == 0 ? false : true;
+                if (PlayerPrefs.GetInt(s.characterName, 0) == 0)
+                {
+                    s.isUnlocked = false;
+                }
+                else
+                {
+                    s.isUnlocked = true;
+                }
+            }
+        }
+        UpdateButtonUI();
     }
 
     public void NextOption()
@@ -28,7 +49,11 @@ public class ShopController : MonoBehaviour
         }
         UpdateCharacterSprite(selectOption);
         Debug.Log("ChangeCharacter right");
-        Save();
+        if (shopScript.shopItems[selectOption].isUnlocked)
+        {
+            Save();
+        }
+        UpdateButtonUI();
     }
 
     public void BackOption()
@@ -40,7 +65,11 @@ public class ShopController : MonoBehaviour
         }
         UpdateCharacterSprite(selectOption);
         Debug.Log("ChangeCharacter left");
-        Save();
+        if (shopScript.shopItems[selectOption].isUnlocked)
+        {
+            Save();
+        }
+        UpdateButtonUI();
     }
 
     private void UpdateCharacterSprite(int selectOption)
@@ -58,9 +87,42 @@ public class ShopController : MonoBehaviour
         selectOption = PlayerPrefs.GetInt("selectChar");
     }
 
-    private void Save()
+    public void Save()
     {
         PlayerPrefs.SetInt("selectChar",selectOption);
+    }
+
+    public void UpdateButtonUI()
+    {
+        //current select character and check
+        if(shopScript.shopItems[selectOption].isUnlocked == true){
+            unlockButton.gameObject.SetActive(false);
+            charUnlockcostText.text = "Selected";
+        }
+        else
+        {
+            if (PlayerPrefs.GetInt("Star", 0) < shopScript.shopItems[selectOption].price)  //check if the current player unlockcost price is less than the coins
+            {
+                unlockButton.gameObject.SetActive(true);
+                unlockButton.interactable = false;
+            }
+            else
+            {
+                unlockButton.gameObject.SetActive(true);
+                unlockButton.interactable = true;
+            }
+        }
+    }
+
+    public void UnlockCharacter()
+    {
+        int coins = PlayerPrefs.GetInt("Star");
+        int price = shopScript.shopItems[selectOption].price;
+        PlayerPrefs.SetInt("Star", coins - price);
+        PlayerPrefs.SetInt(shopScript.shopItems[selectOption].characterName, 1);
+        PlayerPrefs.SetInt("selectChar", selectOption);
+        shopScript.shopItems[selectOption].isUnlocked = true;
+        UpdateButtonUI();
     }
 }
 

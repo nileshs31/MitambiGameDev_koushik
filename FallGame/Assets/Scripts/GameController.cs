@@ -27,7 +27,6 @@ public class GameController : MonoBehaviour
 
     [SerializeField] GameObject[] playerPrefabs;
     
-
     bool promtToContinue = false;
     public bool midgame = false;
         
@@ -35,7 +34,6 @@ public class GameController : MonoBehaviour
     {
         
         charIndex = PlayerPrefs.GetInt("selectChar", 0);
-        /*object p = Instantiate(playerPrefabs[charIndex], transform.position, Quaternion.identity);*/
         Instantiate(playerPrefabs[charIndex]);
 
 
