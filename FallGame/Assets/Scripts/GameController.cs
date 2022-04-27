@@ -29,7 +29,8 @@ public class GameController : MonoBehaviour
     
     bool promtToContinue = false;
     public bool midgame = false;
-        
+    
+    private string coinsStr = "Star";
     private void Start() 
     {
         
@@ -37,7 +38,7 @@ public class GameController : MonoBehaviour
         Instantiate(playerPrefabs[charIndex]);
 
 
-        stars = PlayerPrefs.GetInt("Star", 0);
+        stars = PlayerPrefs.GetInt(coinsStr, 0);
         scoreStarText.text = "" + stars;
 
         score = PlayerPrefs.GetInt("score", 0);
@@ -150,7 +151,7 @@ public class GameController : MonoBehaviour
         if (stars >= 10)
         {
             stars -= 10;
-            PlayerPrefs.SetInt("Star", stars);
+            PlayerPrefs.SetInt(coinsStr, stars);
             scoreStarText.text = stars + "";
             Continue2();
         }
@@ -184,7 +185,7 @@ public class GameController : MonoBehaviour
     public void StarsIncrement(int count)
     {
         stars += count;
-        PlayerPrefs.SetInt("Star", stars);
+        PlayerPrefs.SetInt(coinsStr, stars);
         scoreStarText.text = "" + stars;
     }
 

@@ -11,23 +11,36 @@ public class ShopController : MonoBehaviour
     public TextMeshProUGUI charUnlockcostText;
     public Image charSprite;
 
+    private int selectedIndex;
     private int selectOption = 0;
+    private string characterSelect = "selectChar";
+    private string selectBtntext = "selecttext";
+    public Button unlockButton,selectBtn;
+    public TextMeshProUGUI unlockBtnText, selectBtnText;
 
-    public Button unlockButton;
+   
 
     private void Start()
     {
-        UpdateCharacterSprite(selectOption);
+        //selectBtnText.text = "Select";
+
+        selectedIndex = PlayerPrefs.GetInt(characterSelect, 0);
+        selectOption = selectedIndex;
+
+        unlockButton.onClick.AddListener(() => UnlockSelectButton());
+
         foreach (ShopItems s in shopScript.shopItems)
         {
             if(s.price == 0)
             {
                 s.isUnlocked = true;
+                //selectBtnText.text = "Selected";
+                Save();
             }
             else
             {
                 //s.isUnlocked = PlayerPrefs.GetInt(s.characterName, 0) == 0 ? false : true;
-                if (PlayerPrefs.GetInt(s.characterName, 0) == 0)
+                if ( selectedIndex == 0)
                 {
                     s.isUnlocked = false;
                 }
@@ -37,7 +50,9 @@ public class ShopController : MonoBehaviour
                 }
             }
         }
-        UpdateButtonUI();
+        UpdateCharacterSprite(selectOption);
+        UnlockButtonStatus();
+        //UpdateButtonUI();
     }
 
     public void NextOption()
@@ -49,11 +64,8 @@ public class ShopController : MonoBehaviour
         }
         UpdateCharacterSprite(selectOption);
         Debug.Log("ChangeCharacter right");
-        if (shopScript.shopItems[selectOption].isUnlocked)
-        {
-            Save();
-        }
-        UpdateButtonUI();
+        // UpdateButtonUI();
+        UnlockButtonStatus();
     }
 
     public void BackOption()
@@ -65,11 +77,8 @@ public class ShopController : MonoBehaviour
         }
         UpdateCharacterSprite(selectOption);
         Debug.Log("ChangeCharacter left");
-        if (shopScript.shopItems[selectOption].isUnlocked)
-        {
-            Save();
-        }
-        UpdateButtonUI();
+        //UpdateButtonUI();
+        UnlockButtonStatus();
     }
 
     private void UpdateCharacterSprite(int selectOption)
@@ -82,34 +91,81 @@ public class ShopController : MonoBehaviour
         charUnlockcostText.text = shopitems.characterUnlockcost;
     }
 
+
     private void Load()
     {
-        selectOption = PlayerPrefs.GetInt("selectChar");
+        selectOption = PlayerPrefs.GetInt(characterSelect);
     }
 
     public void Save()
     {
-        PlayerPrefs.SetInt("selectChar",selectOption);
+        PlayerPrefs.SetInt(characterSelect,selectOption);
     }
 
-    public void UpdateButtonUI()
+    private void UnlockSelectButton()
+    {
+        int totalCoins = PlayerPrefs.GetInt("Star");
+        bool selected = false;
+        if (shopScript.shopItems[selectOption].isUnlocked)
+        {
+            selected = true;
+        }
+        else if (!shopScript.shopItems[selectOption].isUnlocked)
+        {
+            if(totalCoins >= shopScript.shopItems[selectOption].price)
+            {
+                totalCoins -= shopScript.shopItems[selectOption].price;
+                PlayerPrefs.SetInt("Star", totalCoins);
+                selected = true;
+                shopScript.shopItems[selectOption].isUnlocked = true;
+            }
+        }
+
+        if (selected)
+        {
+            unlockBtnText.text = "Selected";
+            selectedIndex = selectOption;
+            Save();
+            unlockButton.interactable = false;
+        }
+    }
+
+    public void UnlockButtonStatus()
+    {
+        if (shopScript.shopItems[selectOption].isUnlocked)
+        {
+            unlockButton.interactable = selectedIndex != selectOption ? true : false;
+            unlockBtnText.text = selectedIndex == selectOption ? "Selected" : "Select";
+        }
+        else if (!shopScript.shopItems[selectOption].isUnlocked)
+        {
+            unlockButton.interactable = true;
+            unlockBtnText.text = shopScript.shopItems[selectOption].price + "";
+        }
+    }
+
+   /* public void UpdateButtonUI()
     {
         //current select character and check
         if(shopScript.shopItems[selectOption].isUnlocked == true){
             unlockButton.gameObject.SetActive(false);
-            charUnlockcostText.text = "Selected";
+            selectBtn.gameObject.SetActive(true);
+            selectBtnText.text = selectedIndex == selectOption ? "Selected" : "Select";
         }
         else
         {
+            selectBtn.gameObject.SetActive(false);
             if (PlayerPrefs.GetInt("Star", 0) < shopScript.shopItems[selectOption].price)  //check if the current player unlockcost price is less than the coins
             {
                 unlockButton.gameObject.SetActive(true);
                 unlockButton.interactable = false;
+               // selectBtn.gameObject.SetActive(false);
             }
             else
             {
                 unlockButton.gameObject.SetActive(true);
                 unlockButton.interactable = true;
+               // selectBtn.gameObject.SetActive(false);
             }
         }
     }
@@ -120,10 +176,17 @@ public class ShopController : MonoBehaviour
         int price = shopScript.shopItems[selectOption].price;
         PlayerPrefs.SetInt("Star", coins - price);
         PlayerPrefs.SetInt(shopScript.shopItems[selectOption].characterName, 1);
-        PlayerPrefs.SetInt("selectChar", selectOption);
         shopScript.shopItems[selectOption].isUnlocked = true;
         UpdateButtonUI();
     }
+*/
+    /*public void SelectBtnCharacter()
+    {
+        if (shopScript.shopItems[selectOption].isUnlocked)
+        {
+            Save();
+        }
+    }*/
 }
 
  

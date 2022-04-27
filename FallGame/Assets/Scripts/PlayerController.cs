@@ -11,8 +11,7 @@ public class PlayerController : MonoBehaviour
     AudioSource playerAS;
     bool isair = false;
     public Sprite[] playerExpression;
-
-
+ 
     private Rigidbody2D rb;
     // Start is called before the first frame update
     void Start()
@@ -21,7 +20,11 @@ public class PlayerController : MonoBehaviour
         playerAS = GetComponent<AudioSource>();
     }
 
-    
+    private void Awake()
+    {
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    }
+
     void FixedUpdate()
     {
         gameController.midgame = true;

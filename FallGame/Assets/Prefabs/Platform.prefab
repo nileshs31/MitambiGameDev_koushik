@@ -143,8 +143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2394a6275176ae34fa24c5177851ff21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 0}
-  playerController: {fileID: 0}
+  gameController: {fileID: 8654501602917832798, guid: 9ac7ff3ce2c7b614eb6c39f33149d907,
+    type: 3}
+  playerController: {fileID: 5461580954491597783, guid: ed78e834a8749924db533c6c61aba6ff,
+    type: 3}
   moveSpeed: 2
   moveY: 7
   moveingPlatformLeft: 0
