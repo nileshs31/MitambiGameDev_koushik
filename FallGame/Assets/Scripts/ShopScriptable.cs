@@ -25,7 +25,6 @@ public class ShopItems
     public string characterName;
     public Sprite characterSprite;
     public string characterDescription;
-    public string characterUnlockcost;
-    public int price;
+    public int characterUnlockCost;
     public bool isUnlocked;
 }
