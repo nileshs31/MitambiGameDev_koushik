@@ -254,8 +254,8 @@ PlayerSettings:
   AndroidTargetDevices: 0
   AndroidSplashScreenScale: 0
   androidSplashScreen: {fileID: 0}
-  AndroidKeystoreName: D:/GameDev/MightyHardStudios.keystore
-  AndroidKeyaliasName: mightyhardstudio
+  AndroidKeystoreName: '{dedicated}: Downloads/MightyHardStudios.keystore'
+  AndroidKeyaliasName: mightyhardstudios
   AndroidBuildApkPerCpuArchitecture: 0
   AndroidTVCompatibility: 0
   AndroidIsGame: 1

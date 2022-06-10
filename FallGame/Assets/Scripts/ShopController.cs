@@ -96,7 +96,7 @@ public class ShopController : MonoBehaviour
             }
             else
             {
-                textPopup.Show(textPopup.CloseAfter);
+                textPopup.Show(textPopup.CloseAfter);  //message pop up not enough  coins
             }
         }
 
