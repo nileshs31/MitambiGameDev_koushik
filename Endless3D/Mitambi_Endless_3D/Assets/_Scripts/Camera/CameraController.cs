@@ -8,13 +8,12 @@ public class CameraController : MonoBehaviour
     private Vector3 offset;
     void Start()
     {
+        target = GameObject.FindGameObjectWithTag("Player").transform;
         offset = transform.position - target.position;
     }
 
-    
-    void LateUpdate()
+    void Update()
     {
-        Vector3 newPosition = new Vector3(transform.position.x, transform.position.y, offset.z + target.position.z);
-        transform.position = Vector3.Lerp(transform.position,newPosition,Time.deltaTime); 
+        transform.position = target.position + offset;
     }
 }

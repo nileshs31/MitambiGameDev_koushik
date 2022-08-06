@@ -5,8 +5,8 @@ public class PlayerCon : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 move;
-    public float forwardSpeed;
-    public float maxSpeed;
+    public float forwardSpeed = 10;
+    public float maxSpeed = 20;
 
     private int desiredLane = 1;//0:left, 1:middle, 2:right
     public float laneDistance = 1f;//The distance between tow lanes
