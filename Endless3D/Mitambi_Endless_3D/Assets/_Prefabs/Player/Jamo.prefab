@@ -4249,6 +4249,8 @@ GameObject:
   - component: {fileID: 7212988325388661176}
   - component: {fileID: 7212988325388661190}
   - component: {fileID: 7212988325388661191}
+  - component: {fileID: 256539148}
+  - component: {fileID: 256539149}
   m_Layer: 0
   m_Name: Jamo
   m_TagString: Player
@@ -4303,7 +4305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593024c0c3431ce4088587965f26ae07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 0
+  forwardSpeed: 10
   maxSpeed: 0
   laneDistance: 1
   isGrounded: 0
@@ -4312,9 +4314,38 @@ MonoBehaviour:
     m_Bits: 64
   groundCheck: {fileID: 7212988323582900950}
   gravity: -12
-  jumpHeight: 1
+  jumpHeight: 2
   animator: {fileID: 1003778029421141912}
   slideDuration: 1.5
+--- !u!54 &256539148
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212988325388661177}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 1
+--- !u!65 &256539149
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212988325388661177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1.5, z: 1}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!1 &7354585081324000974
 GameObject:
   m_ObjectHideFlags: 0

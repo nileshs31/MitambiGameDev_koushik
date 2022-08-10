@@ -4,26 +4,38 @@ using UnityEngine;
 public class Spawning : MonoBehaviour
 {
     [SerializeField] private GameObject[] groundPrefabs;
+    [SerializeField] private GameObject obstaclesPrefabs;
+
+    private List<GameObject> activeGround;
+    private List<GameObject> obstacles;
 
     private Transform playerTransform;
     private float spawnZ;
     private float groundLength = 18f;
     private float safeGround = 15f;
     private int groundSpawn = 5;
-    private int groundLastPrefabIndex = 0;
-
-    private List<GameObject> activeGround;
 
     private void Start()
     {
+        //ground
         activeGround = new List<GameObject>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         
         for(int i = 0; i < groundSpawn; i++)
         {
-            //if(i<2) SpawnGround()
             SpawnGround();
         }
+
+        //SpawnObstacles();
+
+        //obstacles
+        //int newnumberOfObstacles = (int)Random.Range(numberOfObstacles.x, numberOfObstacles.y);
+        //for (int i = 0; i < newnumberOfObstacles; i++)
+        //{
+        //    obstacles.Add(Instantiate(obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Length)], transform));
+        //    obstacles[i].SetActive(false);
+        //}
+        //SpawnObstacles();
     }
 
     private void Update()
@@ -37,14 +49,13 @@ public class Spawning : MonoBehaviour
 
     private void SpawnGround()
     {
-        //if(randomIndex == -1)
-        //GameObject spawn = Instantiate(groundPrefabs[RandomPrefabIndex()]) as GameObject;
-
-        GameObject spawn = Instantiate(groundPrefabs[0]) /*as GameObject*/;
+        GameObject spawn = Instantiate(groundPrefabs[0]) as GameObject;
         spawn.transform.SetParent(transform);
         spawn.transform.position = Vector3.forward * spawnZ;
         spawnZ += groundLength;
         activeGround.Add(spawn);
+
+        //SpawnObstacles();
     }
 
     private void DeleteGround()
@@ -53,18 +64,27 @@ public class Spawning : MonoBehaviour
         activeGround.RemoveAt(0);
     }
 
-    //private int RandomPrefabIndex()
-    //{
-    //    if (groundPrefabs.Length <= 1)
-    //        return 0;
+    private void SpawnObstacles()
+    {
+        //for (int i = 0; i < obstacles.Count; i++)
+        //{
+        //    float posZmin = (18f / obstacles.Count) + (18f / obstacles.Count) * i;
+        //    float posZmax = (18f / obstacles.Count) + (18f / obstacles.Count) * (i + 1);
+        //    obstacles[i].transform.localPosition = new Vector3(0, 0, Random.Range(posZmin, posZmax));
+        //    obstacles[i].SetActive(true);
+        //}
 
-    //    int randomIndex = groundLastPrefabIndex;
-    //    while (randomIndex == groundLastPrefabIndex)
-    //    {
-    //        randomIndex = Random.Range(0, groundPrefabs.Length);
-    //    }
 
-    //    groundLastPrefabIndex = randomIndex;
-    //    return randomIndex;
-    //}
+        //GameObject spawnObj = Instantiate(obstaclesPrefabs[Random.Range(0, obstaclesPrefabs.Length)]) as GameObject;
+        ////spawnObj.transform.SetParent(transform);
+        //spawnObj.transform.position = Vector3.forward * spawnZ;
+        //spawnZ += 9f;
+        //obstacles.Add(spawnObj);
+            
+        int obstacleIdx = Random.Range(3, 6);
+        Transform spawnPoint = transform.GetChild(obstacleIdx).transform;
+        spawnPoint.transform.position = Vector3.forward * spawnZ;
+        spawnZ += 5f;
+        Instantiate(obstaclesPrefabs, spawnPoint.position, Quaternion.identity, transform);
+    }
 }
