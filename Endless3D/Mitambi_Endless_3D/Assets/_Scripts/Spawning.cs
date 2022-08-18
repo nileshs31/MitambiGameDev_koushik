@@ -7,7 +7,7 @@ public class Spawning : MonoBehaviour
     [SerializeField] private GameObject obstaclesPrefabs;
 
     private List<GameObject> activeGround;
-    private List<GameObject> obstacles;
+    private List<GameObject> activeObstacles;
 
     private Transform playerTransform;
     private float spawnZ;
@@ -45,10 +45,15 @@ public class Spawning : MonoBehaviour
             SpawnGround();
             DeleteGround();
         }
+        //if(playerTransform.position.z > groundSpawn * groundLength)
+        //{
+        //    //SpawnObstacles();
+        //}
     }
 
     private void SpawnGround()
     {
+        //SpawnObstacles();
         GameObject spawn = Instantiate(groundPrefabs[0]) as GameObject;
         spawn.transform.SetParent(transform);
         spawn.transform.position = Vector3.forward * spawnZ;
@@ -81,10 +86,10 @@ public class Spawning : MonoBehaviour
         //spawnZ += 9f;
         //obstacles.Add(spawnObj);
             
-        int obstacleIdx = Random.Range(3, 6);
-        Transform spawnPoint = transform.GetChild(obstacleIdx).transform;
-        spawnPoint.transform.position = Vector3.forward * spawnZ;
-        spawnZ += 5f;
-        Instantiate(obstaclesPrefabs, spawnPoint.position, Quaternion.identity, transform);
+        //int obstacleIdx = Random.Range(3, 6);
+        //Transform spawnPoint = transform.GetChild(obstacleIdx).transform;
+        //spawnPoint.transform.position = Vector3.forward * spawnZ;
+        //spawnZ += 5f;
+        //Instantiate(obstaclesPrefabs, spawnPoint.position, Quaternion.identity, transform);
     }
 }

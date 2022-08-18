@@ -39,7 +39,7 @@ public class PlayerCon : MonoBehaviour
         {
             toggle = false;
             if (forwardSpeed < maxSpeed)
-                forwardSpeed += 0.1f * Time.fixedDeltaTime;
+                forwardSpeed += 0.001f * Time.fixedDeltaTime;
         }
         else
         {
@@ -73,7 +73,7 @@ public class PlayerCon : MonoBehaviour
             if (SwipeManager.swipeDown && !isSliding)
             {
                 StartCoroutine(Slide());
-                velocity.y = -10;
+                //velocity.y = -10;
             }
 
         }
@@ -115,9 +115,9 @@ public class PlayerCon : MonoBehaviour
 
     private void Jump()
     {
+        animator.SetTrigger("jump");
         StopCoroutine(Slide());
         animator.SetBool("IsSliding", false);
-        animator.SetTrigger("jump");
         controller.center = new Vector3(0, 0.8f, 0);
         controller.height = 1.6f;
         
