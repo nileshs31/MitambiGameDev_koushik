@@ -743,5 +743,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Jamo
       objectReference: {fileID: 0}
+    - target: {fileID: 7212988325388661191, guid: 728cff4fe1408184d9ef8e211f0f8eee,
+        type: 3}
+      propertyPath: forwardSpeed
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 728cff4fe1408184d9ef8e211f0f8eee, type: 3}
