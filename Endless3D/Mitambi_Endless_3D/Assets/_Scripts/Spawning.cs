@@ -4,7 +4,7 @@ using UnityEngine;
 public class Spawning : MonoBehaviour
 {
     [SerializeField] private GameObject[] groundPrefabs;
-    [SerializeField] private GameObject obstaclesPrefabs;
+    //[SerializeField] private GameObject obstaclesPrefabs;
 
     private List<GameObject> activeGround;
     //private List<GameObject> activeObstacles;
@@ -27,9 +27,6 @@ public class Spawning : MonoBehaviour
         {
             SpawnGround();
         }
-
-        //SpawnObstacles();
-
     }
 
     private void Update()
@@ -56,12 +53,4 @@ public class Spawning : MonoBehaviour
         Destroy(activeGround[0]);
         activeGround.RemoveAt(0);
     }
-
-    //private void SpawnObstacles()
-    //{
-    //    int obstacleSpawnIdx = Random.Range(2, 5);
-    //    Transform spawnPoint = transform.GetChild(obstacleSpawnIdx).transform;
-    //    Instantiate(obstaclesPrefabs, spawnPoint.position, Quaternion.identity, transform);
-
-    //}
 }

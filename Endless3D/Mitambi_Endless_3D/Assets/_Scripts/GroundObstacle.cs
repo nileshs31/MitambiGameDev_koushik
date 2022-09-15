@@ -4,23 +4,22 @@ using UnityEngine;
 
 public class GroundObstacle : MonoBehaviour
 {
-    [SerializeField] private GameObject obstaclesPrefabs;
-    
+    [SerializeField] private GameObject[] obstaclesPrefabs; 
+    //powerup 
     void Start()
     {
         SpawnObstacles();
     }
 
-    
-    void Update()
-    {
-        
-    }
     private void SpawnObstacles()
     {
         int obstacleSpawnIdx = Random.Range(2, 5);
         Transform spawnPoint = transform.GetChild(obstacleSpawnIdx).transform;
-        Instantiate(obstaclesPrefabs, spawnPoint.position, Quaternion.identity, transform);
+        Instantiate(obstaclesPrefabs[Random.Range(0,obstaclesPrefabs.Length)], spawnPoint.position, Quaternion.identity, transform);
+    }
+
+    private void SpawnPowerUps()
+    {
 
     }
 }

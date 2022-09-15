@@ -73,7 +73,7 @@ public class PlayerCon : MonoBehaviour
             if (SwipeManager.swipeDown && !isSliding)
             {
                 StartCoroutine(Slide());
-                //velocity.y = -10;
+                velocity.y = -10;
             }
 
         }
@@ -99,7 +99,7 @@ public class PlayerCon : MonoBehaviour
         else if (desiredLane == 2)
             targetPosition += Vector3.right * laneDistance;
 
-        //transform.position = targetPosition;
+        //left right 
         if (transform.position != targetPosition)
         {
             Vector3 diff = targetPosition - transform.position;
@@ -115,26 +115,57 @@ public class PlayerCon : MonoBehaviour
 
     private void Jump()
     {
-        animator.SetTrigger("jump");
         StopCoroutine(Slide());
         animator.SetBool("IsSliding", false);
+        animator.SetTrigger("jump");
+        //controller.center = Vector3.zero;
         controller.center = new Vector3(0, 0.8f, 0);
         controller.height = 1.6f;
         
         isSliding = false;
 
-        velocity.y = Mathf.Sqrt(jumpHeight * 2 * -gravity);
+        velocity.y = Mathf.Sqrt(jumpHeight * 1.6f * -gravity);
     }
 
     private IEnumerator Slide()
     {
         isSliding = true;
         animator.SetBool("IsSliding", true);
+        //yield return new WaitForSeconds(0.25f / Time.timeScale);
+        
+        controller.center = new Vector3(0, 0.8f, 1f);
+        controller.height = 0.5f;
 
         yield return new WaitForSeconds((slideDuration - 0.25f) / Time.timeScale);
 
         animator.SetBool("IsSliding", false);
-
+        //controller.center = Vector3.zero;
+        controller.center = new Vector3(0, 0.8f, 0);
+        controller.height = 1.6f;
+        
         isSliding = false;
     }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        //    if (hit.gameObject.CompareTag("SpeedPowerUp"))
+        //    {
+        //        //speedup player 
+        //        Debug.Log("playerspeed increase");
+        //        Destroy(hit.gameObject);
+        //    }
+
+        if (hit.gameObject.CompareTag("Obstacles"))
+        {
+            Debug.Log("game over");
+        }
+    }
+
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.CompareTag("SpeedPowerUp"))
+    //    {
+    //        Debug.Log("playerspeed increase");
+    //    }
+    //}
 }
