@@ -4249,6 +4249,7 @@ GameObject:
   - component: {fileID: 7212988325388661176}
   - component: {fileID: 7212988325388661190}
   - component: {fileID: 7212988325388661191}
+  - component: {fileID: 256539155}
   m_Layer: 0
   m_Name: Jamo
   m_TagString: Player
@@ -4303,7 +4304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593024c0c3431ce4088587965f26ae07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 5
+  forwardSpeed: 4
   maxSpeed: 0
   laneDistance: 1
   isGrounded: 0
@@ -4315,6 +4316,21 @@ MonoBehaviour:
   jumpHeight: 2
   animator: {fileID: 1003778029421141912}
   slideDuration: 1.5
+  powerUpSpeed: 0
+--- !u!136 &256539155
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7212988325388661177}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7354585081324000974
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+//using System.Collections;
+//using System.Collections.Generic;
 using UnityEngine;
 
 public class GroundObstacle : MonoBehaviour
@@ -20,6 +20,7 @@ public class GroundObstacle : MonoBehaviour
 
     private void SpawnPowerUps()
     {
-
+        //create a time which will start automatically at start of the game
+        //start spawning after a player progress with score
     }
 }

@@ -4,10 +4,8 @@ using UnityEngine;
 public class Spawning : MonoBehaviour
 {
     [SerializeField] private GameObject[] groundPrefabs;
-    //[SerializeField] private GameObject obstaclesPrefabs;
 
     private List<GameObject> activeGround;
-    //private List<GameObject> activeObstacles;
 
     private Transform playerTransform;
     #region Ground Region
@@ -45,7 +43,6 @@ public class Spawning : MonoBehaviour
         spawn.transform.position = Vector3.forward * spawnZ;
         spawnZ += groundLength;
         activeGround.Add(spawn);
-
     }
 
     private void DeleteGround()

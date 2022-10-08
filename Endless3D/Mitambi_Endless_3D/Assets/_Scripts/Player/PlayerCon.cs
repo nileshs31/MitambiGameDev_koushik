@@ -5,8 +5,9 @@ public class PlayerCon : MonoBehaviour
 {
     private CharacterController controller;
     private Vector3 move;
-    public float forwardSpeed = 10;
-    public float maxSpeed = 20;
+    public float forwardSpeed = 10f;
+    public float maxSpeed = 30f;
+    private float currentSpeed;
 
     private int desiredLane = 1;    //0:left, 1:middle, 2:right
     public float laneDistance = 1f; //The distance between tow lanes
@@ -24,7 +25,10 @@ public class PlayerCon : MonoBehaviour
 
     public float slideDuration = 1.5f;
 
-    bool toggle = false;
+    //bool toggle = false;
+    [Header("Power Up Bool")]
+    [SerializeField]bool powerUpSpeed = false;
+    
 
     void Start()
     {
@@ -35,24 +39,35 @@ public class PlayerCon : MonoBehaviour
     private void FixedUpdate()
     {
         //Increase Speed
-        if (toggle)
+        //if (toggle)
+        //{
+        //    toggle = false;
+        //    if (forwardSpeed < maxSpeed)
+        //        forwardSpeed += 0.001f * Time.fixedDeltaTime;
+        //}
+        //else
+        //{
+        //    toggle = true;
+        //    if (Time.timeScale < 2f)
+        //        Time.timeScale += 0.005f * Time.fixedDeltaTime;
+        //}
+        
+        if (!powerUpSpeed)
         {
-            toggle = false;
+            Debug.Log("'powerup not used'");
             if (forwardSpeed < maxSpeed)
                 forwardSpeed += 0.001f * Time.fixedDeltaTime;
         }
-        else
+        else if (powerUpSpeed)
         {
-            toggle = true;
-            if (Time.timeScale < 2f)
-                Time.timeScale += 0.005f * Time.fixedDeltaTime;
+            Debug.Log("coroutine started");
+            //forwardSpeed = 15f * Time.fixedDeltaTime;  
+            //powerSpeed += forwardSpeed + 2f * Time.fixedDeltaTime;
         }
     }
-
     void Update()
     {
         animator.SetBool("IsGameStarted", true);
-        move.z = forwardSpeed;
 
         isGrounded = Physics.CheckSphere(groundCheck.position, 0.17f, groundLayer);
         animator.SetBool("IsGrounded", isGrounded);
@@ -109,7 +124,7 @@ public class PlayerCon : MonoBehaviour
             else
                 controller.Move(diff);
         }
-
+        move.z = forwardSpeed /** Time.fixedDeltaTime*/;
         controller.Move(move * Time.deltaTime);
     }
 
@@ -146,26 +161,51 @@ public class PlayerCon : MonoBehaviour
         isSliding = false;
     }
 
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        //    if (hit.gameObject.CompareTag("SpeedPowerUp"))
-        //    {
-        //        //speedup player 
-        //        Debug.Log("playerspeed increase");
-        //        Destroy(hit.gameObject);
-        //    }
-
-        if (hit.gameObject.CompareTag("Obstacles"))
+        if (other.CompareTag("SpeedPowerUp"))
         {
-            Debug.Log("game over");
+            powerUpSpeed = true;
+            currentSpeed = forwardSpeed;
+            StartCoroutine(SpeedUpdater());
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("SpeedPowerUp"))
-    //    {
-    //        Debug.Log("playerspeed increase");
-    //    }
-    //}
+    IEnumerator SpeedUpdater()
+    {
+        //forwardSpeed = (currentSpeed < 25f) ? 24f : currentSpeed;
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    yield return new WaitForSeconds(0.25f);
+        //    forwardSpeed += 0.25f;
+        //}
+        ////forwardSpeed = (forwardSpeed != 25f) ? 25f : forwardSpeed;
+        //yield return new WaitForSeconds(7f);
+        //print("spedd" + forwardSpeed);
+        //powerUpSpeed = false;
+        //forwardSpeed = currentSpeed;
+        //yield return new WaitForSeconds(5f);
+        //++ frame
+        while (currentSpeed < 15f)
+        {
+            powerUpSpeed = false;
+            currentSpeed += 0.25f * Time.deltaTime;
+            forwardSpeed = currentSpeed;
+            yield return new WaitForEndOfFrame();
+        }
+            
+        yield return new WaitForSeconds(2f);
+        
+        //while (forwardSpeed > currentSpeed)
+        //{
+        //    forwardSpeed -= 0.25f * Time.deltaTime;
+        //}
+    }
+//    while(transform.position!= posToMove.transform.position) 
+//            {   
+
+//                transform.position = Vector3.MoveTowards(transform.position, posToMove.transform.position, speed[Random.Range(0, 4)] * Time.deltaTime);
+//    yield return new WaitForEndOfFrame();
+//}
+
 }
